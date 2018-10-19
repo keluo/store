@@ -1,5 +1,5 @@
 {
-	"miniprogramRoot": "miniprogram/",
+	"miniprogramRoot": "app/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
 		"urlCheck": true,
@@ -9,7 +9,7 @@
 		"newFeature": true
 	},
 	"appid": "wx6d3adcfe0da59c18",
-	"projectname": "business",
+	"projectname": "store",
 	"libVersion": "2.2.5",
 	"condition": {
 		"search": {

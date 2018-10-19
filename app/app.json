@@ -1,0 +1,41 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/promotion/index/index",
+    "pages/store/index",
+    "pages/user/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "天天客多多",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#108EE9",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/store/index",
+        "iconPath": "/images/tabbar/store.png",
+        "selectedIconPath": "/images/tabbar/store_selected.png",
+        "text": "门店"
+      },
+      {
+        "pagePath": "pages/promotion/index/index",
+        "iconPath": "/images/tabbar/promotion.png",
+        "selectedIconPath": "/images/tabbar/promotion_selected.png",
+        "text": "推广"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "/images/tabbar/user.png",
+        "selectedIconPath": "/images/tabbar/user_selected.png",
+        "text": "我的"
+      }
+    ]
+  }
+}
