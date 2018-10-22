@@ -3,6 +3,7 @@
     "navigationBarBackgroundColor": "#0387FE",
     "navigationBarTextStyle": "white",
     "usingComponents": {
-      "client-stat": "components/ClientStat/ClientStat"
+      "client-stat": "components/ClientStat/ClientStat",
+      "arrival-action": "components/ArrivalAction/ArrivalAction"
     }
 }

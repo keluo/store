@@ -21,17 +21,15 @@
   font-weight:500;
   line-height: 56rpx;
 }
+.overview-box .overview-item .overview-num .overview-unit{
+  display: inline;
+  color: #999;
+  font-size: 24rpx;
+}
 .overview-box .overview-item .overview-RingRatio{
   color: #999;
   font-size: 28rpx;
   margin-top: 12rpx;
-}
-
-.border-bottom{
-  display: block;
-  margin-top: 32rpx;
-  height: 32rpx;
-  background: #f5f5f5;
 }
 
 /*  */
@@ -56,7 +54,7 @@
   padding-left: 20rpx;
 }
 .item-box .item-box-content{
-  padding: 0 32rpx;
+  padding:0 32rpx 32rpx 32rpx;
 }
 
 /* 选项卡 */

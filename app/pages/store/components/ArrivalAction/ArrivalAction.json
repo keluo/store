@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "client-analysis": "components/ClientAnalysis/ClientAnalysis",
+    "stay-time": "components/StayTime/StayTime",
+    "arrival-rate": "components/ArrivalRate/ArrivalRate",
+    "revert-period": "components/RevertPeriod/RevertPeriod"
+  }
+}

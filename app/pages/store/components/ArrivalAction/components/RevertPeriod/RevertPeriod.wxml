@@ -1,0 +1,37 @@
+<!-- 返店周期 -->
+<view class="item-box">
+  <view class="item-title">
+    <view class="item-title-txt">
+      返店周期分布
+    </view>
+  </view>
+  <view class="item-box-content">
+    <view class="overview-box">
+      <view class='overview-item'>
+        <view class='overview-title'>
+          顾客平均返店周期
+        </view>
+        <view class='overview-num'>
+          9.3<view class='overview-unit'>天</view>
+        </view>
+        <view class='overview-RingRatio'>
+          环比 23.21%
+        </view>
+      </view>
+    </view>
+    <view class="container">
+      <ec-canvas id="mychart" canvas-id="mychart" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+</view>
+
+<view class="item-box">
+  <view class="item-title">
+    <view class="item-title-txt">驻店时长趋势图</view>
+  </view>
+  <view class="item-box-content">
+    <view class="container">
+      <ec-canvas id="mychart2" canvas-id="mychart2" ec="{{ ec2 }}"></ec-canvas>
+    </view>
+  </view>
+</view>

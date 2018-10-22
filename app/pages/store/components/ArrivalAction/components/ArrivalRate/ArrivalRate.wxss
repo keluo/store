@@ -1,0 +1,6 @@
+/* 到店频次 */
+@import "../../../../style/common.wxss";
+
+.container{
+  height: 400rpx;
+}

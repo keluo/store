@@ -1,0 +1,6 @@
+/* 顾客分析 */
+@import "../../../../style/common.wxss";
+
+.container {
+  height:400rpx;
+}

@@ -13,4 +13,4 @@
 </view>
 
 <client-stat wx:if="{{isActive == 0}}"></client-stat>
-<jin-dian wx:if="{{isActive == 1}}"></jin-dian>
+<arrival-action wx:if="{{isActive == 1}}"></arrival-action>

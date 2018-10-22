@@ -1,0 +1,46 @@
+<!-- 顾客分析 -->
+<view class='item-box'>
+  <view class='item-title'>
+    <view class='item-title-txt'>趋势分析</view>
+  </view>
+  <view class='item-box-content'>
+    <view class='overview-box'>
+      <view class='overview-item'>
+        <view class='overview-title'>
+          连接WiFi人数
+        </view>
+        <view class='overview-num'>
+          4353
+        </view>
+        <view class='overview-RingRatio'>
+          环比 23.21%
+        </view>
+      </view>
+      <view class='overview-item'>
+        <view class='overview-title'>
+          推广人数
+        </view>
+        <view class='overview-num'>
+          1353
+        </view>
+        <view class='overview-RingRatio'>
+          环比 23.21%
+        </view>
+      </view>
+      <view class='overview-item'>
+        <view class='overview-title'>
+          核销人数
+        </view>
+        <view class='overview-num'>
+          2285
+        </view>
+        <view class='overview-RingRatio'>
+          环比 23.21%
+        </view>
+      </view>
+    </view>
+    <view class="container">
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+</view>

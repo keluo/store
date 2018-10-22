@@ -1,4 +1,4 @@
-import * as echarts from '../../ec-canvas/echarts';
+import * as echarts from '../../../../ec-canvas/echarts';
 
 let chart = null;
 
@@ -15,12 +15,12 @@ function initChart(canvas, width, height) {
       type: 'category',
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     },
-    legend: {
-      bottom: 0,
-      data: ['星巴克新街口店']
-    },
     grid: {
       top: 20
+    },
+    legend: {
+      bottom: 0,
+      data: ['连接WiFi人数', '推广人数', '核销人数']
     },
     tooltip: {
       trigger: 'axis',
@@ -40,19 +40,33 @@ function initChart(canvas, width, height) {
         show: false
       }
     },
-    series: [{
-      name: '星巴克新街口店',
-      data: [820, 932, 901, 934, 1290, 1330, 1320],
-      type: 'line',
-      smooth: true
-    }]
+    series: [
+      {
+        name: '连接WiFi人数',
+        data: [10, 42, 71, 14, 40, 70, 10],
+        type: 'line',
+        smooth: true
+      },
+      {
+        name: '推广人数',
+        data: [20, 52, 81, 24, 50, 80, 20],
+        type: 'line',
+        smooth: true
+      },
+      {
+        name: '核销人数',
+        data: [30, 62, 91, 34, 60, 90, 30],
+        type: 'line',
+        smooth: true
+      },
+    ]
   };
 
   chart.setOption(option);
   return chart;
 }
 
-// pages/store/components/ClientStat/ClientStat.js
+// pages/store/components/ArrivalAction/components/ClientAnalysis/ClientAnalysis.js
 Component({
   /**
    * 组件的属性列表
@@ -67,28 +81,13 @@ Component({
   data: {
     ec: {
       onInit: initChart
-    },
-    isActive: 0
+    }
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    isKeliu() {
-      this.setData({
-        isActive: 0
-      })
-    },
-    isJindian() {
-      this.setData({
-        isActive: 1
-      })
-    },
-    isXinke() {
-      this.setData({
-        isActive: 2
-      })
-    }
+
   }
 })

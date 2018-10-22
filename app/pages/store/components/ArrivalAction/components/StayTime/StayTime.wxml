@@ -1,0 +1,56 @@
+<!-- 驻店时长 -->
+<view class="item-box">
+  <view class="item-title">
+    <view class="item-title-txt">驻店时长分布</view>
+  </view>
+  <view class="item-box-content">
+    <view class='tab-box'>
+      <view class='tab-item {{isActive == 0 ? "active" : ""}}' bindtap="">全部</view>
+      <view class='tab-item {{isActive == 1 ? "active" : ""}}' bindtap="">新客</view>
+      <view class='tab-item'>老客</view>
+    </view>
+    <view class='overview-box'>
+      <view class='overview-item'>
+        <view class='overview-title'>
+          平均驻店时长
+        </view>
+        <view class='overview-num'>
+          25<view class='overview-unit'>分钟</view>
+        </view>
+        <view class='overview-RingRatio'>
+          环比 23.21%
+        </view>
+      </view>
+      <view class='overview-item'>
+        <view class='overview-title'>
+          离店率
+        </view>
+        <view class='overview-num'>
+          12.56<view class='overview-unit'>%</view>
+        </view>
+        <view class='overview-RingRatio'>
+          环比 23.21%
+        </view>
+      </view>
+    </view>
+    <view class="container">
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+</view>
+
+<view class="item-box">
+  <view class="item-title">
+    <view class="item-title-txt">驻店时长趋势图</view>
+  </view>
+  <view class="item-content">
+    <view class='tab-box'>
+      <view class='tab-item {{isActive == 0 ? "active" : ""}}' bindtap="">全部</view>
+      <view class='tab-item {{isActive == 1 ? "active" : ""}}' bindtap="">新客</view>
+      <view class='tab-item'>老客</view>
+    </view>
+    <view class="container">
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec2 }}"></ec-canvas>
+    </view>
+  </view>
+</view>

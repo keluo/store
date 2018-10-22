@@ -1,0 +1,6 @@
+/* 返店周期 */
+@import "../../../../style/common.wxss";
+
+.container{
+  height: 400rpx;
+}

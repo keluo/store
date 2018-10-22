@@ -1,0 +1,6 @@
+/* 驻店时长 */
+@import "../../../../style/common.wxss";
+
+.container{
+  height: 400rpx;
+}

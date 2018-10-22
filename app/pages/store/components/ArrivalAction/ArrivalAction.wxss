@@ -1,0 +1,23 @@
+/* 标签栏 */
+.tab-bar-box{
+  display: flex;
+  justify-content: space-around;
+  padding-top:10px;
+  background:#fff;
+}
+.tab-bar-box .tab-bar-item{
+  color: #333;
+  font-size: 32rpx;
+  padding-bottom: 18rpx;
+  border-bottom: 2px solid transparent;
+}
+.tab-bar-box .tab-bar-item.active{
+  color: #108EE9;
+  border-bottom: 4rpx solid #108EE9;
+}
+
+.border-bottom{
+  display: block;
+  height: 32rpx;
+  background: #f5f5f5;
+}
