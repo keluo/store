@@ -42,3 +42,63 @@ page{
   opacity: 0.3;
   color: #fff !important;
 }
+/*item css*/
+.item {
+  position: relative;
+  background-color: #fff;
+  margin-bottom: 32rpx;
+}
+.item .item-title{
+  position: relative;
+  height: 48rpx;
+  line-height: 48rpx;
+  font-size: 34rpx;
+  padding: 28rpx 32rpx 28rpx 64rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.item .item-title .right-ext {
+  float: right;
+}
+.item .item-title::before{
+  position: absolute;
+  width: 12rpx;
+  background-color: #108EE9;
+  height: 48rpx;
+  left: 32rpx;
+  top: 28rpx;
+  content: "";
+}
+.item .item-content{
+  position: relative;
+  padding: 20rpx 32rpx;
+}
+
+.item-tab{
+  position:relative;
+  display:flex;
+  justify-content:center;
+}
+.item-tab .item-tab-bar {
+  box-sizing: border-box;
+  width: 160rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align:center;
+  border: 1rpx solid #108EE9;
+  font-size: 28rpx;
+  color: #108EE9;
+  border-right: 0rpx;
+}
+.item-tab .item-tab-bar:last-child{
+  border-right: 1rpx solid #108EE9;
+}
+.item-tab .item-tab-bar.actived {
+  background-color: #108EE9;
+  color: #fff;
+}
+.item-tab-box {
+  display: none;
+}
+.item-tab-box.actived {
+  display: block;
+}

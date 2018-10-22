@@ -1,17 +1,13 @@
-// pages/promotion/index/index.js
+// pages/promotion/coupon/add/add.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tabType:'1'
+
   },
-  bindTabSelected: function (e) {
-    this.setData({
-      tabType: e.currentTarget.dataset.type
-    });
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

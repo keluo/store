@@ -3,7 +3,9 @@
   "pages": [
     "pages/promotion/index/index",
     "pages/store/index",
-    "pages/user/index"
+    "pages/user/index",
+    "pages/promotion/coupon/list/list",
+    "pages/promotion/coupon/add/add"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",

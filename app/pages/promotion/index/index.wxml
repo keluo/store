@@ -1,7 +1,7 @@
 <!--pages/promotion/index/index.wxml-->
 <view class="container">
   <view class="top-wrap">
-    <view class="item-group">
+    <view class="item-top-group">
       <view class="item-box">
         <image src="/images/promotion/index/coupon_record.png"></image>
         <text>发券记录</text>
@@ -17,6 +17,60 @@
     </view>
     <view class="item-btn">
       <button class="btn">发放优惠券</button>
+    </view>
+  </view>
+  <view class="item">
+    <view class="item-title">
+      优惠券发放情况
+    </view>
+    <view class="item-content">
+      <view class="item-statistics-group">
+        <view class="item-statistics-box">
+          <view>
+            总发放数
+          </view>
+          <view class="item-statistics-box-num">
+            54353
+          </view>
+        </view>
+        <view class="item-statistics-box">
+          <view>
+            总领取数 
+          </view>
+          <view class="item-statistics-box-num">
+            54353
+          </view>
+        </view>
+        <view class="item-statistics-box last">
+          <view>
+            总核销数 
+          </view>
+          <view class="item-statistics-box-num">
+            54353
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="item-title">
+      趋势图
+    </view>
+    <view class="item-content">
+      <view class="item item-tab">
+        <view class="item-tab-bar {{tabType === '1'?'actived':''}}" data-type="1" bindtap="bindTabSelected">总发放数</view>
+        <view class="item-tab-bar {{tabType === '2'?'actived':''}}" data-type="2" bindtap="bindTabSelected">总领取数</view>
+        <view class="item-tab-bar {{tabType === '3'?'actived':''}}" data-type="3" bindtap="bindTabSelected">总核销数</view>
+      </view>
+      <view class="item-tab-box {{tabType==='1'?'actived':''}}">
+        总发放数
+      </view>
+      <view class="item-tab-box {{tabType==='2'?'actived':''}}">
+        总领取数
+      </view>
+      <view class="item-tab-box {{tabType==='3'?'actived':''}}">
+        总核销数
+      </view>
     </view>
   </view>
 </view>

@@ -1,0 +1,8 @@
+<!--pages/promotion/coupon/list/list.wxml-->
+<view class="container">
+  <view class="coupon-option"></view>
+  <view class="item">
+    <view class="item-list">
+    </view>
+  </view>
+</view>

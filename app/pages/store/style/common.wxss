@@ -77,6 +77,7 @@
   background: #fff;
   font-size: 28rpx;
   border: 1px solid #108EE9;
+  box-sizing:border-box;
 }
 .tab-box .tab-item:first-child{
   border-radius: 4rpx 0 0 4rpx;
