@@ -1,0 +1,93 @@
+/* 占比 */
+.overview-box{
+  display: flex;
+  justify-content: center;
+  padding:22rpx 0 32rpx 0;
+  background:#fff;
+}
+.overview-box .overview-item{
+  width: 228rpx;
+  text-align: center;
+}
+.overview-box .overview-item .overview-title{
+  color: #333;
+  font-size: 28rpx;
+}
+.overview-box .overview-item .overview-num{
+  color: #333;
+  margin-top: 6rpx;
+  font-size: 48rpx;
+  height: 56rpx;
+  font-weight:500;
+  line-height: 56rpx;
+}
+.overview-box .overview-item .overview-RingRatio{
+  color: #999;
+  font-size: 28rpx;
+  margin-top: 12rpx;
+}
+
+.border-bottom{
+  display: block;
+  margin-top: 32rpx;
+  height: 32rpx;
+  background: #f5f5f5;
+}
+
+/*  */
+.item-box{
+  background: #fff;
+  margin-top:32rpx;
+}
+.item-box .item-title{
+  border-bottom: 1px solid #eee;
+  padding: 28rpx 32rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.item-box .compared{
+  color: #108EE9;
+  font-size: 34rpx;
+}
+.item-box .item-title .item-title-txt{
+  color: #333;
+  font-size: 34rpx;
+  border-left: 12rpx solid #108EE9;
+  padding-left: 20rpx;
+}
+.item-box .item-box-content{
+  padding: 0 32rpx;
+}
+
+/* 选项卡 */
+.tab-box{
+  height: 64rpx;
+  padding: 32rpx 0 12rpx 0;
+  background:#fff;
+  border-radius: 4rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.tab-box .tab-item{
+  text-align: center;
+  width: 160rpx;
+  line-height: 64rpx;
+  color: #108EE9;
+  background: #fff;
+  font-size: 28rpx;
+  border: 1px solid #108EE9;
+}
+.tab-box .tab-item:first-child{
+  border-radius: 4rpx 0 0 4rpx;
+  border-right: 0;
+}
+.tab-box .tab-item:last-child{
+  border-radius: 0 4rpx 4rpx 0;
+  border-left: 0;
+}
+.tab-box .tab-item.active{
+  background: #108EE9;
+  color: #fff;
+  /* border-left: 1px solid #108EE9; */
+}

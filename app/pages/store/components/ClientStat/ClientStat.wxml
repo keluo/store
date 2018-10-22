@@ -1,0 +1,54 @@
+<!-- 客流组件 -->
+<view class='overview-box'>
+  <view class='overview-item'>
+    <view class='overview-title'>
+      客流量
+    </view>
+    <view class='overview-num'>
+      54353
+    </view>
+    <view class='overview-RingRatio'>
+      环比 23.21%
+    </view>
+  </view>
+  <view class='overview-item'>
+    <view class='overview-title'>
+      进店客
+    </view>
+    <view class='overview-num'>
+      23755
+    </view>
+    <view class='overview-RingRatio'>
+      环比 23.21%
+    </view>
+  </view>
+  <view class='overview-item'>
+    <view class='overview-title'>
+      新顾客
+    </view>
+    <view class='overview-num'>
+      3755
+    </view>
+    <view class='overview-RingRatio'>
+      环比 23.21%
+    </view>
+  </view>
+</view>
+
+<view class='item-box'>
+  <view class='item-title'>
+    <view class='item-title-txt'>客流趋势图</view>
+    <view class='compared'>店铺对比</view>
+  </view>
+  <view class='item-box-content'>
+    <view class='tab-box'>
+      <view class="tab-item {{isActive == 0?'active':''}}" bindtap="isKeliu">客流量</view>
+      <view class="tab-item {{isActive == 1?'active':''}}" bindtap="isJindian">进店客</view>
+      <view class="tab-item {{isActive == 2?'active':''}}" bindtap="isXinke">新顾客</view>
+    </view>
+
+    <view class="container">
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+</view>

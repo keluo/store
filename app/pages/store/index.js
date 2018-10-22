@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isActive: 0
   },
 
   /**
@@ -62,5 +62,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  isKeliu() {
+    this.setData({
+      isActive: 0
+    })
+  },
+  isJindian() {
+    this.setData({
+      isActive: 1
+    })
   }
 })

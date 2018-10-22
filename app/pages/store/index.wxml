@@ -1,2 +1,16 @@
-<!--miniprogram/pages/store/index.wxml-->
-<text>门店</text>
+<view class='header'>
+  星巴克新街口店
+</view>
+
+<view class='tab-box'>
+  <view class='tab-item {{isActive == 0 ? "active" : ""}}' bindtap="isKeliu">客流统计</view>
+  <view class='tab-item {{isActive == 1 ? "active" : ""}}' bindtap="isJindian">进店行为</view>
+  <view class='tab-item'>顾客画像</view>
+</view>
+
+<view class='time'>
+  统计日期：2018/9/29-2018/10/05
+</view>
+
+<client-stat wx:if="{{isActive == 0}}"></client-stat>
+<jin-dian wx:if="{{isActive == 1}}"></jin-dian>
