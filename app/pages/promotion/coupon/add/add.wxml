@@ -1,2 +1,90 @@
 <!--pages/promotion/coupon/add/add.wxml-->
-<text>pages/promotion/coupon/add/add.wxml</text>
+<view class="container">
+  <view class="item item-info-group">
+    <view class="item-info">
+      <view class="item-label">
+        面额：
+      </view>
+      <view class="item-input">
+        <input name="ssid_name" class="txt" value="{{ssid_name}}" placeholder="请输入优惠券面额"></input>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        最低消费：
+      </view>
+      <view class="item-input">
+        <input name="apcfg_ssid_auth_key" class="txt" value="{{apcfg_ssid_auth_key}}" placeholder="输入优惠券减免的最低消费额度"></input>
+      </view>
+    </view>
+  </view>
+  <view class="item item-info-group">
+    <view class="item-info">
+      <view class="item-label">
+        券有效期
+      </view>
+      <view class="item-input">
+        <view class="item-input-right">
+          <text class="blue">相对时间</text>
+          <icon class="iconfont icon-next"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        结束时间
+      </view>
+      <view class="item-input">
+        <view class="item-input-right">
+          <text class="blue">领取15天后</text>
+          <icon class="iconfont icon-next"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="item item-info-group">
+    <view class="item-info date-range">
+      <view class="item-label">
+        券可用时间段
+      </view>
+      <view class="item-input">
+        <view class="item-input-right">
+          <text class="blue">周一至周五</text>
+          <icon class="iconfont icon-next"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        结束时间
+      </view>
+      <view class="item-input">
+        <view class="item-input-right">
+          <text class="blue">领取15天后</text>
+          <icon class="iconfont icon-next"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="item item-info-group">
+    <view class="item-info date-range">
+      <view class="item-label">
+        发放数量
+      </view>
+      <view class="item-input">
+        <view class="item-input-right">
+          <text class="blue">100张</text>
+          <icon class="iconfont icon-next"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="item-btn">
+    <button class="btn">确认发放</button>
+  </view>
+  <view class="item-btn">
+    <button class="btn btn-white">取消</button>
+  </view>
+</view>

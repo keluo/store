@@ -17,12 +17,15 @@
 .top-wrap .item-top-group .item-box {
   width:33.33%;
   height:170rpx;
-  display:flex;
-  flex-direction:column;
   padding-top:52rpx;
   text-align:center;
   font-size:28rpx;
   color: #333;
+}
+.top-wrap .item-top-group navigator {
+  display:flex;
+  flex-direction:column;
+  height:170rpx;
 }
 .top-wrap .item-top-group .item-box image {
   width: 82rpx;

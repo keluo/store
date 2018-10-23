@@ -1,11 +1,11 @@
 {
   "cloud": true,
   "pages": [
-    "pages/promotion/index/index",
+    "pages/promotion/coupon/add/add",
     "pages/store/index",
     "pages/user/index",
     "pages/promotion/coupon/list/list",
-    "pages/promotion/coupon/add/add"
+    "pages/promotion/index/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",

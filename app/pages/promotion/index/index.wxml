@@ -3,16 +3,22 @@
   <view class="top-wrap">
     <view class="item-top-group">
       <view class="item-box">
-        <image src="/images/promotion/index/coupon_record.png"></image>
-        <text>发券记录</text>
+        <navigator url = "/pages/promotion/coupon/list/list">
+          <image src="/images/promotion/index/coupon_record.png"></image>
+          <text>发券记录</text>
+        </navigator>
       </view>
       <view class="item-box">
-        <image src="/images/promotion/index/promotion_statistics.png"></image>
-        <text>门店推广统计</text>
+        <navigator url = "/pages/promotion/coupon/list/list">
+          <image src="/images/promotion/index/promotion_statistics.png"></image>
+          <text>门店推广统计</text>
+        </navigator>
       </view>
       <view class="item-box">
-        <image src="/images/promotion/index/commission_record.png"></image>
-        <text>返佣设置</text>
+        <navigator url = "/pages/promotion/coupon/list/list">
+          <image src="/images/promotion/index/commission_record.png"></image>
+          <text>返佣设置</text>
+        </navigator>
       </view>
     </view>
     <view class="item-btn">

@@ -1,1 +1,10 @@
 /* pages/promotion/coupon/add/add.wxss */
+.date-range {
+
+}
+.item-info-group .item-info.date-range .item-label{
+  width: 50%;
+}
+.item-info-group .item-info.date-range .item-input{
+  width: 50%;
+}
