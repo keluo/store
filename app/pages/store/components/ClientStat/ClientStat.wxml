@@ -8,7 +8,7 @@
       54353
     </view>
     <view class='overview-RingRatio'>
-      环比 23.21%
+      环比 <view class='icon-increase'></view> 23.21%
     </view>
   </view>
   <view class='overview-item'>
@@ -19,7 +19,7 @@
       23755
     </view>
     <view class='overview-RingRatio'>
-      环比 23.21%
+      环比 <view class='icon-decline'></view> 23.21%
     </view>
   </view>
   <view class='overview-item'>
@@ -30,7 +30,7 @@
       3755
     </view>
     <view class='overview-RingRatio'>
-      环比 23.21%
+      环比 <view class='icon-increase'></view> 23.21%
     </view>
   </view>
 </view>

@@ -18,7 +18,7 @@
           25<view class='overview-unit'>分钟</view>
         </view>
         <view class='overview-RingRatio'>
-          环比 23.21%
+          环比 <view class='icon-increase'></view> 23.21%
         </view>
       </view>
       <view class='overview-item'>
@@ -29,7 +29,7 @@
           12.56<view class='overview-unit'>%</view>
         </view>
         <view class='overview-RingRatio'>
-          环比 23.21%
+          环比 <view class='icon-increase'></view> 23.21%
         </view>
       </view>
     </view>
@@ -42,6 +42,7 @@
 <view class="item-box">
   <view class="item-title">
     <view class="item-title-txt">驻店时长趋势图</view>
+    <view class='compared'>店铺对比</view>
   </view>
   <view class="item-content">
     <view class='tab-box'>

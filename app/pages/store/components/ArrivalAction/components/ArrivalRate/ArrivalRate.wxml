@@ -13,7 +13,7 @@
           2.5<view class='overview-unit'>次</view>
         </view>
         <view class='overview-RingRatio'>
-          环比 23.21%
+          环比 <view class='icon-increase'></view> 23.21%
         </view>
       </view>
     </view>

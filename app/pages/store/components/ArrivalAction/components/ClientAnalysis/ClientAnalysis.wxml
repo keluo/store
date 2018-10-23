@@ -10,10 +10,10 @@
           连接WiFi人数
         </view>
         <view class='overview-num'>
-          4353
+          4354
         </view>
         <view class='overview-RingRatio'>
-          环比 23.21%
+          环比 <view class='icon-increase'></view> 23.21%
         </view>
       </view>
       <view class='overview-item'>
@@ -24,7 +24,7 @@
           1353
         </view>
         <view class='overview-RingRatio'>
-          环比 23.21%
+          环比 <view class='icon-increase'></view> 23.21%
         </view>
       </view>
       <view class='overview-item'>
@@ -35,7 +35,7 @@
           2285
         </view>
         <view class='overview-RingRatio'>
-          环比 23.21%
+          环比 <view class='icon-increase'></view> 23.21%
         </view>
       </view>
     </view>

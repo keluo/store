@@ -90,3 +90,20 @@
   color: #fff;
   /* border-left: 1px solid #108EE9; */
 }
+
+/* 增加图标 */
+.icon-increase{
+  display: inline-block;
+  border: 18rpx solid #52C41A;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-top: 2rpx solid transparent;
+}
+/* 下降图标 */
+.icon-decline{
+  display: inline-block;
+  border: 18rpx solid #F4222C;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-bottom: 2rpx solid transparent;
+}

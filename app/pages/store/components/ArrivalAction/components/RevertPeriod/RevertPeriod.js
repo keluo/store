@@ -77,7 +77,7 @@ function initChart2(canvas, width, height) {
     width: width,
     height: height
   });
-  canvas.setChart(chart2);
+  canvas.setChart(chart);
 
   var option = {
     color: ['#0386E5', '#FF3C24', '#FFA602'],
