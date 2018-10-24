@@ -5,7 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isActive: 0
+    isActive: 0,
+    params:{
+      id: 2,
+      begin_time: '2018-09-30',
+      end_time: '2018-10-15',
+    }
   },
 
   /**

@@ -5,7 +5,7 @@
       客流量
     </view>
     <view class='overview-num'>
-      54353
+      {{keLiu_total}}
     </view>
     <view class='overview-RingRatio'>
       环比 <view class='icon-increase'></view> 23.21%
@@ -16,7 +16,7 @@
       进店客
     </view>
     <view class='overview-num'>
-      23755
+      {{jinDian_total}}
     </view>
     <view class='overview-RingRatio'>
       环比 <view class='icon-decline'></view> 23.21%
@@ -27,7 +27,7 @@
       新顾客
     </view>
     <view class='overview-num'>
-      3755
+      {{totalNewCustomer}}
     </view>
     <view class='overview-RingRatio'>
       环比 <view class='icon-increase'></view> 23.21%

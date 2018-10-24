@@ -12,5 +12,5 @@
   统计日期：2018/9/29-2018/10/05
 </view>
 
-<client-stat wx:if="{{isActive == 0}}"></client-stat>
+<client-stat wx:if="{{isActive == 0}}" params="{{params}}"></client-stat>
 <arrival-action wx:if="{{isActive == 1}}"></arrival-action>
