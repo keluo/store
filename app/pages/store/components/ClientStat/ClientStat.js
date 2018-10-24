@@ -1,7 +1,7 @@
 import * as echarts from '../../ec-canvas/echarts';
 
 var https = require('../../../../service/https.js');
-var { keLiuAllTotalAjax, totalCustomerAjax, keLiuDayAjax, jinDianDayAjax } = require('../../../../service/api.js');
+var { keLiuAllTotalAjax, totalCustomerAjax, keLiuDayAjax, jinDianDayAjax, newCustomerAjax } = require('../../../../service/api.js');
 
 let chart = null;
 let option = {
@@ -62,7 +62,16 @@ Component({
    */
   properties: {
     params:{
-      type: Object
+      type: Object,
+      observer: function (newVal, oldVal, changedPath) {
+        // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串
+        // 通常 newVal 就是新设置的数据， oldVal 是旧数据
+        
+        if (oldVal){
+          this.getTotalInfo();
+          this.isKeliu();
+        }
+      }
     }
   },
 
@@ -106,45 +115,51 @@ Component({
       this.setData({
         isActive: 0
       })
-      // this.getTotalInfo();
-
+      chart.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
       https(keLiuDayAjax, this.data.params, 'get').then(res => {
-        let myList = res.data.data;
+        if(res.code === "1"){
+          let myList = res.data.data;
 
-        option.xAxis.data = [];
-        option.series[0].data = [];
-        //查一天
-        if (this.data.params.begin_time == this.data.params.end_time) {
-          for (var i = 0; i < 24; i++) {
-            var time = new Date(res.data.begin_time);
-            time = time.setHours(time.getHours() + i);
+          option.xAxis.data = [];
+          option.series[0].data = [];
+          //查一天
+          if (this.data.params.begin_time == this.data.params.end_time) {
+            for (var i = 0; i < 24; i++) {
+              var time = new Date(res.data.begin_time);
+              time = time.setHours(time.getHours() + i);
 
-            option.xAxis.data[i] = this.fmtMin(time);
-            option.series[0].data[i] = 0;
-            for (var j = 0; j < myList.length; j++) {
-              if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
-                option.series[0].data[i] = myList[j].ke_liu;
+              option.xAxis.data[i] = this.fmtMin(time);
+              option.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
+                  option.series[0].data[i] = myList[j].ke_liu;
+                }
+              }
+
+            }
+            chart.hideLoading();
+            chart.setOption(option, true);
+          } else {
+            // 不是同一天
+            var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+            days = Math.floor(days) + 1;
+
+            for (var i = 0; i < days; i++) {
+              var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+              option.xAxis.data[i] = time;
+              option.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (time == myList[j].DayTime.slice(0, 10)) {
+                  option.series[0].data[i] = myList[j].ke_liu;
+                }
               }
             }
-
+            chart.hideLoading();
+            chart.setOption(option, true);
           }
-          chart.setOption(option, true);
-        }else {
-          // 不是同一天
-          var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
-          days = Math.floor(days) + 1;
-
-          for (var i = 0; i < days; i++) {
-            var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-            option.xAxis.data[i] = time;
-            option.series[0].data[i] = 0;
-            for (var j = 0; j < myList.length; j++) {
-              if (time == myList[j].DayTime.slice(0, 10)) {
-                option.series[0].data[i] = myList[j].ke_liu;
-              }
-            }
-          }
-          chart.setOption(option, true);
         }
 
       })
@@ -153,10 +168,104 @@ Component({
       this.setData({
         isActive: 1
       })
+      chart.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
+      https(jinDianDayAjax, this.data.params, 'get').then(res => {
+        if(res.code === "1"){
+          let myList = res.data.data;
+
+          option.xAxis.data = [];
+          option.series[0].data = [];
+          //查一天
+          if (this.data.params.begin_time == this.data.params.end_time) {
+            for (var i = 0; i < 24; i++) {
+              var time = new Date(res.data.begin_time);
+              time = time.setHours(time.getHours() + i);
+
+              option.xAxis.data[i] = this.fmtMin(time);
+              option.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
+                  option.series[0].data[i] = myList[j].jin_dian;
+                }
+              }
+
+            }
+            chart.hideLoading();
+            chart.setOption(option, true);
+          } else {
+            // 不是同一天
+            var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+            days = Math.floor(days) + 1;
+
+            for (var i = 0; i < days; i++) {
+              var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+              option.xAxis.data[i] = time;
+              option.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (time == myList[j].DayTime.slice(0, 10)) {
+                  option.series[0].data[i] = myList[j].jin_dian;
+                }
+              }
+            }
+            chart.hideLoading();
+            chart.setOption(option, true);
+          }
+        }
+      })
     },
     isXinke() {
       this.setData({
         isActive: 2
+      })
+      chart.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
+      https(newCustomerAjax, this.data.params, 'get').then(res => {
+        if(res.code === "1"){
+          let myList = res.data.data;
+
+          option.xAxis.data = [];
+          option.series[0].data = [];
+          //查一天
+          if (this.data.params.begin_time == this.data.params.end_time) {
+            for (var i = 0; i < 24; i++) {
+              var time = new Date(res.data.begin_time);
+              time = time.setHours(time.getHours() + i);
+
+              option.xAxis.data[i] = this.fmtMin(time);
+              option.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
+                  option.series[0].data[i] = myList[j].new_customers;
+                }
+              }
+
+            }
+            chart.hideLoading();
+            chart.setOption(option, true);
+          } else {
+            // 不是同一天
+            var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+            days = Math.floor(days) + 1;
+
+            for (var i = 0; i < days; i++) {
+              var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+              option.xAxis.data[i] = time;
+              option.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (time == myList[j].DayTime.slice(0, 10)) {
+                  option.series[0].data[i] = myList[j].new_customers;
+                }
+              }
+            }
+            chart.hideLoading();
+            chart.setOption(option, true);
+          }
+        }
       })
     },
     fmtMin (obj) {
