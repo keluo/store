@@ -1,0 +1,4 @@
+/* pages/user/message/index.wxss */
+.item-list .item-list-content .item-list-txt{
+  padding: 20rpx 0;
+}

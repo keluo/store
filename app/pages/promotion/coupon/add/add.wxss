@@ -8,3 +8,6 @@
 .item-info-group .item-info.date-range .item-input{
   width: 50%;
 }
+.item-btn-group {
+  margin-top: 64rpx;
+}

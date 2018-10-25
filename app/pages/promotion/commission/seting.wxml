@@ -1,0 +1,24 @@
+<!--pages/promotion/commission/seting.wxml-->
+<view class="container">
+  <view class="item item-info-group">
+    <view class="item-info">
+      <view class="item-label">
+        分享反佣金额：
+      </view>
+      <view class="item-input">
+        <input name="ssid_name" class="txt" value="{{ssid_name}}" placeholder="输入分享反佣金额（元）"></input>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        核销反佣金额：
+      </view>
+      <view class="item-input">
+        <input name="apcfg_ssid_auth_key" class="txt" value="{{apcfg_ssid_auth_key}}" placeholder="输入核销反佣金额（元）"></input>
+      </view>
+    </view>
+  </view>
+  <view class="item-btn form-btn">
+    <button class="btn">提交</button>
+  </view>
+</view>

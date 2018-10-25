@@ -1,0 +1,29 @@
+<!--pages/user/money/add/success.wxml-->
+<view class="container">
+  <view class="item item-success">
+    <image src="/images/user/success.png"></image>
+    <view class="success-txt">充值成功</view>
+  </view>
+  <view class="item item-charge-info">
+    <view class="charge-info-list">
+      <view class="charge-info-txt">
+          充值金额
+      </view>
+      <view class="charge-info-num">
+          ￥1000
+      </view>
+    </view>
+    <view class="charge-info-list">
+      <view class="charge-info-txt">
+          充值方式
+      </view>
+      <view class="charge-info-num">
+          微信支付
+      </view>
+    </view>
+  </view>
+  <view class="item-btn form-btn">
+    <button class="btn">完成</button>
+  </view>
+</view>
+

@@ -1,0 +1,64 @@
+<!--pages/user/index/index.wxml-->
+<view class="container">
+  <view class="top-wrap">
+    <view class="item-user">
+      <image src="/images/3.png" class="user-photo"></image>
+      <view class="item-user-info">
+        <text class="user-name">xingbake123</text>
+        <text class="user-address">星巴克食品股份有限公司</text>
+      </view>
+    </view>
+    <view class="item-money">
+      <text class="blue">账户余额:1230.0元</text>
+      <button class="btn">点击充值</button>
+    </view>
+  </view>
+  <view class="item">
+    <view class="item-list item-list-icon">
+      <view class="item-list-content">
+        <icon class="icon icon-trade"></icon>
+        交易明细
+      </view>
+      <view class="item-list-right">
+          <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+    <view class="item-list item-list-icon">
+      <view class="item-list-content">
+        <icon class="icon icon-qualifications"></icon>
+        资质信息
+      </view>
+      <view class="item-list-right">
+          <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+    <view class="item-list item-list-icon">
+      <view class="item-list-content">
+        <icon class="icon icon-message"></icon>
+        消息通知
+      </view>
+      <view class="item-list-right">
+          <text class="message">预警信息</text>
+          <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+    <view class="item-list item-list-icon">
+      <view class="item-list-content">
+        <icon class="icon icon-link"></icon>
+        联系客服
+      </view>
+      <view class="item-list-right">
+          <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+    <view class="item-list item-list-icon">
+      <view class="item-list-content">
+        <icon class="icon icon-password"></icon>
+        修改密码
+      </view>
+      <view class="item-list-right">
+          <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+  </view>
+</view>

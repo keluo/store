@@ -2,7 +2,7 @@
 @import "/style/iconfont.wxss";
 page{
   background-color: #f5f5f5;
-  color: #1A1A1A;
+  color: #333;
 }
 button::after{
   border: none;
@@ -19,8 +19,8 @@ button::after{
 .green {
   color: #00a65a;
 }
-.grey {
-  color: #666;
+.x {
+  color: #999;
 }
 .blue {
   color: #108EE9;
@@ -78,6 +78,14 @@ button::after{
   top: 28rpx;
   content: "";
 }
+.item .item-title .btn {
+  height:64rpx;
+  line-height:64rpx;
+  font-size:28rpx;
+  float:right;
+  position:absolue;
+  top:-8rpx;
+}
 .item .item-content{
   position: relative;
   padding: 20rpx 32rpx;
@@ -118,24 +126,60 @@ button::after{
   display: block;
 }
 
-
+/* item-statistics css */
+.item-statistics-group {
+  flex-direction:row;
+  display:flex;
+  flex-wrap:wrap;
+  padding: 23rpx 20rpx;
+}
+.item-statistics-group .item-statistics-box {
+  width: 50%;
+  height:168rpx;
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  font-size:28rpx;
+  padding:35rpx 0;
+  box-sizing: border-box;
+  border-right: 1rpx solid #f5f5f5;
+  line-height:40rpx;
+}
+.item-statistics-group .item-statistics-box.border-bottom {
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.item-statistics-group.column-2 .item-statistics-box{
+  width: 50%;
+}
+.item-statistics-group.column-3 .item-statistics-box{
+  width: 33.33%;
+}
+.item-statistics-group .item-statistics-box.last {
+  border-right: 0rpx;
+}
+.item-statistics-group .item-statistics-box .item-statistics-box-num {
+  font-size: 48rpx;
+  font-weight: 600;
+  margin-top:20rpx;
+}
+/* item-statistics css */
 
 .item-options {
   border-top: 1rpx solid #eeeeee;
   border-bottom: 1rpx solid #eeeeee;
-  padding: 20rpx 32rpx;
+  padding: 28rpx 32rpx;
   display: flex;
   justify-content:space-between;
   height:64rpx;
   line-height:64rpx;
 }
 .item-options .item-options-right {
-  font-size:0rpx;
 }
 .item-options .btn {
   height: 64rpx;
   line-height: 64rpx;
   font-size: 28rpx;
+  display: block;
 }
 
 /* item-list css */
@@ -145,17 +189,29 @@ button::after{
   justify-content:space-between;
   position: relative;
 }
-.item-list:after{
-  height: 1rpx;
-  background-color: #eeeeee;
-  position: absolute;
-  left: 32rpx;
-  bottom: 1rpx;
-  width: 100%;
-  content: "";
+.item-list.bd-top{
+  border-top: 1rpx solid #eeeeee;
 }
-.item-list:last-child:after{
+.item-list:after{
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 32rpx;
   height: 0rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.item-list:last-child:after,.item-list.item-list-icon:last-child:after{
+  border: 0rpx;
+}
+.item-list.item-list-icon:after{
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 126rpx;
+  height: 0rpx;
+  border-bottom: 1rpx solid #eeeeee;
 }
 .item-list .item-list-content {
   position: relative;
@@ -193,7 +249,10 @@ button::after{
   display: flex;
 }
 .item-list .item-list-right .icon-next {
-  height:68rpx;
+  line-height:48rpx;
+  font-size:34rpx;
+  height:48rpx;
+  margin-top:-14rpx;
   color: #C7C7CC;
 }
 .item-list .item-list-right .item-list-right-txt {
@@ -251,13 +310,13 @@ button::after{
 .item-info-group .item-info .item-label{
   min-height: 48rpx;
   line-height: 48rpx;
-  width: 173rpx;
+  width: 210rpx;
   word-break:break-all;
 }
 .item-info-group .item-info .item-input{
   min-height: 48rpx;
   line-height: 48rpx;
-  width: 512rpx;
+  width: 476rpx;
 }
 .item-info-group .item-info .item-input switch {
   float: right;
@@ -290,9 +349,66 @@ button::after{
 .item-btn{
   position: relative;
   background-color: none;
+  margin-bottom: 32rpx;
 }
 .item-btn .btn{
   margin: 0 auto;
   display: block;
   width: 686rpx;
 }
+.item-btn.form-btn {
+  margin-top: 60rpx;
+}
+
+
+/*item-checkbox css*/
+.item-info-group .item-info.item-checkbox {
+  flex-direction:column;
+  padding:0rpx;
+}
+.item-info-group .item-info.item-checkbox .checkbox {
+  padding: 28rpx 32rpx;
+  display:flex;
+  position: relative;
+}
+.item-info-group .item-info.item-checkbox .checkbox:after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 100rpx;
+  height: 0rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.item-info-group .item-info.item-checkbox .checkbox:last-child:after {
+  border: 0rpx;
+}
+.item-info-group .item-info.item-checkbox .checkbox checkbox {
+  margin-right: 32rpx;
+}
+
+/*checkbox 重写*/
+checkbox .wx-checkbox-input{
+   border-radius: 50%;/* 圆角 */
+   width: 40rpx; /* 背景的宽 */
+   height: 40rpx; /* 背景的高 */
+}
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+   border: 1rpx solid #108EE9;
+   background:#108EE9;
+}
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   border-radius: 50%;/* 圆角 */
+   width: 40rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+   height: 40rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+   line-height: 40rpx;
+   text-align: center;
+   font-size:24rpx; /* 对勾大小 30rpx */
+   color:#fff; /* 对勾颜色 白色 */
+   background: transparent;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}
+/*checkbox 重写*/

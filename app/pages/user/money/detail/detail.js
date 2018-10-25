@@ -1,19 +1,11 @@
-// pages/promotion/coupon/add/add.js
+// pages/user/money/detail/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    items: [
-      { name: '1', value: '全天可用' },
-      { name: '2', value: '早 7:00-10:00 ', checked: 'true' },
-      { name: '3', value: '中 11:00-16:00 ' },
-      { name: '4', value: '晚 17:00-22:00 ' }
-    ]
-  }, 
-  checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+
   },
 
   /**

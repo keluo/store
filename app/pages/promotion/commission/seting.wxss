@@ -1,0 +1,4 @@
+/* pages/promotion/commission/seting.wxss */
+.item-info-group .item-info .item-label {
+  width: 255rpx;
+}

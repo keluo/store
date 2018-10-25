@@ -2,10 +2,23 @@
   "cloud": true,
   "pages": [
     "pages/store/index",
-    "pages/user/index",
     "pages/promotion/coupon/list/list",
     "pages/promotion/coupon/add/add",
-    "pages/promotion/index/index"
+    "pages/promotion/coupon/detail/detail",
+    "pages/promotion/index/index",
+    "pages/promotion/commission/seting",
+    "pages/promotion/statistics/index",
+    "pages/user/money/add/success",
+    "pages/user/money/add/add",
+    "pages/user/money/detail/detail",
+    "pages/user/money/list/list",
+    "pages/user/password/reset",
+    "pages/user/link/index",
+    "pages/user/index/index",
+    "pages/user/message/index",
+    "pages/user/qualifications/index",
+    "pages/account/password/password",
+    "pages/account/login/login"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
@@ -33,7 +46,7 @@
         "text": "推广"
       },
       {
-        "pagePath": "pages/user/index",
+        "pagePath": "pages/user/index/index",
         "iconPath": "/images/tabbar/user.png",
         "selectedIconPath": "/images/tabbar/user_selected.png",
         "text": "我的"

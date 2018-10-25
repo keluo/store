@@ -1,0 +1,29 @@
+<!--pages/user/money/add/add.wxml-->
+<view class="container">
+  <view class="item item-charge">
+    <view class="item-list">
+      <view class="item-list-content">
+        <view class="item-list-txt">
+          充值方式
+        </view>
+        <view class="item-list-txt-ext first">
+          <view class="charge-method">
+             <icon class="icon-wx"></icon>微信支付
+          </view>
+        </view>
+      </view>
+      <view class="item-list-right">
+          <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="item item-money">
+    <view class="money-txt">转入金额</view>
+    <view class="money-num">
+      ￥<input value="0"></input>
+    </view>
+  </view>
+  <view class="item-btn form-btn">
+    <button class="btn">提交</button>
+  </view>
+</view>

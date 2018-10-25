@@ -1,0 +1,65 @@
+<!--pages/user/money/list/list.wxml-->
+<view class="container">
+  <view class="item">
+    <view class="item-options">
+      <text class="blue">筛选</text>
+      <view class="item-options-right">
+        <text class="blue">日期</text>
+      </view>
+    </view>
+    <view class="item-money-info">
+      <text>2018/06</text>
+      <text>充值2000.00元</text>
+      <text>消耗：1000.00元</text>
+    </view>
+    <view class="item-list">
+      <view class="item-list-content">
+        <view class="item-list-txt">
+          充值
+        </view>
+        <view class="item-list-txt-ext first">
+          <view class="">
+            2018/06/18 21:13:20
+          </view>
+        </view>
+      </view>
+      <view class="item-list-right">
+        <text>＋10000.00</text>
+        <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+    <view class="item-list">
+      <view class="item-list-content">
+        <view class="item-list-txt">
+          分享返佣
+        </view>
+        <view class="item-list-txt-ext first">
+          <view class="">
+            2018/06/18 21:13:20
+          </view>
+        </view>
+      </view>
+      <view class="item-list-right">
+        <text>＋20.80</text>
+        <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+    <view class="item-list">
+      <view class="item-list-content">
+        <view class="item-list-txt">
+          核销返佣
+        </view>
+        <view class="item-list-txt-ext first">
+          <view class="">
+            2018/06/18 21:13:20
+          </view>
+        </view>
+      </view>
+      <view class="item-list-right">
+        <text>＋10000.00</text>
+        <icon class="iconfont icon-next"></icon>
+      </view>
+    </view>
+  </view>
+</view>
+

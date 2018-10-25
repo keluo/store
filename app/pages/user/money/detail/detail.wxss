@@ -1,0 +1,28 @@
+/* pages/user/money/detail/detail.wxss */
+.item-money-info {
+  padding-bottom: 22rpx;
+}
+.item-money-info .money-info-list {
+  display: flex;
+  flex-direction: row;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  justify-content: space-between;
+  padding: 10rpx 32rpx;
+}
+.item-money-info .money-info-list .info-cat {
+  color: #999;
+}
+.item-money-info .money-info-list .info-value {
+  color: #333;
+}
+.item-money-info .money-info-list.info-head { 
+  padding: 22rpx 32rpx;
+  border-bottom: 1rpx solid #eee;
+  border-top: 1rpx solid #eee;
+  height: 50rpx;
+  margin-bottom: 10rpx;
+}
+.item-money-info .money-info-list.info-head .info-value {
+  font-size: 36rpx;
+}

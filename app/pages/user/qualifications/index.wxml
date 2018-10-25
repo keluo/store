@@ -1,0 +1,46 @@
+<!--pages/user/qualifications/index.wxml-->
+<view class="container">
+  <view class="item item-info-group">
+    <view class="item-info">
+      <view class="item-label">
+        商户名称：
+      </view>
+      <view class="item-input">
+        <text class="txt">星巴克食品股份有限公司</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        商户地址：
+      </view>
+      <view class="item-input">
+        <text class="txt">江苏省南京市建邺区XXX</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        商户类型：
+      </view>
+      <view class="item-input">
+        <text class="txt">餐饮-咖啡店</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        联 系 人 ：
+      </view>
+      <view class="item-input">
+        <text class="txt"> 张总</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        联系电话：
+      </view>
+      <view class="item-input">
+        <text class="txt">18032122312</text>
+      </view>
+    </view>
+  </view>
+</view>
+

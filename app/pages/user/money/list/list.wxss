@@ -1,0 +1,11 @@
+/* pages/user/money/list/list.wxss */
+.item-money-info {
+  display: flex;
+  flex-direction: row;
+  background-color: #F9FCFF;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  padding: 25rpx 32rpx;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eee;
+}

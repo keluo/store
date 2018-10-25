@@ -54,16 +54,12 @@
         </view>
       </view>
     </view>
-    <view class="item-info">
-      <view class="item-label">
-        结束时间
-      </view>
-      <view class="item-input">
-        <view class="item-input-right">
-          <text class="blue">领取15天后</text>
-          <icon class="iconfont icon-next"></icon>
-        </view>
-      </view>
+    <view class="item-info item-checkbox">
+      <checkbox-group bindchange="checkboxChange">
+          <label class="checkbox" wx:for="{{items}}">
+              <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+          </label>
+      </checkbox-group>
     </view>
   </view>
   
@@ -80,11 +76,12 @@
       </view>
     </view>
   </view>
-  
-  <view class="item-btn">
-    <button class="btn">确认发放</button>
-  </view>
-  <view class="item-btn">
-    <button class="btn btn-white">取消</button>
+  <view class="item-btn-group">
+    <view class="item-btn">
+      <button class="btn">确认发放</button>
+    </view>
+    <view class="item-btn">
+      <button class="btn btn-white">取消</button>
+    </view>
   </view>
 </view>

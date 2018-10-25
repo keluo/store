@@ -1,0 +1,22 @@
+/* pages/promotion/statistics/index.wxss */
+.item.user-list .item-options{
+  border-top: 0rpx;
+}
+.item.user-list .item-list-content{
+  display: flex;
+  justify-content: space-between;
+  line-height: 60rpx;
+}
+.item.user-list .item-content {
+  padding: 0rpx;
+}
+.item.user-list .item-list {
+  padding: 17rpx 32rpx;
+  display: inherit;
+  justify-content: inherit;
+}
+.item.user-list .item-list image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}

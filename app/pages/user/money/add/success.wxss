@@ -1,0 +1,47 @@
+/* pages/user/money/add/success.wxss */
+.item-success {
+  text-align: center;
+  overflow: hidden;
+  font-size: 0rpx;
+  border-top: 1rpx solid #eee;
+  padding-top: 38rpx;
+  margin-bottom: 0rpx;
+}
+.item-success image {
+  width: 171rpx;
+  height: 171rpx;
+}
+.item-success .success-txt {
+  font-size: 34rpx;
+  line-height: 48rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  color: #333;
+}
+.item-charge-info {
+  padding: 20rpx 32rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.item-charge-info::after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 32rpx;
+  left: 32rpx;
+  height: 0rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.charge-info-list {
+  display: flex;
+  justify-content:space-between;
+  position: relative;
+  font-size: 28rpx;
+  line-height: 52rpx;
+  padding: 0 4rpx;
+}
+.charge-info-list .charge-info-txt{
+  color: #999;
+}
+.charge-info-list .charge-info-num{
+  color: #333;
+}

@@ -1,0 +1,31 @@
+<!--pages/user/money/detail/detail.wxml-->
+<view class="container">
+  <view class="item">
+    <view class="item-money-info">
+      <view class="money-info-list info-head">
+        <text class="info-cat">交易金额</text>
+        <text class="info-value">＋20.80</text>
+      </view>
+      <view class="money-info-list">
+        <text class="info-cat">交易类型</text>
+        <text class="info-value">分享返佣</text>
+      </view>
+      <view class="money-info-list">
+        <text class="info-cat">交易时间</text>
+        <text class="info-value">2017/02/30 12:30:20</text>
+      </view>
+      <view class="money-info-list">
+        <text class="info-cat">流水单号</text>
+        <text class="info-value">12349585904088858</text>
+      </view>
+      <view class="money-info-list">
+        <text class="info-cat">推广人支付宝</text>
+        <text class="info-value">180xxxx874</text>
+      </view>
+      <view class="money-info-list">
+        <text class="info-cat">账户余额</text>
+        <text class="info-value">10023.00</text>
+      </view>
+    </view>
+  </view>
+</view>

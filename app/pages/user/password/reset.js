@@ -1,4 +1,4 @@
-// pages/user/index.js
+// pages/user/password/reset.js
 Page({
 
   /**

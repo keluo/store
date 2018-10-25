@@ -47,27 +47,3 @@
 .top-wrap .item-btn button{
   width: 622rpx;
 }
-
-.item-statistics-group {
-  flex-direction:row;
-  display:flex;
-  padding: 23rpx 20rpx;
-}
-.item-statistics-group .item-statistics-box {
-  width:33.33%;
-  height:168rpx;
-  display:flex;
-  flex-direction:column;
-  text-align:center;
-  font-size:28rpx;
-  padding:35rpx 0;
-  box-sizing: border-box;
-  border-right: 1rpx solid #f5f5f5;
-}
-.item-statistics-group .item-statistics-box.last {
-  border-right: 0rpx;
-}
-.item-statistics-group .item-statistics-box .item-statistics-box-num {
-  font-size: 48rpx;
-  font-weight: 600;
-}

@@ -1,0 +1,7 @@
+/* pages/user/qualifications/index.wxss */
+.item-info-group {
+  margin: 0rpx;
+}
+.item-info-group .item-info:after{
+  left: 0;
+}

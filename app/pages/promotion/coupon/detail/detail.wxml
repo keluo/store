@@ -1,0 +1,63 @@
+<!--pages/promotion/coupon/detail/detail.wxml-->
+<view class="container">
+  <view class="item item-info-group">
+    <view class="item-info">
+      <view class="item-label">
+        面额：
+      </view>
+      <view class="item-input">
+        <text class="txt">2元</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        最低消费：
+      </view>
+      <view class="item-input">
+        <text class="txt">100元</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        券有效期：
+      </view>
+      <view class="item-input">
+        <text class="txt">2018/09/29-2018/10/05</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        券可用时段：
+      </view>
+      <view class="item-input">
+        <text class="txt"> 周一至周五 中11:00-16:00可用</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="item-title">
+      领取、核销趋势图
+    </view>
+    <view class="item-content">
+      <view class="item-statistics-group">
+        <view class="item-statistics-box">
+          <view>
+            总领取数 
+          </view>
+          <view class="item-statistics-box-num">
+            54353
+          </view>
+        </view>
+        <view class="item-statistics-box last">
+          <view>
+            总核销数 
+          </view>
+          <view class="item-statistics-box-num">
+            54353
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

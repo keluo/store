@@ -1,0 +1,31 @@
+<!--pages/user/link/index.wxml-->
+<view class="container">
+  <view class="item">
+    <view class="item-list item-list-icon bd-top">
+      <view class="item-list-content">
+        <icon class="icon icon-phone"></icon>
+        <view>
+          <view class="item-list-txt">
+            客服电话
+          </view>
+          <view class="item-list-txt-ext first">
+            13934383210
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="item-list item-list-icon">
+      <view class="item-list-content">
+        <icon class="icon icon-qq"></icon>
+        <view>
+          <view class="item-list-txt">
+            客服QQ
+          </view>
+          <view class="item-list-txt-ext first">
+            278514009
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
