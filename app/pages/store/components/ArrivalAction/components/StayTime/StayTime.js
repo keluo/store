@@ -1,7 +1,7 @@
 import * as echarts from '../../../../ec-canvas/echarts';
 
 let https = require('../../../../../../service/https.js');
-let { allCustomerStayInfoAjax, allCustomerStayTimeAjax, newCustomerStayInfoAjax, newCustomerStayTimeAjax, oldCustomerStayInfoAjax, oldCustomerStayTimeAjax } = require('../../../../../../service/api.js');
+let { allCustomerStayInfoAjax, allCustomerStayTimeAjax, newCustomerStayInfoAjax, newCustomerStayTimeAjax, oldCustomerStayInfoAjax, oldCustomerStayTimeAjax, allCustomerStayTimeDayAjax, newCustomerStayTimeDayAjax, oldCustomerStayTimeDayAjax } = require('../../../../../../service/api.js');
 
 let chart = null;
 let chart2 = null;
@@ -76,6 +76,53 @@ function initChart(canvas, width, height) {
   return chart;
 }
 
+let option2 = {
+  color: ['#0386E5', '#FF3C24', '#FFA602'],
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  grid: {
+    top: 20
+  },
+  legend: {
+    bottom: 0,
+    data: ['星巴克新街口', '星巴克新桥店']
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+      type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
+    },
+    position: function (pos, params, dom, rect, size) {
+      // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+      var obj = { top: 60 };
+      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+      return obj;
+    }
+  },
+  yAxis: {
+    type: 'value',
+    splitLine: {
+      show: false
+    }
+  },
+  series: [
+    {
+      name: '星巴克新街口',
+      data: [10, 42, 71, 14, 40, 70, 10],
+      type: 'line',
+      smooth: true
+    },
+    {
+      name: '星巴克新桥店',
+      data: [20, 52, 81, 24, 50, 80, 20],
+      type: 'line',
+      smooth: true
+    }
+  ]
+};
+
 function initChart2(canvas, width, height) {
   chart2 = echarts.init(canvas, null, {
     width: width,
@@ -83,54 +130,7 @@ function initChart2(canvas, width, height) {
   });
   canvas.setChart(chart2);
 
-  var option = {
-    color: ['#0386E5', '#FF3C24', '#FFA602'],
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    grid: {
-      top: 20
-    },
-    legend: {
-      bottom: 0,
-      data: ['星巴克新街口', '星巴克新桥店']
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
-      },
-      position: function (pos, params, dom, rect, size) {
-        // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
-        var obj = { top: 60 };
-        obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-        return obj;
-      }
-    },
-    yAxis: {
-      type: 'value',
-      splitLine: {
-        show: false
-      }
-    },
-    series: [
-      {
-        name: '星巴克新街口',
-        data: [10, 42, 71, 14, 40, 70, 10],
-        type: 'line',
-        smooth: true
-      },
-      {
-        name: '星巴克新桥店',
-        data: [20, 52, 81, 24, 50, 80, 20],
-        type: 'line',
-        smooth: true
-      }
-    ]
-  };
-
-  chart2.setOption(option);
+  chart2.setOption(option2);
   return chart2;
 }
 
@@ -291,15 +291,24 @@ Component({
       this.setData({
         trendActive: 0
       })
+      https(allCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
+        console.log(res)
+      })
     },
     trendNew () {
       this.setData({
         trendActive: 1
       })
+      https(newCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
+        console.log(res)
+      })
     },
     trendOld () {
       this.setData({
         trendActive: 2
+      })
+      https(oldCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
+        console.log(res)
       })
     }
   }

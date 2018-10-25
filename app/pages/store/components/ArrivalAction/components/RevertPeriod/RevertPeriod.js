@@ -1,7 +1,7 @@
 import * as echarts from '../../../../ec-canvas/echarts';
 
 let https = require('../../../../../../service/https.js');
-let { customerReturnDaysAjax, customerStayTimeAjax } = require('../../../../../../service/api.js');
+let { customerReturnDaysAjax, customerStayTimeAjax, oldCustomerReturnDaysDayAjax } = require('../../../../../../service/api.js');
 
 let chart = null;
 let chart2 = null;
@@ -146,7 +146,8 @@ Component({
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
 
         setTimeout(() => {
-          this.getDist()
+          this.getDist();
+          this.getTrend();
         }, 1000)
       }
     }
@@ -195,6 +196,11 @@ Component({
             old_customer_avg_return: res.data.data.old_customer_avg_return.toFixed()
           })
         }
+      })
+    },
+    getTrend () {
+      https(oldCustomerReturnDaysDayAjax, this.data.params, 'get').then(res => {
+        console.log(res)
       })
     }
   }
