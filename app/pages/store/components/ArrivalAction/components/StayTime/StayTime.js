@@ -31,7 +31,7 @@ let option = {
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
     },
-    formatter: '{b} : {c}'
+    formatter: '{b} : {c}%'
   },
   yAxis: {
     type: 'value',
@@ -42,7 +42,7 @@ let option = {
   series: [
     {
       name: '驻店时长分布',
-      data: [18, 32, 45, 31, 8],
+      data: [0, 0, 0, 0, 0],
       type: 'bar',
       barWidth: '45%',
       label: {

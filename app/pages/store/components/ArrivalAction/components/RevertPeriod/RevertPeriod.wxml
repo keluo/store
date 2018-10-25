@@ -12,7 +12,7 @@
           顾客平均返店周期
         </view>
         <view class='overview-num'>
-          9.3<view class='overview-unit'>天</view>
+          {{old_customer_avg_return}}<view class='overview-unit'>天</view>
         </view>
         <view class='overview-RingRatio'>
           环比 <view class='icon-increase'></view> 23.21%

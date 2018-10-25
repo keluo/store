@@ -10,7 +10,7 @@
           顾客平均到店频次
         </view>
         <view class='overview-num'>
-          2.5<view class='overview-unit'>次</view>
+          {{old_customer_avg_times}}<view class='overview-unit'>次</view>
         </view>
         <view class='overview-RingRatio'>
           环比 <view class='icon-increase'></view> 23.21%

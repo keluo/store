@@ -15,6 +15,9 @@ const newCustomerStayTimeAjax = '/inner-api/customer/new/stay_time'; //进店行
 const oldCustomerStayTimeAjax = '/inner-api/customer/old/stay_time'; //进店行为 —— 驻店时长 —— 老 驻店时长分布
 
 const customerArrivedTimesAjax = '/inner-api/customer/arrived_times'; //进店行为 —— 到店频次 —— 分布
+const customerStayTimeAjax = '/inner-api/customer/old/misc_info'; //进店行为 —— 到店频次、返店周期 —— 老客到店频次、老客返店周期
+
+const customerReturnDaysAjax = '/inner-api/customer/return_days'; //进店行为 —— 返店周期 —— 分布
 
 module.exports = {
   homeInitApi: homeInit,
@@ -29,5 +32,7 @@ module.exports = {
   allCustomerStayTimeAjax,
   newCustomerStayTimeAjax,
   oldCustomerStayTimeAjax,
-  customerArrivedTimesAjax
+  customerArrivedTimesAjax,
+  customerStayTimeAjax,
+  customerReturnDaysAjax
 }

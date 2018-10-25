@@ -8,7 +8,7 @@ let option = {
   color: ['#0386E5', '#FF3C24', '#FFA602'],
   xAxis: {
     type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: [' ', ' ', ' ', ' ', ' ', ' ', ' ']
   },
   legend: {
     bottom: 0,
@@ -38,7 +38,7 @@ let option = {
   },
   series: [{
     name: '星巴克新街口店',
-    data: [820, 932, 901, 934, 1290, 1330, 1320],
+    data: [0, 0, 0, 0, 0, 0, 0],
     type: 'line',
     smooth: true
   }]

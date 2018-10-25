@@ -8,5 +8,5 @@
 
 <client-analysis wx:if="{{isActive == 0}}"></client-analysis>
 <stay-time wx:if="{{isActive == 1}}" params="{{params}}"></stay-time>
-<arrival-rate wx:if="{{isActive == 2}}"></arrival-rate>
-<revert-period wx:if="{{isActive == 3}}"></revert-period>
+<arrival-rate wx:if="{{isActive == 2}}" params="{{params}}"></arrival-rate>
+<revert-period wx:if="{{isActive == 3}}" params="{{params}}"></revert-period>

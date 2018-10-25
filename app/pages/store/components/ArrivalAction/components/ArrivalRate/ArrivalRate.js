@@ -1,7 +1,7 @@
 import * as echarts from '../../../../ec-canvas/echarts';
 
 let https = require('../../../../../../service/https.js');
-let { customerArrivedTimesAjax } = require('../../../../../../service/api.js');
+let { customerArrivedTimesAjax, customerStayTimeAjax } = require('../../../../../../service/api.js');
 
 let chart = null;
 
@@ -29,7 +29,8 @@ let option = {
       var obj = { top: 60 };
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
-    }
+    },
+    formatter: '{b} : {c}%'
   },
   yAxis: {
     type: 'value',
@@ -40,7 +41,7 @@ let option = {
   series: [
     {
       name: '顾客平局到店频次',
-      data: [18, 32, 45, 31, 8],
+      data: [0, 0, 0, 0, 0],
       type: 'bar',
       barWidth: '45%',
       label: {
@@ -81,7 +82,16 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    params: {
+      type: Object,
+      observer: function (newVal, oldVal, changedPath) {
+        // 通常 newVal 就是新设置的数据， oldVal 是旧数据
 
+        setTimeout(() => {
+          this.getInfo();
+        }, 1000)
+      }
+    }
   },
 
   /**
@@ -90,13 +100,41 @@ Component({
   data: {
     ec: {
       onInit: initChart
-    }
+    },
+    old_customer_avg_times: 0
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    getInfo () {
+      chart.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
+      https(customerArrivedTimesAjax, this.data.params, 'get').then(res => {
+        if(res.code === "1"){
+          let data = res.data.data;
+          let total = data.arrived_1_time + data.arrived_2_time + data.arrived_3to5_time + data.arrived_6to9_time + data.arrived_10_time
 
+          option.series[0].data[0] = ( data.arrived_1_time / total * 100 ).toFixed();
+          option.series[0].data[1] = ( data.arrived_2_time / total * 100 ).toFixed();
+          option.series[0].data[2] = ( data.arrived_3to5_time / total * 100 ).toFixed();
+          option.series[0].data[3] = ( data.arrived_6to9_time / total * 100 ).toFixed();
+          option.series[0].data[4] = ( data.arrived_10_time / total * 100 ).toFixed();
+
+          chart.hideLoading();
+          chart.setOption(option, true);
+        }
+      })
+      https(customerStayTimeAjax, this.data.params, 'get').then(res => {
+        if(res.code === "1"){
+          this.setData({
+            old_customer_avg_times: res.data.data.old_customer_avg_times.toFixed()
+          })
+        }
+      })
+    }
   }
 })
