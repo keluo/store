@@ -1,7 +1,7 @@
 import * as echarts from '../../ec-canvas/echarts';
 
-var https = require('../../../../service/https.js');
-var { keLiuAllTotalAjax, totalCustomerAjax, keLiuDayAjax, jinDianDayAjax, newCustomerAjax } = require('../../../../service/api.js');
+let https = require('../../../../service/https.js');
+let { keLiuAllTotalAjax, totalCustomerAjax, keLiuDayAjax, jinDianDayAjax, newCustomerAjax } = require('../../../../service/api.js');
 
 let chart = null;
 let option = {
@@ -67,10 +67,11 @@ Component({
         // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
         
-        if (oldVal){
-          this.getTotalInfo();
+        this.getTotalInfo();
+        
+        setTimeout(() => {
           this.isKeliu();
-        }
+        }, 1000)
       }
     }
   },

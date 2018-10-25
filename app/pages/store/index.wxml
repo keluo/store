@@ -13,4 +13,4 @@
 </view>
 
 <client-stat wx:if="{{isActive == 0}}" params="{{params}}"></client-stat>
-<arrival-action wx:if="{{isActive == 1}}"></arrival-action>
+<arrival-action wx:if="{{isActive == 1}}" params="{{params}}"></arrival-action>

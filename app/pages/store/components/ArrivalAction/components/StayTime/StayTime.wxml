@@ -5,9 +5,9 @@
   </view>
   <view class="item-box-content">
     <view class='tab-box'>
-      <view class='tab-item {{isActive == 0 ? "active" : ""}}' bindtap="">全部</view>
-      <view class='tab-item {{isActive == 1 ? "active" : ""}}' bindtap="">新客</view>
-      <view class='tab-item'>老客</view>
+      <view class='tab-item {{distActive == 0 ? "active" : ""}}' bindtap="distAll">全部</view>
+      <view class='tab-item {{distActive == 1 ? "active" : ""}}' bindtap="distNew">新客</view>
+      <view class='tab-item {{distActive == 2 ? "active" : ""}}' bindtap="distOld">老客</view>
     </view>
     <view class='overview-box'>
       <view class='overview-item'>
@@ -15,7 +15,7 @@
           平均驻店时长
         </view>
         <view class='overview-num'>
-          25<view class='overview-unit'>分钟</view>
+          {{svg_stay_time}}<view class='overview-unit'>分钟</view>
         </view>
         <view class='overview-RingRatio'>
           环比 <view class='icon-increase'></view> 23.21%
@@ -26,7 +26,7 @@
           离店率
         </view>
         <view class='overview-num'>
-          12.56<view class='overview-unit'>%</view>
+          {{bounce_rate}}<view class='overview-unit'>%</view>
         </view>
         <view class='overview-RingRatio'>
           环比 <view class='icon-increase'></view> 23.21%
@@ -44,11 +44,11 @@
     <view class="item-title-txt">驻店时长趋势图</view>
     <view class='compared'>店铺对比</view>
   </view>
-  <view class="item-content">
+  <view class="item-box-content">
     <view class='tab-box'>
-      <view class='tab-item {{isActive == 0 ? "active" : ""}}' bindtap="">全部</view>
-      <view class='tab-item {{isActive == 1 ? "active" : ""}}' bindtap="">新客</view>
-      <view class='tab-item'>老客</view>
+      <view class='tab-item {{trendActive == 0 ? "active" : ""}}' bindtap="trendAll">全部</view>
+      <view class='tab-item {{trendActive == 1 ? "active" : ""}}' bindtap="trendNew">新客</view>
+      <view class='tab-item {{trendActive == 2 ? "active" : ""}}' bindtap='trendOld'>老客</view>
     </view>
     <view class="container">
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec2 }}"></ec-canvas>
