@@ -232,23 +232,23 @@ Component({
           option.xAxis.data = [];
           option.series[0].data = [];
           //查一天
-          if (this.data.params.begin_time == this.data.params.end_time) {
-            for (var i = 0; i < 24; i++) {
-              var time = new Date(res.data.begin_time);
-              time = time.setHours(time.getHours() + i);
+          // if (this.data.params.begin_time == this.data.params.end_time) {
+          //   for (var i = 0; i < 24; i++) {
+          //     var time = new Date(res.data.begin_time);
+          //     time = time.setHours(time.getHours() + i);
 
-              option.xAxis.data[i] = this.fmtMin(time);
-              option.series[0].data[i] = 0;
-              for (var j = 0; j < myList.length; j++) {
-                if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
-                  option.series[0].data[i] = myList[j].new_customers;
-                }
-              }
+          //     option.xAxis.data[i] = this.fmtMin(time);
+          //     option.series[0].data[i] = 0;
+          //     for (var j = 0; j < myList.length; j++) {
+          //       if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
+          //         option.series[0].data[i] = myList[j].new_customers;
+          //       }
+          //     }
 
-            }
-            chart.hideLoading();
-            chart.setOption(option, true);
-          } else {
+          //   }
+          //   chart.hideLoading();
+          //   chart.setOption(option, true);
+          // } else {
             // 不是同一天
             var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
             days = Math.floor(days) + 1;
@@ -265,7 +265,7 @@ Component({
             }
             chart.hideLoading();
             chart.setOption(option, true);
-          }
+          // }
         }
       })
     },

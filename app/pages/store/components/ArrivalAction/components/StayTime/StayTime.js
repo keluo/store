@@ -87,7 +87,7 @@ let option2 = {
   },
   legend: {
     bottom: 0,
-    data: ['星巴克新街口', '星巴克新桥店']
+    data: ['星巴克新街口']
   },
   tooltip: {
     trigger: 'axis',
@@ -99,7 +99,8 @@ let option2 = {
       var obj = { top: 60 };
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
-    }
+    },
+    formatter: "{b} {a}:{c}"
   },
   yAxis: {
     type: 'value',
@@ -111,12 +112,6 @@ let option2 = {
     {
       name: '星巴克新街口',
       data: [10, 42, 71, 14, 40, 70, 10],
-      type: 'line',
-      smooth: true
-    },
-    {
-      name: '星巴克新桥店',
-      data: [20, 52, 81, 24, 50, 80, 20],
       type: 'line',
       smooth: true
     }
@@ -291,25 +286,172 @@ Component({
       this.setData({
         trendActive: 0
       })
+      chart2.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
       https(allCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
-        console.log(res)
+        if(res.code === "1"){
+          let myList = res.data.data;
+
+          option2.xAxis.data = [];
+          option2.series[0].data = [];
+          //查一天
+          // if (this.data.params.begin_time == this.data.params.end_time) {
+          //   for (var i = 0; i < 24; i++) {
+          //     var time = new Date(res.data.begin_time);
+          //     time = time.setHours(time.getHours() + i);
+
+          //     option.xAxis.data[i] = this.fmtMin(time);
+          //     option.series[0].data[i] = 0;
+          //     for (var j = 0; j < myList.length; j++) {
+          //       if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
+          //         option.series[0].data[i] = myList[j].stay_time;
+          //       }
+          //     }
+
+          //   }
+          //   chart2.hideLoading();
+          //   chart2.setOption(option2, true);
+          // } else {
+            // 不是同一天
+            var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+            days = Math.floor(days) + 1;
+
+            for (var i = 0; i < days; i++) {
+              var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+              option2.xAxis.data[i] = time;
+              option2.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (time == myList[j].DayTime.slice(0, 10)) {
+                  option2.series[0].data[i] = myList[j].stay_time;
+                }
+              }
+            }
+            chart2.hideLoading();
+            chart2.setOption(option2, true);
+          // }
+        }
       })
     },
     trendNew () {
       this.setData({
         trendActive: 1
       })
+      chart2.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
       https(newCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
-        console.log(res)
+        if(res.code === "1"){
+          let myList = res.data.data;
+
+          option2.xAxis.data = [];
+          option2.series[0].data = [];
+          //查一天
+          // if (this.data.params.begin_time == this.data.params.end_time) {
+          //   for (var i = 0; i < 24; i++) {
+          //     var time = new Date(res.data.begin_time);
+          //     time = time.setHours(time.getHours() + i);
+
+          //     option.xAxis.data[i] = this.fmtMin(time);
+          //     option.series[0].data[i] = 0;
+          //     for (var j = 0; j < myList.length; j++) {
+          //       if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
+          //         option.series[0].data[i] = myList[j].stay_time;
+          //       }
+          //     }
+
+          //   }
+          //   chart2.hideLoading();
+          //   chart2.setOption(option2, true);
+          // } else {
+            // 不是同一天
+            var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+            days = Math.floor(days) + 1;
+
+            for (var i = 0; i < days; i++) {
+              var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+              option2.xAxis.data[i] = time;
+              option2.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (time == myList[j].DayTime.slice(0, 10)) {
+                  option2.series[0].data[i] = myList[j].stay_time;
+                }
+              }
+            }
+            chart2.hideLoading();
+            chart2.setOption(option2, true);
+          // }
+        }
       })
     },
     trendOld () {
       this.setData({
         trendActive: 2
       })
+      chart2.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
       https(oldCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
-        console.log(res)
+        if(res.code === "1"){
+          let myList = res.data.data;
+
+          option2.xAxis.data = [];
+          option2.series[0].data = [];
+          //查一天
+          // if (this.data.params.begin_time == this.data.params.end_time) {
+          //   for (var i = 0; i < 24; i++) {
+          //     var time = new Date(res.data.begin_time);
+          //     time = time.setHours(time.getHours() + i);
+
+          //     option.xAxis.data[i] = this.fmtMin(time);
+          //     option.series[0].data[i] = 0;
+          //     for (var j = 0; j < myList.length; j++) {
+          //       if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
+          //         option.series[0].data[i] = myList[j].stay_time;
+          //       }
+          //     }
+
+          //   }
+          //   chart2.hideLoading();
+          //   chart2.setOption(option2, true);
+          // } else {
+            // 不是同一天
+            var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+            days = Math.floor(days) + 1;
+
+            for (var i = 0; i < days; i++) {
+              var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+              option2.xAxis.data[i] = time;
+              option2.series[0].data[i] = 0;
+              for (var j = 0; j < myList.length; j++) {
+                if (time == myList[j].DayTime.slice(0, 10)) {
+                  option2.series[0].data[i] = myList[j].stay_time;
+                }
+              }
+            }
+            chart2.hideLoading();
+            chart2.setOption(option2, true);
+          // }
+        }
       })
+    },
+    fmtMin(obj) {
+      var date = new Date(obj);
+      var h = date.getHours();
+      if (h < 10) { h = '0' + h }
+      var m = date.getMinutes();
+      if (m < 10) { m = '0' + m }
+      return h + ':' + m
+    },
+    fmtDate: function (obj) {
+      var date = new Date(obj);
+      var y = 1900 + date.getYear();
+      var m = "0" + (date.getMonth() + 1);
+      var d = "0" + date.getDate();
+      return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
     }
   }
 })

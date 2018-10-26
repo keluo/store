@@ -65,6 +65,48 @@ let option = {
   ]
 };
 
+let option2 = {
+  color: ['#0386E5', '#FF3C24', '#FFA602'],
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  grid: {
+    top: 20
+  },
+  legend: {
+    bottom: 0,
+    data: ['星巴克新街口']
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+      type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
+    },
+    position: function (pos, params, dom, rect, size) {
+      // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+      var obj = { top: 60 };
+      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+      return obj;
+    },
+    formatter: "{b} {a}:{c}"
+  },
+  yAxis: {
+    type: 'value',
+    splitLine: {
+      show: false
+    }
+  },
+  series: [
+    {
+      name: '星巴克新街口',
+      data: [10, 42, 71, 14, 40, 70, 10],
+      type: 'line',
+      smooth: true
+    }
+  ]
+};
+
 function initChart(canvas, width, height) {
   chart = echarts.init(canvas, null, {
     width: width,
@@ -83,54 +125,7 @@ function initChart2(canvas, width, height) {
   });
   canvas.setChart(chart);
 
-  var option = {
-    color: ['#0386E5', '#FF3C24', '#FFA602'],
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    grid: {
-      top: 20
-    },
-    legend: {
-      bottom: 0,
-      data: ['星巴克新街口', '星巴克新桥店']
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
-      },
-      position: function (pos, params, dom, rect, size) {
-        // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
-        var obj = { top: 60 };
-        obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-        return obj;
-      }
-    },
-    yAxis: {
-      type: 'value',
-      splitLine: {
-        show: false
-      }
-    },
-    series: [
-      {
-        name: '星巴克新街口',
-        data: [10, 42, 71, 14, 40, 70, 10],
-        type: 'line',
-        smooth: true
-      },
-      {
-        name: '星巴克新桥店',
-        data: [20, 52, 81, 24, 50, 80, 20],
-        type: 'line',
-        smooth: true
-      }
-    ]
-  };
-
-  chart2.setOption(option);
+  chart2.setOption(option2);
   return chart2;
 }
 
@@ -199,9 +194,41 @@ Component({
       })
     },
     getTrend () {
+      chart.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
       https(oldCustomerReturnDaysDayAjax, this.data.params, 'get').then(res => {
-        console.log(res)
+        if(res.code === "1"){
+          let myList = res.data.data;
+
+          option2.xAxis.data = [];
+          option2.series[0].data = [];
+
+          var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+          days = Math.floor(days) + 1;
+
+          for (var i = 0; i < days; i++) {
+            var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+            option2.xAxis.data[i] = time;
+            option2.series[0].data[i] = 0;
+            for (var j = 0; j < myList.length; j++) {
+              if (time == myList[j].DayTime.slice(0, 10)) {
+                option2.series[0].data[i] = myList[j].return_ds;
+              }
+            }
+          }
+          chart2.hideLoading();
+          chart2.setOption(option2, true);
+        }
       })
+    },
+    fmtDate: function (obj) {
+      var date = new Date(obj);
+      var y = 1900 + date.getYear();
+      var m = "0" + (date.getMonth() + 1);
+      var d = "0" + date.getDate();
+      return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
     }
   }
 })
