@@ -1,11 +1,10 @@
 {
   "cloud": true,
   "pages": [
-    "pages/store/index",
+    "pages/promotion/index/index",
     "pages/promotion/coupon/list/list",
     "pages/promotion/coupon/add/add",
     "pages/promotion/coupon/detail/detail",
-    "pages/promotion/index/index",
     "pages/promotion/commission/seting",
     "pages/promotion/statistics/index",
     "pages/user/money/add/success",
@@ -16,9 +15,10 @@
     "pages/user/link/index",
     "pages/user/index/index",
     "pages/user/message/index",
+    "pages/store/index",
     "pages/user/qualifications/index",
-    "pages/account/password/password",
-    "pages/account/login/login"
+    "pages/account/login/login",
+    "pages/account/password/password"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",

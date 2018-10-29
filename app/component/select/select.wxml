@@ -1,0 +1,12 @@
+<!--component/select/select.wxml-->
+<view class="com-selectBox {{left?'left':''}}">
+    <view class='com-sContent' bindtap='selectToggle'>
+        <view class='com-sTxt'>{{nowText}}</view>
+        <view class="icon-bottom" animation="{{animationData}}"></view>
+    </view>
+    <view class='com-sList' wx:if="{{selectShow}}">
+        <view wx:for="{{options}}" data-index="{{index}}" wx:key='{{index}}' class="com-sItem {{nowId === options[index].id ? 'actived':''}}" bindtap='setText'>{{item.name}}</view>
+    </view>
+    <view class='com-bg' wx:if="{{selectShow}}" bindtap='cancelSelect'>
+    </view>
+</view>

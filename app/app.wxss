@@ -65,6 +65,8 @@ button::after{
   font-size: 34rpx;
   padding: 28rpx 32rpx 28rpx 64rpx;
   border-bottom: 1rpx solid #eeeeee;
+  display:flex;
+  justify-content:space-between;
 }
 .item .item-title .right-ext {
   float: right;

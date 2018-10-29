@@ -1,0 +1,18 @@
+<!--component/pop/pop.wxml-->
+<view class="pop-wrap" wx:if="{{isShow}}">
+  <view class="pop-box">
+    <view class="pop-close" wx:if="{{closeShow}}" bindtap="hide">×</view>
+    <view class="pop-body">
+      <view class="pop-title">
+        <slot name="title"></slot>
+      </view>
+      <view class="pop-content">
+        <slot name="content"></slot>
+      </view>
+    </view>
+    <view class="pop-foot" wx:if="{{footShow}}">
+      <slot name="foot"></slot>
+    </view>
+  </view>
+  <view class="pop-bg" bindtap="hide" wx:if="{{isShow}}"></view>
+</view>

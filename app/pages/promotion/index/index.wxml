@@ -29,7 +29,8 @@
   </view>
   <view class="item">
     <view class="item-title">
-      优惠券发放情况
+      <view>优惠券发放情况</view>
+      <component-select  options="{{selectArray}}" selected="bindSelected"></component-select>
     </view>
     <view class="item-content">
       <view class="item-statistics-group column-3">
@@ -62,7 +63,7 @@
   </view>
   <view class="item">
     <view class="item-title">
-      趋势图
+      <view>趋势图</view>
     </view>
     <view class="item-content">
       <view class="item item-tab">
@@ -82,3 +83,12 @@
     </view>
   </view>
 </view>
+<component-pop class="pop-box">
+  <view slot="title">余额不足</view>
+  <view slot="content">根据您设置的返佣金额和目前已领券人数，您的账户余额将很快无法支付的推广费用，账户余额一旦低于单笔推广返佣金额，种草用户的返佣激励金额为0.1元，对推广效果会有影响，请提前充值保障推广效果~ </view>
+  <view slot="foot">
+    <navigator url = "/pages/user/money/add/add">
+      立即充值
+    </navigator>
+  </view>
+</component-pop>

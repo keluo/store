@@ -2,7 +2,7 @@
 <view class="container">
   <view class="item">
     <view class="item-options">
-      近7天
+      <component-select  options="{{selectArray}}" selected="bindSelected" left="true"></component-select>
       <view class="item-options-right">
         <button class="btn">+ 发放优惠券</button>
       </view>

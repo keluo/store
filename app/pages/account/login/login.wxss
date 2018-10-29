@@ -1,1 +1,70 @@
 /* pages/account/login/login.wxss */
+page {
+  background-color: #fff;
+}
+.item-logo {
+
+}
+.item-logo image {
+  width: 214rpx;
+  height: 150rpx;
+  margin: 0 auto;
+  display: block;
+  margin-top: 103rpx;
+}
+.item-login-input {
+  margin-top: 58rpx;
+  margin-bottom: 58rpx;
+  display: none;
+}
+.item-login-input.actived{
+  display: block;
+}
+.item-login-input .login-input {
+  line-height: 48rpx;
+  padding: 28rpx 32rpx;
+  position: relative;
+  font-size: 34rpx; 
+}
+.item-login-input .login-input:after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  right: 32rpx;
+  left: 32rpx;
+  height: 0rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.item-login-method {
+  display: flex;
+  justify-content: center;
+}
+.item-login-method .login-method {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  padding: 12rpx;
+  position: relative;
+}
+.item-login-method .login-method:last-child:after{
+  border-left: 2rpx solid #eeeeee;
+  height: 28rpx;
+  content: " ";
+  position: absolute;
+  top: 18rpx;
+  left: -1rpx;
+}
+.item-login-method .login-method.actived {
+  color: #108EE9;
+}
+
+.valid-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.valid-wrap .valid-btn{
+  display: flex;
+  width: 200rpx;
+  padding-left: 30rpx;
+  border-left: 1rpx solid #eee;
+  font-size: 34rpx;
+}
