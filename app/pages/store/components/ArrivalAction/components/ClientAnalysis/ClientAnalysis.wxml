@@ -18,7 +18,7 @@
       </view>
       <view class='overview-item'>
         <view class='overview-title'>
-          推广人数
+          推广人数 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           1353
@@ -29,7 +29,7 @@
       </view>
       <view class='overview-item'>
         <view class='overview-title'>
-          核销人数
+          核销人数 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           2285

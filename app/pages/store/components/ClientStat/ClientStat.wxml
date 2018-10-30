@@ -2,7 +2,7 @@
 <view class='overview-box'>
   <view class='overview-item'>
     <view class='overview-title'>
-      客流量
+      客流量 <view class='icon-question'></view>
     </view>
     <view class='overview-num'>
       {{keLiu_total}}
@@ -13,7 +13,7 @@
   </view>
   <view class='overview-item'>
     <view class='overview-title'>
-      进店客
+      进店客 <view class='icon-question'></view>
     </view>
     <view class='overview-num'>
       {{jinDian_total}}
@@ -24,7 +24,7 @@
   </view>
   <view class='overview-item'>
     <view class='overview-title'>
-      新顾客
+      新顾客 <view class='icon-question'></view>
     </view>
     <view class='overview-num'>
       {{totalNewCustomer}}
