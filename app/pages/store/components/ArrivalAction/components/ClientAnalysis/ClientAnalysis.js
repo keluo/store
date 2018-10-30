@@ -13,10 +13,24 @@ function initChart(canvas, width, height) {
     color: ['#0386E5', '#FF3C24', '#FFA602'],
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: '#999',
+          fontSize: 10
+        }
+      }
     },
     grid: {
-      top: 20
+      top: 20,
+      right: 0
     },
     legend: {
       bottom: 0,
@@ -38,6 +52,19 @@ function initChart(canvas, width, height) {
       type: 'value',
       splitLine: {
         show: false
+      },
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: '#999',
+          fontSize: 10
+        }
       }
     },
     series: [
@@ -45,18 +72,21 @@ function initChart(canvas, width, height) {
         name: '连接WiFi人数',
         data: [10, 42, 71, 14, 40, 70, 10],
         type: 'line',
+        showSymbol: false,
         smooth: true
       },
       {
         name: '推广人数',
         data: [20, 52, 81, 24, 50, 80, 20],
         type: 'line',
+        showSymbol: false,
         smooth: true
       },
       {
         name: '核销人数',
         data: [30, 62, 91, 34, 60, 90, 30],
         type: 'line',
+        showSymbol: false,
         smooth: true
       },
     ]

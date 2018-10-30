@@ -1,3 +1,6 @@
+let https = require('../../service/https.js');
+let { queryAssetGroup } = require('../../service/api.js');
+
 // miniprogram/pages/store/index.js
 Page({
 
@@ -8,9 +11,13 @@ Page({
     isActive: 0,
     params:{
       id: 2,
-      begin_time: '2018-09-30',
+      begin_time: '2018-10-15',
       end_time: '2018-10-15',
-    }
+    },
+    selectArray: []
+  },
+  bindSelected: function(id){
+    console.log(id)
   },
 
   /**
@@ -24,7 +31,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.getShopList();
   },
 
   /**
@@ -76,6 +83,24 @@ Page({
   isJindian() {
     this.setData({
       isActive: 1
+    })
+  },
+  getShopList () {
+    let that = this;
+    // https(queryAssetGroup, {}, 'get').then(res => {
+    //   console.log(res)
+    // })
+    wx.request({
+      url: 'https://mart.ubiwifi.cn/etma/bg/cond/',
+      header: {
+        'Cookie': 'sessionid=yb8ve9viavrn8px20eljsfogi9dhk2ug;csrftoken=jSo8hOwNiYxZsvHEYyCs6E2sqa3tMe87;'
+      },
+      success (res) {
+        console.log(res)
+        that.setData({
+          selectArray: res.data.data.bgs
+        })
+      }
     })
   }
 })

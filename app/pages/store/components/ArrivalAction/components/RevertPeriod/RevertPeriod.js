@@ -11,8 +11,18 @@ let option = {
   xAxis: {
     type: 'category',
     data: ['1-2天', '3-7天', '8-15天', '16-30天 ', '30天以上'],
-    nameTextStyle: {
-      fontSize: 10
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
     }
   },
   grid: {
@@ -38,6 +48,19 @@ let option = {
     splitLine: {
       show: false
     },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    }
   },
   series: [
     {
@@ -69,10 +92,24 @@ let option2 = {
   color: ['#0386E5', '#FF3C24', '#FFA602'],
   xAxis: {
     type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    }
   },
   grid: {
-    top: 20
+    top: 20,
+    right: 0
   },
   legend: {
     bottom: 0,
@@ -88,13 +125,25 @@ let option2 = {
       var obj = { top: 60 };
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
-    },
-    formatter: "{b} {a}:{c}"
+    }
   },
   yAxis: {
     type: 'value',
     splitLine: {
       show: false
+    },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
     }
   },
   series: [
@@ -102,7 +151,8 @@ let option2 = {
       name: '星巴克新街口',
       data: [10, 42, 71, 14, 40, 70, 10],
       type: 'line',
-      smooth: true
+      smooth: true,
+      showSymbol: false
     }
   ]
 };
@@ -210,7 +260,7 @@ Component({
 
           for (var i = 0; i < days; i++) {
             var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-            option2.xAxis.data[i] = time;
+            option2.xAxis.data[i] = time.substring(5, 10);
             option2.series[0].data[i] = 0;
             for (var j = 0; j < myList.length; j++) {
               if (time == myList[j].DayTime.slice(0, 10)) {

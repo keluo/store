@@ -4,6 +4,7 @@
     "navigationBarTextStyle": "white",
     "usingComponents": {
       "client-stat": "components/ClientStat/ClientStat",
-      "arrival-action": "components/ArrivalAction/ArrivalAction"
+      "arrival-action": "components/ArrivalAction/ArrivalAction",
+      "component-select": "../../component/select/select"
     }
 }

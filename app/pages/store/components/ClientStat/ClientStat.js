@@ -8,18 +8,38 @@ let option = {
   color: ['#0386E5', '#FF3C24', '#FFA602'],
   xAxis: {
     type: 'category',
-    data: [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    data: [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    name: '',
+    nameTextStyle: {
+      color: '#999',
+      fontSize: 10
+    },
+    nameLocation: 'middle',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      },
+      // interval: 3
+    }
   },
   legend: {
     bottom: 0,
     data: ['星巴克新街口店']
   },
   grid: {
-    top: 20
+    top: 20,
+    right: 0
   },
   tooltip: {
     trigger: 'axis',
-    formatter: "{b} {a}:{c}",
     axisPointer: {            // 坐标轴指示器，坐标轴触发有效
       type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
     },
@@ -34,12 +54,26 @@ let option = {
     type: 'value',
     splitLine: {
       show: false
+    },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
     }
   },
   series: [{
     name: '星巴克新街口店',
     data: [0, 0, 0, 0, 0, 0, 0],
     type: 'line',
+    showSymbol: false,
     smooth: true
   }]
 };
@@ -125,6 +159,7 @@ Component({
           let myList = res.data.data;
 
           option.xAxis.data = [];
+          option.xAxis.name = ' ';
           option.series[0].data = [];
           //查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
@@ -150,7 +185,7 @@ Component({
 
             for (var i = 0; i < days; i++) {
               var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-              option.xAxis.data[i] = time;
+              option.xAxis.data[i] = time.substring(5,10);
               option.series[0].data[i] = 0;
               for (var j = 0; j < myList.length; j++) {
                 if (time == myList[j].DayTime.slice(0, 10)) {
@@ -178,6 +213,7 @@ Component({
           let myList = res.data.data;
 
           option.xAxis.data = [];
+          option.xAxis.name = ' ';
           option.series[0].data = [];
           //查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
@@ -203,7 +239,7 @@ Component({
 
             for (var i = 0; i < days; i++) {
               var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-              option.xAxis.data[i] = time;
+              option.xAxis.data[i] = time.substring(5, 10);
               option.series[0].data[i] = 0;
               for (var j = 0; j < myList.length; j++) {
                 if (time == myList[j].DayTime.slice(0, 10)) {
@@ -231,31 +267,35 @@ Component({
 
           option.xAxis.data = [];
           option.series[0].data = [];
-          //查一天
-          // if (this.data.params.begin_time == this.data.params.end_time) {
-          //   for (var i = 0; i < 24; i++) {
-          //     var time = new Date(res.data.begin_time);
-          //     time = time.setHours(time.getHours() + i);
+          // 查一天
+          if (this.data.params.begin_time == this.data.params.end_time) {
+            for (var i = 0; i < 24; i++) {
+              var time = new Date(res.data.begin_time);
+              time = time.setHours(time.getHours() + i);
 
-          //     option.xAxis.data[i] = this.fmtMin(time);
-          //     option.series[0].data[i] = 0;
-          //     for (var j = 0; j < myList.length; j++) {
-          //       if (this.fmtMin(time) == myList[j].HourTime.slice(11, 16)) {
-          //         option.series[0].data[i] = myList[j].new_customers;
-          //       }
-          //     }
+              // option.xAxis.data[i] = this.fmtMin(time);
+              option.xAxis.data[i] = ' ',
+              option.series[0].data[i] = myList[0].new_customers;
+              option.xAxis.name = this.data.params.begin_time.substring(5, 10);
 
-          //   }
-          //   chart.hideLoading();
-          //   chart.setOption(option, true);
-          // } else {
+              // option.series[0].data[i] = 0;
+              // for (var j = 0; j < myList.length; j++) {
+              //   if (this.data.params.begin_time == myList[j].DayTime.slice(11, 16)) {
+              //     option.series[0].data[i] = myList[j].new_customers;
+              //   }
+              // }
+
+            }
+            chart.hideLoading();
+            chart.setOption(option, true);
+          } else {
             // 不是同一天
             var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
             days = Math.floor(days) + 1;
 
             for (var i = 0; i < days; i++) {
               var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-              option.xAxis.data[i] = time;
+              option.xAxis.data[i] = time.substring(5, 10);
               option.series[0].data[i] = 0;
               for (var j = 0; j < myList.length; j++) {
                 if (time == myList[j].DayTime.slice(0, 10)) {
@@ -265,7 +305,7 @@ Component({
             }
             chart.hideLoading();
             chart.setOption(option, true);
-          // }
+          }
         }
       })
     },

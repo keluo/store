@@ -1,5 +1,5 @@
 <view class='header'>
-  星巴克新街口店
+  <component-select options="{{selectArray}}" selected="bindSelected" left="{{true}}"></component-select>
 </view>
 
 <view class='tab-box'>

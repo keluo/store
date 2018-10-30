@@ -10,8 +10,18 @@ let option = {
   xAxis: {
     type: 'category',
     data: ['1次', '2次', '3-5次', '6-9次 ', '多于10次'],
-    nameTextStyle: {
-      fontSize: 10
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
     }
   },
   grid: {
@@ -37,6 +47,19 @@ let option = {
     splitLine: {
       show: false
     },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    }
   },
   series: [
     {

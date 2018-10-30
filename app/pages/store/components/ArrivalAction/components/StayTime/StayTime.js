@@ -10,9 +10,19 @@ let option = {
   color: ['#5266FF', '#FFA602', '#0386E5', '#56D497', '#38D4DF'],
   xAxis: {
     type: 'category',
-    data: ['小于10分钟', '11-30分钟', '31-60分钟', '1-2小时 ', '大于2小时'],
-    nameTextStyle: {
-      fontSize: 10
+    data: ['<10m', '11-30m', '31-60m', '1-2h ', '>2h'],
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
     }
   },
   grid: {
@@ -38,6 +48,19 @@ let option = {
     splitLine: {
       show: false
     },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    }
   },
   series: [
     {
@@ -80,10 +103,24 @@ let option2 = {
   color: ['#0386E5', '#FF3C24', '#FFA602'],
   xAxis: {
     type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    }
   },
   grid: {
-    top: 20
+    top: 20,
+    right: 0
   },
   legend: {
     bottom: 0,
@@ -99,13 +136,25 @@ let option2 = {
       var obj = { top: 60 };
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
-    },
-    formatter: "{b} {a}:{c}"
+    }
   },
   yAxis: {
     type: 'value',
     splitLine: {
       show: false
+    },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
     }
   },
   series: [
@@ -113,6 +162,7 @@ let option2 = {
       name: '星巴克新街口',
       data: [10, 42, 71, 14, 40, 70, 10],
       type: 'line',
+      showSymbol: false,
       smooth: true
     }
   ]
@@ -320,7 +370,7 @@ Component({
 
             for (var i = 0; i < days; i++) {
               var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-              option2.xAxis.data[i] = time;
+              option2.xAxis.data[i] = time.substring(5, 10);
               option2.series[0].data[i] = 0;
               for (var j = 0; j < myList.length; j++) {
                 if (time == myList[j].DayTime.slice(0, 10)) {
@@ -372,7 +422,7 @@ Component({
 
             for (var i = 0; i < days; i++) {
               var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-              option2.xAxis.data[i] = time;
+              option2.xAxis.data[i] = time.substring(5, 10);
               option2.series[0].data[i] = 0;
               for (var j = 0; j < myList.length; j++) {
                 if (time == myList[j].DayTime.slice(0, 10)) {
@@ -424,7 +474,7 @@ Component({
 
             for (var i = 0; i < days; i++) {
               var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-              option2.xAxis.data[i] = time;
+              option2.xAxis.data[i] = time.substring(5, 10);
               option2.series[0].data[i] = 0;
               for (var j = 0; j < myList.length; j++) {
                 if (time == myList[j].DayTime.slice(0, 10)) {

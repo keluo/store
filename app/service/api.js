@@ -1,5 +1,7 @@
 const homeInit = '/ubiasset/home/';
 
+const queryAssetGroup = '/etma/sg/cond/'; //店铺列表
+
 const keLiuAllTotalAjax = '/inner-api/ke_liu/all/total'; //客流统计 —— 客流、进店客 总
 const totalCustomerAjax = '/inner-api/customer/total/customer'; //客流统计 —— 新顾客、老顾客 总
 const keLiuDayAjax = '/inner-api/ke_liu/day'; // 客流统计 —— 客流趋势图
@@ -25,6 +27,7 @@ const oldCustomerReturnDaysDayAjax = '/inner-api/customer/day/return_days'; //�
 
 module.exports = {
   homeInitApi: homeInit,
+  queryAssetGroup,
   keLiuAllTotalAjax,
   totalCustomerAjax,
   keLiuDayAjax,
