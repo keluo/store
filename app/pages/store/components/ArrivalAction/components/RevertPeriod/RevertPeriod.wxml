@@ -9,7 +9,7 @@
     <view class="overview-box">
       <view class='overview-item'>
         <view class='overview-title'>
-          顾客平均返店周期
+          顾客平均返店周期 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{old_customer_avg_return}}<view class='overview-unit'>天</view>

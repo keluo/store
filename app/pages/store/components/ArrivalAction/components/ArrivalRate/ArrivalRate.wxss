@@ -4,3 +4,6 @@
 .container{
   height: 400rpx;
 }
+.overview-box .overview-item{
+  width: 300rpx;
+}

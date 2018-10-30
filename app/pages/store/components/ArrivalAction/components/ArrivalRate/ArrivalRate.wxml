@@ -7,7 +7,7 @@
     <view class='overview-box'>
       <view class='overview-item'>
         <view class='overview-title'>
-          顾客平均到店频次
+          顾客平均到店频次 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{old_customer_avg_times}}<view class='overview-unit'>次</view>
