@@ -1,5 +1,9 @@
 <view class='header'>
-  <component-select options="{{selectArray}}" selected="bindSelected" left="{{true}}"></component-select>
+  <component-select options="{{selectArray}}" bind:selected="bindSelected" left="{{true}}"></component-select>
+  <view class='icon-download'></view>
+  <picker value="{{date}}" range="{{dateList}}" range-key="name" bindchange="bindDateChange">
+    <view class='icon-time'></view>
+  </picker>
 </view>
 
 <view class='tab-box'>
@@ -9,8 +13,14 @@
 </view>
 
 <view class='time'>
-  统计日期：2018/9/29-2018/10/05
+  统计日期：{{params.begin_time}}-{{params.end_time}}
 </view>
 
 <client-stat wx:if="{{isActive == 0}}" params="{{params}}"></client-stat>
 <arrival-action wx:if="{{isActive == 1}}" params="{{params}}"></arrival-action>
+
+
+  <!-- <view class="section__title">日期选择器</view> -->
+
+
+<canvas canvas-id='myCanvas'></canvas>

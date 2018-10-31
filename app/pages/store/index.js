@@ -11,13 +11,22 @@ Page({
     isActive: 0,
     params:{
       id: 2,
-      begin_time: '2018-10-15',
+      begin_time: '2018-09-15',
       end_time: '2018-10-15',
     },
+    dateList: [
+      { id: 0, name: '今天'},
+      { id: 1, name: '昨天' },
+      { id: 6, name: '近7天' },
+      { id: 14, name: '近15天' },
+      { id: 29, name: '近30天' }
+    ],
     selectArray: []
   },
   bindSelected: function(id){
-    console.log(id)
+    this.setData({
+      ['params.id']: id.detail
+    })
   },
 
   /**
@@ -32,6 +41,18 @@ Page({
    */
   onReady: function () {
     this.getShopList();
+    // wx.canvasToTempFilePath({
+    //   x: 100,
+    //   y: 200,
+    //   width: 50,
+    //   height: 50,
+    //   destWidth: 100,
+    //   destHeight: 100,
+    //   canvasId: 'myCanvas',
+    //   success(res) {
+    //     console.log(res.tempFilePath)
+    //   }
+    // })
   },
 
   /**
@@ -93,7 +114,7 @@ Page({
     wx.request({
       url: 'https://mart.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=yb8ve9viavrn8px20eljsfogi9dhk2ug;csrftoken=jSo8hOwNiYxZsvHEYyCs6E2sqa3tMe87;'
+        'Cookie': 'sessionid=c74bef6dyxjsgjf5b0o9k8tme5bgzv8j;csrftoken=dUnBYhhayarzBDHAR1hDgXuLqu2ueGPt;'
       },
       success (res) {
         console.log(res)
@@ -102,5 +123,24 @@ Page({
         })
       }
     })
+  },
+  bindDateChange: function (e) {
+    let currentId = this.data.dateList[e.detail.value].id;
+    let begin = new Date().setDate(new Date().getDate() - currentId);
+    let end = new Date();
+    if (currentId == 1){
+      end = new Date().setDate(new Date().getDate() - currentId)
+    }
+    this.setData({
+      ['params.begin_time']: this.fmtDate(begin),
+      ['params.end_time']: this.fmtDate(end)
+    })
+  },
+  fmtDate: function (obj) {
+    var date = new Date(obj);
+    var y = 1900 + date.getYear();
+    var m = "0" + (date.getMonth() + 1);
+    var d = "0" + date.getDate();
+    return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
   }
 })

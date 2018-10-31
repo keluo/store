@@ -12,6 +12,13 @@ page{
   background:#fff;
   font-size: 34rpx;
 }
+.header .icon-time, .header .icon-download{
+  float: right;
+  margin-left:36rpx;
+}
+.header picker{
+  float: right;
+}
 
 /* 时间 */
 .time{

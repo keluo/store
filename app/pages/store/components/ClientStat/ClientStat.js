@@ -19,15 +19,18 @@ let option = {
       show: false
     },
     axisTick: {
-      show: false
+      show: true,
+      alignWithLabel: true,
+      lineStyle: {
+        color: '#999'
+      }
     },
     axisLabel: {
       show: true,
       textStyle: {
         color: '#999',
         fontSize: 10
-      },
-      // interval: 3
+      }
     }
   },
   legend: {
@@ -48,12 +51,16 @@ let option = {
       var obj = { top: 60 };
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
-    }
+    },
+    formatter: '{b} {a0}:{c0}'
   },
   yAxis: {
     type: 'value',
     splitLine: {
-      show: false
+      show: true,
+      lineStyle: {
+        color: '#F9FAFE'
+      }
     },
     axisLine: {
       show: false
@@ -75,7 +82,8 @@ let option = {
     type: 'line',
     showSymbol: false,
     smooth: true
-  }]
+  }
+  ]
 };
 
 function initChart(canvas, width, height) {
