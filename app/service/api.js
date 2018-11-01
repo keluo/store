@@ -25,6 +25,9 @@ const customerStayTimeAjax = '/inner-api/customer/old/misc_info'; //进店行为
 const customerReturnDaysAjax = '/inner-api/customer/return_days'; //进店行为 —— 返店周期 —— 分布
 const oldCustomerReturnDaysDayAjax = '/inner-api/customer/day/return_days'; //进店行为 —— 返店周期 —— 趋势
 
+const loginApi = '/etma/login/'; //登录
+
+
 module.exports = {
   homeInitApi: homeInit,
   queryAssetGroup,
@@ -45,5 +48,6 @@ module.exports = {
   customerArrivedTimesAjax,
   customerStayTimeAjax,
   customerReturnDaysAjax,
-  oldCustomerReturnDaysDayAjax
+  oldCustomerReturnDaysDayAjax,
+  loginApi
 }
