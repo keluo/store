@@ -115,9 +115,9 @@ Page({
     //   console.log(res)
     // })
     wx.request({
-      url: 'https://mart.ubiwifi.cn/etma/bg/cond/',
+      url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=dq9ezgjj7yo2inybaixqafe8klcbn2k1;csrftoken=om776rvkQIIs38P3DSaXniBu2iedISwu;'
+        'Cookie': 'sessionid=7vuhmcc1gx5psq9cgpo057o5bdtwc6bx;csrftoken=pgED9Ff6sIi1bGW3qDviEqZHbYU46010;'
       },
       success (res) {
         that.setData({
