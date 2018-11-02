@@ -4,6 +4,7 @@
     <view class="item-title-txt">
       返店周期分布
     </view>
+    <view wx:if="{{isToday}}" class="item-title-prompt">此数据只能查看到昨天</view>
   </view>
   <view class="item-box-content">
     <view class="overview-box">
@@ -28,7 +29,7 @@
 <view class="item-box">
   <view class="item-title">
     <view class="item-title-txt">返店周期趋势图</view>
-    <view class='compared'>店铺对比</view>
+    <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="店铺对比"></component-select>
   </view>
   <view class="item-box-content">
     <view class="container">

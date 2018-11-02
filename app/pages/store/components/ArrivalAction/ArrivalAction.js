@@ -18,6 +18,9 @@ Component({
           })
         }
       }
+    },
+    selectArray: {
+      type: Array
     }
   },
 

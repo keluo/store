@@ -130,7 +130,7 @@ let option2 = {
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
     },
-    formatter: '{b} {a}:{c}'
+    formatter: '{b}\n{a}：{c}'
   },
   yAxis: {
     type: 'value',
@@ -161,6 +161,102 @@ let option2 = {
       type: 'line',
       smooth: true,
       showSymbol: false
+    }
+  ]
+};
+
+let option3 = {
+  color: ['#0386E5', '#FF3C24', '#FFA602'],
+  xAxis: {
+    type: 'category',
+    data: [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    name: '',
+    nameTextStyle: {
+      color: '#999',
+      fontSize: 10
+    },
+    nameLocation: 'middle',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: true,
+      alignWithLabel: true,
+      lineStyle: {
+        color: '#999'
+      }
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    }
+  },
+  legend: {
+    bottom: 0,
+    data: ['', '']
+  },
+  grid: {
+    top: 20,
+    right: 0
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+      type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
+    },
+    position: function (pos, params, dom, rect, size) {
+      // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+      var obj = { top: 60 };
+      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+      return obj;
+    },
+    formatter: function (params) {
+      var res = params[0].name;
+      for (var i = 0, l = params.length; i < l; i++) {
+        res += '\n' + params[i].seriesName + ' : ' + params[i].value;
+      }
+      return res
+    }
+  },
+  yAxis: {
+    type: 'value',
+    splitLine: {
+      show: true,
+      lineStyle: {
+        color: '#F9FAFE'
+      }
+    },
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: true,
+      textStyle: {
+        color: '#999',
+        fontSize: 10
+      }
+    }
+  },
+  series: [
+    {
+      name: '',
+      data: [0, 0, 0, 0, 0, 0, 0],
+      type: 'line',
+      showSymbol: false,
+      smooth: true
+    },
+    {
+      name: '',
+      data: [0, 0, 0, 0, 0, 0, 0],
+      type: 'line',
+      showSymbol: false,
+      smooth: true
     }
   ]
 };
@@ -203,6 +299,12 @@ Component({
           this.getTrend();
         }, 1000)
       }
+    },
+    isToday: {
+      type: Boolean
+    },
+    selectArray: {
+      type: Array
     }
   },
 
@@ -216,7 +318,9 @@ Component({
     ec2: {
       onInit: initChart2
     },
-    old_customer_avg_return: 0
+    old_customer_avg_return: 0,
+    isVs: false,
+    vsId: ''
   },
 
   /**
@@ -256,6 +360,7 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
+      this.setName()
       https(oldCustomerReturnDaysDayAjax, this.data.params, 'get').then(res => {
         if(res.code === "1"){
           let myList = res.data.data;
@@ -263,23 +368,112 @@ Component({
           option2.xAxis.data = [];
           option2.series[0].data = [];
 
-          var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
-          days = Math.floor(days) + 1;
-
-          for (var i = 0; i < days; i++) {
-            var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
-            option2.xAxis.data[i] = time.substring(5, 10);
-            option2.series[0].data[i] = 0;
-            for (var j = 0; j < myList.length; j++) {
-              if (time == myList[j].DayTime.slice(0, 10)) {
-                option2.series[0].data[i] = myList[j].return_ds;
-              }
-            }
+          if(this.data.params.begin_time === this.data.params.end_time){
+            this.setToadyChart({
+              begin_time: res.data.begin_time,
+              myList: myList,
+              option: option2,
+              index: 0,
+              name: 'return_ds'
+            })
+          }else{
+            this.setNotTodayChart({
+              myList: myList,
+              option: option2,
+              index: 0,
+              name: 'return_ds'
+            })
           }
-          chart2.hideLoading();
-          chart2.setOption(option2, true);
+          if(!this.data.isVs){
+            chart2.hideLoading();
+            chart2.setOption(option2, true);
+          }
         }
       })
+      if(this.data.isVs){
+        https(oldCustomerReturnDaysDayAjax,{id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
+          if(res.code === "1"){
+            let myList = res.data.data;
+
+            if (this.data.params.begin_time === this.data.params.end_time){
+              this.setToadyChart({
+                begin_time: res.data.begin_time,
+                myList: myList,
+                option: option3,
+                index: 1,
+                name: 'return_ds'
+              })
+            }else{
+              this.setNotTodayChart({
+                myList: myList,
+                option: option3,
+                index: 1,
+                name: 'return_ds'
+              })
+            }
+            setTimeout(() => {
+              chart2.hideLoading();
+              chart2.setOption(option3, true);
+            }, 1000)
+          }
+        })
+      }
+    },
+    bindSelected(id) {
+      option3.legend.data[1] = this.data.selectArray.find((item) => {
+        return item.id == id.detail
+      }).name;
+      option3.series[1].name = this.data.selectArray.find((item) => {
+        return item.id == id.detail
+      }).name;
+      this.setData({
+        isVs: true,
+        vsId: id.detail,
+      })
+      setTimeout(() => {
+        this.getTrend()
+      }, 1000)
+    },
+    setName() {
+      option2.legend.data[0] = this.data.params.name;
+      option2.series[0].name = this.data.params.name;
+
+      option3.legend.data[0] = this.data.params.name;
+      option3.series[0].name = this.data.params.name;
+    },
+    setNotTodayChart(obj) {
+      var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+      days = Math.floor(days) + 1;
+
+      for (var i = 0; i < days; i++) {
+        var time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() + i));
+        obj.option.xAxis.data[i] = time.substring(5, 10);
+        obj.option.series[obj.index].data[i] = 0;
+        for (var j = 0; j < obj.myList.length; j++) {
+          if (time == obj.myList[j].DayTime.slice(0, 10)) {
+            obj.option.series[0].data[i] = obj.myList[j].return_ds;
+          }
+        }
+      }
+      option3.xAxis.data = option2.xAxis.data;
+      option3.series[0] = option2.series[0]
+    },
+    setToadyChart(obj) {
+      for (var i = 0; i < 24; i++) {
+        var time = new Date(obj.begin_time);
+        time = time.setHours(time.getHours() + i);
+
+        obj.option.xAxis.data[i] = this.fmtMin(time);
+        // obj.option.series[obj.index].data[i] = 0;
+        // for (var j = 0; j < obj.myList.length; j++) {
+        //   if (this.fmtMin(time) == obj.myList[j].HourTime.slice(11, 16)) {
+        //     obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
+        //   }
+        // }
+        obj.option.series[obj.index].data[i] = myList[0][obj.name]
+      }
+      option3.xAxis.data = option2.xAxis.data;
+      option3.series[0] = option2.series[0]
     },
     fmtDate: function (obj) {
       var date = new Date(obj);

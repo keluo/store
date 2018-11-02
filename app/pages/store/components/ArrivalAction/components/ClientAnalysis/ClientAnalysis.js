@@ -52,8 +52,6 @@ function initChart(canvas, width, height) {
         return obj;
       },
       formatter: function (params) {
-        console.log(params)
-        // console.log(ticket)
         var res = params[0].name;
         for (var i = 0, l = params.length; i < l; i++) {
           res += '\n' + params[i].seriesName + ' : ' + params[i].value;
