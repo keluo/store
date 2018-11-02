@@ -5,6 +5,7 @@
     "usingComponents": {
       "client-stat": "components/ClientStat/ClientStat",
       "arrival-action": "components/ArrivalAction/ArrivalAction",
-      "component-select": "../../component/select/select"
+      "component-select": "../../component/select/select",
+      "component-pop": "../../component/pop/pop"
     }
 }

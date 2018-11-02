@@ -114,6 +114,9 @@ Component({
           this.getInfo();
         }, 1000)
       }
+    },
+    isToday: {
+      type: Boolean
     }
   },
 

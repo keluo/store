@@ -2,6 +2,7 @@
 <view class="item-box">
   <view class="item-title">
     <view class="item-title-txt">到店频次分布</view>
+    <view wx:if="{{isToday}}" class="item-title-prompt">此数据只能查看到昨天</view>
   </view>
   <view class='item-box-content'>
     <view class='overview-box'>

@@ -27,3 +27,30 @@ page{
   color: #999;
   background:#fff;
 }
+
+.pop-box input{
+  width: 500rpx;
+  height: 72rpx;
+  box-sizing: border-box;
+  padding: 14rpx 20rpx 16rpx 20rpx;
+  border-radius:4rpx;
+  border:2rpx solid #DDDDDD;
+}
+.pop-box .label{
+  color: #333;
+  font-size: 28rpx;
+  margin: 16rpx 0 12rpx 0;
+}
+.pop-box .select-title{
+  display:flex;
+  justify-content:space-between;
+  margin: 32rpx 0 12rpx 0;
+}
+.pop-box .select-title-txt{
+  color: #333333;
+  font-size: 28rpx;
+}
+.pop-box .select-all{
+  color: #108EE9;
+  font-size: 28rpx;
+}

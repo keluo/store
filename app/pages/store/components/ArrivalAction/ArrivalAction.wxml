@@ -6,7 +6,7 @@
   <view class="tab-bar-item {{isActive == 3?'active':''}}" bindtap="isRevertPeriod">返店周期</view>
 </view>
 
-<client-analysis wx:if="{{isActive == 0}}"></client-analysis>
-<stay-time wx:if="{{isActive == 1}}" params="{{params}}"></stay-time>
-<arrival-rate wx:if="{{isActive == 2}}" params="{{params}}"></arrival-rate>
-<revert-period wx:if="{{isActive == 3}}" params="{{params}}"></revert-period>
+<client-analysis wx:if="{{isActive == 0}}" params="{{params}}"></client-analysis>
+<stay-time wx:if="{{isActive == 1}}" params="{{params}}" isToday="{{isToday}}"></stay-time>
+<arrival-rate wx:if="{{isActive == 2}}" params="{{params}}" isToday="{{isToday}}"></arrival-rate>
+<revert-period wx:if="{{isActive == 3}}" params="{{params}}" isToday="{{isToday}}"></revert-period>

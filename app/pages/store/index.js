@@ -11,8 +11,9 @@ Page({
     isActive: 0,
     params:{
       id: 2,
-      begin_time: '2018-09-15',
-      end_time: '2018-10-15',
+      name: '',
+      begin_time: '',
+      end_time: '',
     },
     dateList: [
       { id: 0, name: '今天'},
@@ -24,8 +25,14 @@ Page({
     selectArray: []
   },
   bindSelected: function(id){
+    console.log(id)
+    let name = this.data.selectArray.find((item) => {
+      return item.id == id.detail
+    }).name
+
     this.setData({
-      ['params.id']: id.detail
+      ['params.id']: id.detail,
+      ['params.name']: name
     })
   },
 
@@ -33,7 +40,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      ['params.begin_time']: this.fmtDate(new Date().setDate(new Date().getDate() - 6)),
+      ['params.end_time']: this.fmtDate(new Date())
+    })
   },
 
   /**
@@ -41,18 +51,6 @@ Page({
    */
   onReady: function () {
     this.getShopList();
-    // wx.canvasToTempFilePath({
-    //   x: 100,
-    //   y: 200,
-    //   width: 50,
-    //   height: 50,
-    //   destWidth: 100,
-    //   destHeight: 100,
-    //   canvasId: 'myCanvas',
-    //   success(res) {
-    //     console.log(res.tempFilePath)
-    //   }
-    // })
   },
 
   /**
@@ -96,6 +94,11 @@ Page({
   onShareAppMessage: function () {
 
   },
+  handleDownLoad () {
+    this.selectComponent('.pop-box').show({
+
+    });
+  },
   isKeliu() {
     this.setData({
       isActive: 0
@@ -114,10 +117,9 @@ Page({
     wx.request({
       url: 'https://mart.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=c74bef6dyxjsgjf5b0o9k8tme5bgzv8j;csrftoken=dUnBYhhayarzBDHAR1hDgXuLqu2ueGPt;'
+        'Cookie': 'sessionid=dq9ezgjj7yo2inybaixqafe8klcbn2k1;csrftoken=om776rvkQIIs38P3DSaXniBu2iedISwu;'
       },
       success (res) {
-        console.log(res)
         that.setData({
           selectArray: res.data.data.bgs
         })
@@ -134,6 +136,14 @@ Page({
     this.setData({
       ['params.begin_time']: this.fmtDate(begin),
       ['params.end_time']: this.fmtDate(end)
+    })
+  },
+  notToday: function(e) {
+    console.log(e)
+    let time = new Date().setDate(new Date().getDate() - 1);
+    this.setData({
+      ['params.begin_time']: this.fmtDate(time),
+      ['params.end_time']: this.fmtDate(time)
     })
   },
   fmtDate: function (obj) {

@@ -18,7 +18,11 @@ function initChart(canvas, width, height) {
         show: false
       },
       axisTick: {
-        show: false
+        show: true,
+        alignWithLabel: true,
+        lineStyle: {
+          color: '#999'
+        }
       },
       axisLabel: {
         show: true,
@@ -46,12 +50,24 @@ function initChart(canvas, width, height) {
         var obj = { top: 60 };
         obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
         return obj;
+      },
+      formatter: function (params) {
+        console.log(params)
+        // console.log(ticket)
+        var res = params[0].name;
+        for (var i = 0, l = params.length; i < l; i++) {
+          res += '\n' + params[i].seriesName + ' : ' + params[i].value;
+        }
+        return res
       }
     },
     yAxis: {
       type: 'value',
       splitLine: {
-        show: false
+        show: true,
+        lineStyle: {
+          color: '#F9FAFE'
+        }
       },
       axisLine: {
         show: false
