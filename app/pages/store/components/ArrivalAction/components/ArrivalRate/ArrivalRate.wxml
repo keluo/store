@@ -14,7 +14,7 @@
           {{old_customer_avg_times}}<view class='overview-unit'>次</view>
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class='icon-increase'></view> 23.21%
+          环比 <view class="{{time_lrr.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{time_lrr.lrr}}%
         </view>
       </view>
     </view>

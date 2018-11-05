@@ -322,6 +322,14 @@ Component({
     },
     svg_stay_time: 0,
     bounce_rate: 0,
+    svg_stay_time_lrr: {
+      lrr: 0,
+      plus_minus: true
+    },
+    bounce_rate_lrr: {
+      lrr: 0,
+      plus_minus: true
+    },
     isVs: false,
     vsId: ''
   },
@@ -367,6 +375,17 @@ Component({
           chart.setOption(option, true)
         }
       })
+      setTimeout(() => {// 获取环比信息
+        let ratioParams = this.getPeriodTime();
+        https(allCustomerStayInfoAjax, ratioParams, 'get').then(res => {
+          if(res.code === "1"){
+            this.setData({
+              svg_stay_time_lrr: this.getRatio(this.data.svg_stay_time, res.data.data.all_customer_avg_stay_time),
+              bounce_rate_lrr: this.getRatio(this.data.bounce_rate, res.data.data.shallow_customer)
+            })
+          }
+        })
+      }, 1000)
     },
     distNew () {
       this.setData({
@@ -405,6 +424,17 @@ Component({
           chart.setOption(option, true)
         }
       })
+      setTimeout(() => {// 获取环比信息
+        let ratioParams = this.getPeriodTime();
+        https(newCustomerStayInfoAjax, ratioParams, 'get').then(res => {
+          if (res.code === "1") {
+            this.setData({
+              svg_stay_time_lrr: this.getRatio(this.data.svg_stay_time, res.data.data.all_customer_avg_stay_time),
+              bounce_rate_lrr: this.getRatio(this.data.bounce_rate, res.data.data.shallow_customer)
+            })
+          }
+        })
+      }, 1000)
     },
     distOld () {
       this.setData({
@@ -443,6 +473,55 @@ Component({
           chart.setOption(option, true)
         }
       })
+      setTimeout(() => {// 获取环比信息
+        let ratioParams = this.getPeriodTime();
+        https(oldCustomerStayInfoAjax, ratioParams, 'get').then(res => {
+          if (res.code === "1") {
+            this.setData({
+              svg_stay_time_lrr: this.getRatio(this.data.svg_stay_time, res.data.data.all_customer_avg_stay_time),
+              bounce_rate_lrr: this.getRatio(this.data.bounce_rate, res.data.data.shallow_customer)
+            })
+          }
+        })
+      }, 1000)
+    },
+    getPeriodTime() {// 获取上一个周期时间
+      let obj = {
+        id: this.data.params.id,
+        begin_time: '',
+        end_time: ''
+      }
+      if (this.data.params.begin_time === this.data.params.end_time) {//同一天
+        if (this.fmtDate(new Date(this.data.params.begin_time)) === this.fmtDate(new Date())) {//今天
+          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+          obj.end_time = obj.begin_time;
+        } else {//昨天
+          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+          obj.end_time = obj.begin_time;
+        }
+      } else {//不是同一天
+        var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+        days = Math.floor(days) + 1;
+
+        obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - days));
+        obj.end_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+      }
+      return obj
+    },
+    getRatio: function (oldVal, newVal) {// 获取增减比例
+      let obj = {
+        plus_minus: true,
+        lrr: 0
+      }
+      if (oldVal > newVal) {
+        let num = oldVal - newVal;
+        obj.lrr = (num / oldVal) * 100;
+        obj.plus_minus = false;
+      } else if (oldVal < newVal) {
+        let num = newVal - oldVal;
+        obj.lrr = (num / oldVal) * 100;
+      }
+      return obj
     },
     trendAll () {
       this.setData({

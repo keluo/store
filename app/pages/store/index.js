@@ -23,7 +23,18 @@ Page({
       { id: 29, name: '近30天' }
     ],
     selectArray: [],
-    mailList:[]
+    emailInputVal: '', 
+    mailList:[
+      {
+        value: '12321321@qq.com',
+        checked: false
+      },
+      {
+        value: '12321321@qq.com',
+        checked: false
+      }
+    ],
+    subMail: []
   },
   bindSelected: function(id){
     let name = this.data.selectArray.find((item) => {
@@ -52,17 +63,16 @@ Page({
   onReady: function () {
     this.getShopList();
 
-    try {
-      let list = wx.getStorageSync('mailList')
-      if (list) {
-        this.setData({
-          mailList: list
-        })
-      }
-    } catch (e) {
-      console.log(e)
-    }
-    
+    // try {
+    //   let list = wx.getStorageSync('mailList')
+    //   if (list) {
+    //     this.setData({
+    //       mailList: list
+    //     })
+    //   }
+    // } catch (e) {
+    //   console.log(e)
+    // }
     
   },
 
@@ -130,7 +140,7 @@ Page({
     wx.request({
       url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=lv3j8vz1fd0hgeukuywejl7vtfg3q222;csrftoken=FaiUBtpO2ef4yvyzBuvVoagTvhKtbWt7;'
+        'Cookie': 'sessionid=phbp687rp04gz4a2a3o6k8negjd5yzuk;csrftoken=PQM2HXecw1jEZxdITSeIgqdmGFfNG6QX;'
       },
       success (res) {
         that.setData({
@@ -152,15 +162,20 @@ Page({
     })
   },
   notToday (e) {
-    console.log(e)
     let time = new Date().setDate(new Date().getDate() - 1);
     this.setData({
       ['params.begin_time']: this.fmtDate(time),
       ['params.end_time']: this.fmtDate(time)
     })
   },
+  emailInput (e) {//input输入事件
+    this.setData({
+      emailInputVal: e.detail.value
+    })
+  },
   hadnleConfirm (e) {
     console.log(e)
+    let subArr = this.data.subMail;
     let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
     if (!regMail.test(e.detail.value)){
       wx.showToast({
@@ -171,38 +186,73 @@ Page({
       return false;
     }
     //通过验证 邮箱push到mailList 发到后台
+    subArr.push(e.detail.value);
+    https('/xxx', {
+      id: this.data.params.id,
+      time: 'xxx',
+      subArr: subArr
+    }, 'post').then(res => {
+      console.log(res)
+    })
   },
-  handleSelect (e) {//选择历史邮箱
-    let item = `mailList[${e.currentTarget.dataset.index}].active`;
-    let active = !this.data.mailList[e.currentTarget.dataset.index].active;
+  radioChange(e) {//多选框事件
     this.setData({
-      [item]: active
+      subMail: e.detail.value
     })
   },
   selectAll () {
     let list = this.data.mailList;
     for(let i=0;i<list.length;i++){
-      list[i].active = true
+      list[i].checked = true
     }
     this.setData({
       mailList: list
     })
   },
   handleSubMail () {
-    // this.selectComponent('.pop-box').hide({});
+    let subArr = this.data.subMail;
+    let list = this.data.mailList;    
+    let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
 
-    let list = this.data.mailList;
-    for (let i = 0; i < list.length; i++) {
-      list[i].active = false
+    if (this.data.emailInputVal) {
+      if (regMail.test(this.data.emailInputVal)){
+        subArr.push(this.data.emailInputVal);
+        list.push({
+          value: this.data.emailInputVal,
+          checked: false
+        })
+      }else{
+        wx.showToast({
+          title: '邮箱格式错误',
+          icon: 'loading',
+          duration: 1500
+        })
+        return false;
+      }
     }
-    try{
-      wx.setStorage({
-        key: "mailList",
-        data: list
+
+    if (subArr.length > 0){
+      https('/xxx', {
+        id: this.data.params.id,
+        time: 'xxx',
+        subArr: subArr
+      }, 'post').then(res => {
+        console.log(res)
       })
-    } catch (e) {
-      console.log(e)
-    }
+      
+      for (let i = 0; i < list.length; i++) {
+        list[i].checked = false
+      }
+      try {
+        wx.setStorage({
+          key: "mailList",
+          data: list
+        })
+      } catch (e) {
+        console.log(e)
+      }
+      this.selectComponent('.pop-box').hide({});
+    }   
   },
   fmtDate (obj) {
     var date = new Date(obj);

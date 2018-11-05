@@ -16,7 +16,7 @@
           {{old_customer_avg_return}}<view class='overview-unit'>天</view>
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class='icon-increase'></view> 23.21%
+          环比 <view class="{{return_lrr.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{return_lrr.lrr}}%
         </view>
       </view>
     </view>

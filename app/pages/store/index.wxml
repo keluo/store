@@ -20,19 +20,21 @@
 <arrival-action wx:if="{{isActive == 1}}" params="{{params}}" selectArray="{{selectArray}}" bind:myevent="notToday"></arrival-action>
 
 <component-pop class="pop-box">
-  <view slot="title">选择邮箱</view>
+  <view slot="title">导出报表</view>
   <view slot="content">
     <view class="label">发送至邮箱:</view>
-    <input placeholder="请输入邮箱地址" bindconfirm="hadnleConfirm"></input>
+    <input placeholder="请输入邮箱地址" bindinput="emailInput" bindconfirm="hadnleConfirm"></input>
     <view class="select-title">
       <view class="select-title-txt">选择历史邮箱:</view>
       <view class="select-all" bindtap="selectAll">全选</view>
     </view>
     <scroll-view class="scroll-box" scroll-y="{{true}}">
-      <view class="scroll-item"  wx:for="{{mailList}}" wx:for-index="idx" wx:for-item="item" wx:key="idx" data-index="{{idx}}" bindtap='handleSelect'>
-        <text>{{item.name}}</text>
-        <text wx:if="{{item.active}}">勾</text>
-      </view>
+      <checkbox-group bindchange="radioChange" >
+        <label class="checkbox" wx:for="{{mailList}}" wx:for-index="idx" wx:for-item="item" wx:key="idx" data-index="{{idx}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}"></checkbox>
+          <text>{{item.value}}</text>
+        </label>
+      </checkbox-group>
     </scroll-view>
   </view>
   <view slot="foot">

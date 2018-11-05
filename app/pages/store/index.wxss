@@ -58,11 +58,12 @@ page{
 .pop-box .scroll-box{
   height: 188rpx;
 }
-.pop-box .scroll-box .scroll-item{
+.pop-box .scroll-box .checkbox text{
   color: #333333;
   font-size: 28rpx;
-  margin-bottom: 12rpx;
-  padding: 0 20rpx;
-  display: flex;
-  justify-content: space-between;
+  margin-left: 12rpx;
+}
+.pop-box .scroll-box .checkbox{
+  display: block;
+  margin-bottom: 20rpx;
 }

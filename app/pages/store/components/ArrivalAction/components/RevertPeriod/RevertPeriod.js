@@ -319,6 +319,10 @@ Component({
       onInit: initChart2
     },
     old_customer_avg_return: 0,
+    return_lrr: {
+      plus_minus: true,
+      lrr: 0
+    },
     isVs: false,
     vsId: ''
   },
@@ -354,6 +358,54 @@ Component({
           })
         }
       })
+      setTimeout(() => {// 获取环比信息
+        let ratioParams = this.getPeriodTime();
+        https(customerStayTimeAjax, ratioParams, 'get').then(res => {
+          if (res.code === "1") {
+            this.setData({
+              return_lrr: this.getRatio(this.data.old_customer_avg_return, res.data.data.old_customer_avg_return.toFixed()),
+            })
+          }
+        })
+      }, 1000)
+    },
+    getPeriodTime() {// 获取上一个周期时间
+      let obj = {
+        id: this.data.params.id,
+        begin_time: '',
+        end_time: ''
+      }
+      if (this.data.params.begin_time === this.data.params.end_time) {//同一天
+        if (this.fmtDate(new Date(this.data.params.begin_time)) === this.fmtDate(new Date())) {//今天
+          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+          obj.end_time = obj.begin_time;
+        } else {//昨天
+          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+          obj.end_time = obj.begin_time;
+        }
+      } else {//不是同一天
+        var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+        days = Math.floor(days) + 1;
+
+        obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - days));
+        obj.end_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+      }
+      return obj
+    },
+    getRatio: function (oldVal, newVal) {// 获取增减比例
+      let obj = {
+        plus_minus: true,
+        lrr: 0
+      }
+      if (oldVal > newVal) {
+        let num = oldVal - newVal;
+        obj.lrr = (num / oldVal) * 100;
+        obj.plus_minus = false;
+      } else if (oldVal < newVal) {
+        let num = newVal - oldVal;
+        obj.lrr = (num / oldVal) * 100;
+      }
+      return obj
     },
     getTrend () {
       chart2.showLoading('default', {

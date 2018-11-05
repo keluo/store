@@ -19,7 +19,7 @@
           {{svg_stay_time}}<view class='overview-unit'>分钟</view>
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class='icon-increase'></view> 23.21%
+          环比 <view class="{{svg_stay_time_lrr.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{svg_stay_time_lrr.lrr}}%
         </view>
       </view>
       <view class='overview-item'>
@@ -30,7 +30,7 @@
           {{bounce_rate}}<view class='overview-unit'>%</view>
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class='icon-increase'></view> 23.21%
+          环比 <view class="{{bounce_rate_lrr.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{bounce_rate_lrr.lrr}}%
         </view>
       </view>
     </view>

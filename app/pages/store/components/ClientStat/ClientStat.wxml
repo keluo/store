@@ -8,7 +8,7 @@
       {{keLiu_total}}
     </view>
     <view class='overview-RingRatio'>
-      环比 <view class='icon-increase'></view> 23.21%
+      环比 <view class="{{keLiu_lrr.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{keLiu_lrr.lrr}}%
     </view>
   </view>
   <view class='overview-item'>
@@ -19,7 +19,7 @@
       {{jinDian_total}}
     </view>
     <view class='overview-RingRatio'>
-      环比 <view class='icon-decline'></view> 23.21%
+      环比 <view class="{{jinDian_lrr.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{jinDian_lrr.lrr}}%
     </view>
   </view>
   <view class='overview-item'>
@@ -30,7 +30,7 @@
       {{totalNewCustomer}}
     </view>
     <view class='overview-RingRatio'>
-      环比 <view class='icon-increase'></view> 23.21%
+      环比 <view class="{{newCustomer_lrr.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{newCustomer_lrr.lrr}}%
     </view>
   </view>
 </view>

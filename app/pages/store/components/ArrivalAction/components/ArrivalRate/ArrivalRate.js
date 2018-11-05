@@ -127,7 +127,11 @@ Component({
     ec: {
       onInit: initChart
     },
-    old_customer_avg_times: 0
+    old_customer_avg_times: 0,
+    time_lrr: {
+      lrr: 0,
+      plus_minus: true
+    }
   },
 
   /**
@@ -161,6 +165,61 @@ Component({
           })
         }
       })
+      setTimeout(() => {// 获取环比信息
+        let ratioParams = this.getPeriodTime();
+        https(customerStayTimeAjax, ratioParams, 'get').then(res => {
+          if (res.code === "1") {
+            this.setData({
+              time_lrr: this.getRatio(this.data.old_customer_avg_times, res.data.data.old_customer_avg_times.toFixed()),
+            })
+          }
+        })
+      }, 1000)
+    },
+    getPeriodTime() {// 获取上一个周期时间
+      let obj = {
+        id: this.data.params.id,
+        begin_time: '',
+        end_time: ''
+      }
+      if (this.data.params.begin_time === this.data.params.end_time) {//同一天
+        if (this.fmtDate(new Date(this.data.params.begin_time)) === this.fmtDate(new Date())) {//今天
+          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+          obj.end_time = obj.begin_time;
+        } else {//昨天
+          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+          obj.end_time = obj.begin_time;
+        }
+      } else {//不是同一天
+        var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
+        days = Math.floor(days) + 1;
+
+        obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - days));
+        obj.end_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+      }
+      return obj
+    },
+    getRatio: function (oldVal, newVal) {// 获取增减比例
+      let obj = {
+        plus_minus: true,
+        lrr: 0
+      }
+      if (oldVal > newVal) {
+        let num = oldVal - newVal;
+        obj.lrr = (num / oldVal) * 100;
+        obj.plus_minus = false;
+      } else if (oldVal < newVal) {
+        let num = newVal - oldVal;
+        obj.lrr = (num / oldVal) * 100;
+      }
+      return obj
+    },
+    fmtDate: function (obj) {
+      var date = new Date(obj);
+      var y = 1900 + date.getYear();
+      var m = "0" + (date.getMonth() + 1);
+      var d = "0" + date.getDate();
+      return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
     }
   }
 })
