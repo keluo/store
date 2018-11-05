@@ -1,5 +1,7 @@
 //app.js
 var https = require('service/https.js');
+var api = require('service/api.js');
+var util = require('utils/util.js');
 import { loginApi } from './service/api'
 App({
   onLaunch: function () {
@@ -45,5 +47,9 @@ App({
       });
     }
   },
-  https: https
+  https: https,
+  api: api,
+  utils: {
+    util: util
+  }
 })
