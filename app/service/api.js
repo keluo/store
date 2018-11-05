@@ -8,6 +8,8 @@ const keLiuDayAjax = '/inner-api/ke_liu/day'; // 客流统计 —— 客流趋�
 const jinDianDayAjax = '/inner-api/jin_dian/day'; // 客流统计 —— 进店趋势图
 const newCustomerAjax = '/inner-api/customer/new'; //客流统计 —— 新顾客趋势图
 
+const marketingSgCustomAnalyze = '/etma/sg/custom_analyze/'; //进店行为 —— 顾客分析
+
 const allCustomerStayInfoAjax = '/inner-api/customer/all/stay_info'; //进店行为 —— 驻店时长 —— 全部 平均驻店时长、离店率
 const newCustomerStayInfoAjax = '/inner-api/customer/new/stay_info'; //进店行为 —— 驻店时长 —— 新 平均驻店时长、离店率
 const oldCustomerStayInfoAjax = '/inner-api/customer/old/stay_info'; //进店行为 —— 驻店时长 —— 老 平均驻店时长、离店率
@@ -36,6 +38,7 @@ module.exports = {
   keLiuDayAjax,
   jinDianDayAjax,
   newCustomerAjax,
+  marketingSgCustomAnalyze,
   allCustomerStayInfoAjax,
   newCustomerStayInfoAjax,
   oldCustomerStayInfoAjax,

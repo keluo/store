@@ -356,7 +356,7 @@ Component({
       })
     },
     getTrend () {
-      chart.showLoading('default', {
+      chart2.showLoading('default', {
         text: '',
         color: '#5b9bd1',
       });

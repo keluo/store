@@ -1,5 +1,8 @@
 import * as echarts from '../../../../ec-canvas/echarts';
 
+let app = getApp();
+let { marketingSgCustomAnalyze } = require('../../../../../../service/api.js');
+
 let chart = null;
 
 function initChart(canvas, width, height) {
@@ -116,7 +119,17 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    params: {
+      type: Object,
+      observer: function (newVal, oldVal, changedPath) {
+        // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串
+        // 通常 newVal 就是新设置的数据， oldVal 是旧数据
+        
+        setTimeout(() => {
+          this.getInfo();
+        }, 1000)
+      }
+    }
   },
 
   /**
@@ -125,6 +138,18 @@ Component({
   data: {
     ec: {
       onInit: initChart
+    },
+    ptdc: {
+      count: 0,
+      lrr: 0
+    },
+    sdc: {
+      count: 0,
+      lrr: 0
+    },
+    vudc: {
+      count: 0,
+      lrr: 0
     }
   },
 
@@ -132,6 +157,66 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    getInfo () {
+      chart.showLoading('default', {
+        text: '',
+        color: '#5b9bd1',
+      });
+      return
+      wx.request({
+        url: `https://cloud1.ubiwifi.cn${marketingSgCustomAnalyze}`,
+        method: 'POST',
+        data: {
+          sg_id: this.data.params.id,
+          from_time: this.data.params.begin_time,
+          to_time: this.data.params.end_time,
+          lrr: 0
+        },
+        header: {
+          'Cookie': 'sessionid=7vuhmcc1gx5psq9cgpo057o5bdtwc6bx;csrftoken=pgED9Ff6sIi1bGW3qDviEqZHbYU46010;'
+        },
+        success(res) {
+          // that.setData({
+          //   selectArray: res.data.data.bgs
+          // })
+          // console.log(res)
+          if(res.code === "1"){
+            let ptdcList = res.data.ptdc.ptdc;
+            let sdcList = res.data.sdc.sdc;
+            let vudcList = res.data.vudc.vudc;
 
+            option.xAxis.data = [];
+            option.series[0].data = [];
+            option.series[1].data = [];
+            option.series[2].data = [];
+
+            this.setChart({
+              list: ptdcList,
+              index: 0
+            });
+            this.setChart({
+              list: sdcList,
+              index: 1
+            });
+            this.setChart({
+              list: vudcList,
+              index: 2
+            });
+
+            setTimeout(() => {
+              chart.hideLoading();
+              chart.setOption(option, true);
+            }, 1000)
+
+          }
+        }
+      })
+    },
+    setChart (obj) {
+      for(let i = 0;i<obj.list.length;i++){
+        option.xAxis.data[i] = list[i].date;
+        option.series[obj.index].data[i] = list[i].count;
+      }
+    }
   }
 })

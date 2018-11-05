@@ -10,7 +10,7 @@
           连接WiFi人数
         </view>
         <view class='overview-num'>
-          4354
+          {{ptdc.count}}
         </view>
         <view class='overview-RingRatio'>
           环比 <view class='icon-increase'></view> 23.21%
@@ -21,7 +21,7 @@
           推广人数 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
-          1353
+          {{sdc.count}}
         </view>
         <view class='overview-RingRatio'>
           环比 <view class='icon-increase'></view> 23.21%
@@ -32,7 +32,7 @@
           核销人数 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
-          2285
+          {{vudc.count}}
         </view>
         <view class='overview-RingRatio'>
           环比 <view class='icon-increase'></view> 23.21%

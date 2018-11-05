@@ -22,10 +22,10 @@ Page({
       { id: 14, name: '近15天' },
       { id: 29, name: '近30天' }
     ],
-    selectArray: []
+    selectArray: [],
+    mailList:[]
   },
   bindSelected: function(id){
-    console.log(id)
     let name = this.data.selectArray.find((item) => {
       return item.id == id.detail
     }).name
@@ -51,6 +51,19 @@ Page({
    */
   onReady: function () {
     this.getShopList();
+
+    try {
+      let list = wx.getStorageSync('mailList')
+      if (list) {
+        this.setData({
+          mailList: list
+        })
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    
+    
   },
 
   /**
@@ -117,7 +130,7 @@ Page({
     wx.request({
       url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=7vuhmcc1gx5psq9cgpo057o5bdtwc6bx;csrftoken=pgED9Ff6sIi1bGW3qDviEqZHbYU46010;'
+        'Cookie': 'sessionid=lv3j8vz1fd0hgeukuywejl7vtfg3q222;csrftoken=FaiUBtpO2ef4yvyzBuvVoagTvhKtbWt7;'
       },
       success (res) {
         that.setData({
@@ -126,7 +139,7 @@ Page({
       }
     })
   },
-  bindDateChange: function (e) {
+  bindDateChange (e) {
     let currentId = this.data.dateList[e.detail.value].id;
     let begin = new Date().setDate(new Date().getDate() - currentId);
     let end = new Date();
@@ -138,7 +151,7 @@ Page({
       ['params.end_time']: this.fmtDate(end)
     })
   },
-  notToday: function(e) {
+  notToday (e) {
     console.log(e)
     let time = new Date().setDate(new Date().getDate() - 1);
     this.setData({
@@ -146,7 +159,52 @@ Page({
       ['params.end_time']: this.fmtDate(time)
     })
   },
-  fmtDate: function (obj) {
+  hadnleConfirm (e) {
+    console.log(e)
+    let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
+    if (!regMail.test(e.detail.value)){
+      wx.showToast({
+        title: '邮箱格式错误',
+        icon: 'loading',
+        duration: 1500
+      })
+      return false;
+    }
+    //通过验证 邮箱push到mailList 发到后台
+  },
+  handleSelect (e) {//选择历史邮箱
+    let item = `mailList[${e.currentTarget.dataset.index}].active`;
+    let active = !this.data.mailList[e.currentTarget.dataset.index].active;
+    this.setData({
+      [item]: active
+    })
+  },
+  selectAll () {
+    let list = this.data.mailList;
+    for(let i=0;i<list.length;i++){
+      list[i].active = true
+    }
+    this.setData({
+      mailList: list
+    })
+  },
+  handleSubMail () {
+    // this.selectComponent('.pop-box').hide({});
+
+    let list = this.data.mailList;
+    for (let i = 0; i < list.length; i++) {
+      list[i].active = false
+    }
+    try{
+      wx.setStorage({
+        key: "mailList",
+        data: list
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  fmtDate (obj) {
     var date = new Date(obj);
     var y = 1900 + date.getYear();
     var m = "0" + (date.getMonth() + 1);

@@ -23,13 +23,19 @@
   <view slot="title">选择邮箱</view>
   <view slot="content">
     <view class="label">发送至邮箱:</view>
-    <input placeholder="请输入邮箱地址"></input>
+    <input placeholder="请输入邮箱地址" bindconfirm="hadnleConfirm"></input>
     <view class="select-title">
       <view class="select-title-txt">选择历史邮箱:</view>
-      <view class="select-all">全选</view>
+      <view class="select-all" bindtap="selectAll">全选</view>
     </view>
+    <scroll-view class="scroll-box" scroll-y="{{true}}">
+      <view class="scroll-item"  wx:for="{{mailList}}" wx:for-index="idx" wx:for-item="item" wx:key="idx" data-index="{{idx}}" bindtap='handleSelect'>
+        <text>{{item.name}}</text>
+        <text wx:if="{{item.active}}">勾</text>
+      </view>
+    </scroll-view>
   </view>
   <view slot="foot">
-    <text>确定</text>
+    <text bindtap='handleSubMail'>确定</text>
   </view>
 </component-pop>
