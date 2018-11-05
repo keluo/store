@@ -51,13 +51,21 @@
           <icon class="iconfont icon-next"></icon>
       </view>
     </view>
-    <view class="item-list item-list-icon">
+    <view class="item-list item-list-icon" bindtap="bindToPage" data-url="/pages/user/password/reset">
+        <view class="item-list-content">
+          <icon class="icon icon-password"></icon>
+          修改密码
+        </view>
+        <view class="item-list-right">
+            <icon class="iconfont icon-next"></icon>
+        </view>
+    </view>
+  </view>
+  
+  <view class="item">
+    <view class="item-list item-logout" bindtap="bindLogout">
       <view class="item-list-content">
-        <icon class="icon icon-password"></icon>
-        修改密码
-      </view>
-      <view class="item-list-right">
-          <icon class="iconfont icon-next"></icon>
+        退出登录
       </view>
     </view>
   </view>

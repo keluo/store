@@ -1,11 +1,18 @@
 // pages/account/password/password.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    phone:'',
+    valid:'',
+    password: '',
+    new_password: '',
+    timmer: '',
+    valid_disabled: false,
+    valid_text: '获取验证码'
   },
 
   /**
@@ -14,53 +21,85 @@ Page({
   onLoad: function (options) {
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  inputPhone: function (e) {
+    this.setData({
+      phone: e.detail.value
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  bindGetValid: function () {
+    if (this.data.phone) {
+      this.countDown(60);
+      app.https(app.api.smsSendApi, {
+        'username': this.data.phone
+      }, 'post').then(function (data) {
+        wx.showToast({
+          title: data.msg,
+          icon: 'none',
+          mask: true
+        });
+      }).catch(function (data) {
+        wx.showToast({
+          title: data.msg,
+          icon: 'none',
+          mask: true
+        });
+      });
+    } else {
+      wx.showToast({
+        title: "请输入手机号码",
+        icon: 'none',
+        mask: true
+      });
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  countDown: function (time) {
+    var that = this;
+    clearInterval(that.data.timmer);
+    time = time || 60;
+    that.setData({
+      valid_disabled: true,
+      valid_text: time + '秒后重新发送'
+    });
+    that.data.timmer = setInterval(function () {
+      if (time < 2) {
+        that.setData({
+          valid_disabled: false,
+          valid_text: '获取验证码'
+        });
+        clearInterval(that.data.timmer);
+        return false;
+      }
+      time--
+      that.setData({
+        valid_text: time + '秒后重新发送'
+      });
+    }, 1000);
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  formSubmit: function (e) {
+    var that = this;
+    if (e.detail.value && e.detail.value.phone && e.detail.value.valid && e.detail.value.password && e.detail.value.new_password) {
+      app.https(app.api.forgotPasswordApi, {
+        'username': e.detail.value.phone,
+        'password': e.detail.value.valid,
+        'newpassword': e.detail.value.password,
+      }, 'post').then(function (data) {
+        data = data.data;
+        var token = wx.setStorageSync('user', "");
+        wx.reLaunch({
+          url: '/pages/account/login/login'
+        });
+      }).catch(function (data) {
+        wx.showToast({
+          title: data.msg,
+          icon: 'none',
+          mask: true
+        });
+      });
+    } else {
+      wx.showToast({
+        title: '请输入必填项',
+        icon: 'none'
+      });
+    }
   }
 })

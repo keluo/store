@@ -15,8 +15,8 @@
     "pages/user/link/index",
     "pages/user/index/index",
     "pages/user/message/index",
-    "pages/store/index",
     "pages/user/qualifications/index",
+    "pages/store/index",
     "pages/account/login/login",
     "pages/account/password/password"
   ],

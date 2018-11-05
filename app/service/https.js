@@ -23,7 +23,7 @@ function https(url, data, callBack, method) {
             success: function (res) {
               if (res.confirm) {
                 wx.navigateTo({
-                  url: '/pages/user/account/list/list'
+                  url: '/pages/account/login/login'
                 });
               }
             }

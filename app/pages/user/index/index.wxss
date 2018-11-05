@@ -90,3 +90,9 @@
   font-size: 34rpx;
   margin-right: 20rpx;
 }
+.item-list.item-logout .item-list-content{
+  text-align: center;
+  width: 100%;
+  display:inline-block;
+  color: #999;
+}

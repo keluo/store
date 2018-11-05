@@ -335,10 +335,16 @@ button::after{
   word-break:break-all;
 }
 .item-info-group .item-info .item-input .item-input-right {
-  line-height: 48rpx;
+  line-height:48rpx;
   word-break:break-all;
-  float: right;
+  float:right;
   display:flex;
+  width:100%;
+  justify-content:flex-end;
+}
+.item-info-group .item-info .item-input .item-input-right picker {
+  width:100%;
+  text-align:right;
 }
 .item-info-group .item-info .item-input .item-input-right .icon-next {
   line-height:48rpx;
@@ -364,16 +370,16 @@ button::after{
 
 
 /*item-checkbox css*/
-.item-info-group .item-info.item-checkbox {
+.item-info-group .item-info.item-checkbox,.item-info-group .item-info.item-radio {
   flex-direction:column;
   padding:0rpx;
 }
-.item-info-group .item-info.item-checkbox .checkbox {
+.item-info-group .item-info.item-checkbox .checkbox,.item-info-group .item-info.item-radio .radio {
   padding: 28rpx 32rpx;
   display:flex;
   position: relative;
 }
-.item-info-group .item-info.item-checkbox .checkbox:after {
+.item-info-group .item-info.item-checkbox .checkbox:after,.item-info-group .item-info.item-radio .radio:after {
   content: " ";
   position: absolute;
   bottom: 0;
@@ -382,10 +388,10 @@ button::after{
   height: 0rpx;
   border-bottom: 1rpx solid #eeeeee;
 }
-.item-info-group .item-info.item-checkbox .checkbox:last-child:after {
+.item-info-group .item-info.item-checkbox .checkbox:last-child:after,.item-info-group .item-info.item-radio .radio:last-child:after {
   border: 0rpx;
 }
-.item-info-group .item-info.item-checkbox .checkbox checkbox {
+.item-info-group .item-info.item-checkbox .checkbox checkbox,.item-info-group .item-info.item-radio .radio radio {
   margin-right: 32rpx;
 }
 

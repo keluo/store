@@ -1,12 +1,13 @@
 <!--pages/promotion/coupon/add/add.wxml-->
 <view class="container">
+  <form bindsubmit="formSubmit">
   <view class="item item-info-group">
     <view class="item-info">
       <view class="item-label">
         面额：
       </view>
       <view class="item-input">
-        <input name="ssid_name" class="txt" value="{{ssid_name}}" placeholder="请输入优惠券面额"></input>
+        <input name="amount" class="txt" value="{{amount}}" placeholder="请输入优惠券面额"></input>
       </view>
     </view>
     <view class="item-info">
@@ -14,7 +15,7 @@
         最低消费：
       </view>
       <view class="item-input">
-        <input name="apcfg_ssid_auth_key" class="txt" value="{{apcfg_ssid_auth_key}}" placeholder="输入优惠券减免的最低消费额度"></input>
+        <input name="floor_amount" class="txt" value="{{floor_amount}}" placeholder="输入优惠券减免的最低消费额度"></input>
       </view>
     </view>
   </view>
@@ -25,19 +26,35 @@
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <text class="blue">相对时间</text>
-          <icon class="iconfont icon-next"></icon>
+          <picker name="voucer_valid" bindchange="bindPickerChange" value="{{voucer_valid}}" range="{{voucer_valid_group}}" range-key="value" data-type="expiry_date">
+            <view class="picker blue">
+              <block wx:if="{{voucer_valid_index === ''}}">请选择</block>
+              <block wx:else>{{voucer_valid_group[voucer_valid_index].value}}</block>
+              <icon class="iconfont icon-next"></icon>
+            </view>
+          </picker>
         </view>
       </view>
     </view>
     <view class="item-info">
       <view class="item-label">
-        结束时间
+        {{voucer_valid == '1'?'失效时间':'结束时间'}}
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <text class="blue">领取15天后</text>
-          <icon class="iconfont icon-next"></icon>
+          <picker name="voucher_valid_after" bindchange="bindPickerChange" value="{{voucher_valid_after}}" range="{{voucher_valid_after_group}}" range-key="value" data-type="voucher_valid_after"  wx:if="{{voucer_valid == '1'}}">
+            <view class="picker blue">
+              <block wx:if="{{voucher_valid_after_index === ''}}">请选择</block>
+              <block wx:else>{{voucher_valid_after_group[voucher_valid_after_index].value}}</block>
+              <icon class="iconfont icon-next"></icon>
+            </view>
+          </picker>
+          <picker mode="date" value="{{voucher_valid_end}}" start="{{now_date}}" bindchange="bindPickerChange"  data-type="voucher_valid_end" wx:if="{{voucer_valid == '2'}}">
+            <view class="picker blue">
+              {{voucher_valid_end}}
+              <icon class="iconfont icon-next"></icon>
+            </view>
+          </picker>
         </view>
       </view>
     </view>
@@ -49,17 +66,22 @@
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <text class="blue">周一至周五</text>
-          <icon class="iconfont icon-next"></icon>
+          <picker name="day_rule" bindchange="bindPickerChange" value="{{day_rule}}" range="{{day_rule_group}}" range-key="value" data-type="day_rule">
+            <view class="picker blue">
+              <block wx:if="{{day_rule_index === ''}}">请选择</block>
+              <block wx:else>{{day_rule_group[day_rule_index].value}}</block>
+              <icon class="iconfont icon-next"></icon>
+            </view>
+          </picker>
         </view>
       </view>
     </view>
-    <view class="item-info item-checkbox">
-      <checkbox-group bindchange="checkboxChange">
-          <label class="checkbox" wx:for="{{items}}">
-              <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    <view class="item-info item-radio">
+      <radio-group bindchange="bindRadioChange">
+          <label class="radio" wx:for="{{time_rule_group}}" wx:key="{{key}}">
+              <radio  value="{{item.key}}" checked="{{item.key == time_rule_checked}}" color='#108EE9'/>{{item.value}}
           </label>
-      </checkbox-group>
+      </radio-group>
     </view>
   </view>
   
@@ -70,18 +92,24 @@
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <text class="blue">100张</text>
-          <icon class="iconfont icon-next"></icon>
+          <picker name="voucher_quantity" bindchange="bindPickerChange" value="{{voucher_quantity}}" range="{{voucher_quantity_group}}" range-key="value" data-type="voucher_quantity">
+            <view class="picker blue">
+              <block wx:if="{{voucher_quantity_index === ''}}">请选择</block>
+              <block wx:else>{{voucher_quantity_group[voucher_quantity_index].value}}张</block>
+              <icon class="iconfont icon-next"></icon>
+            </view>
+          </picker>
         </view>
       </view>
     </view>
   </view>
   <view class="item-btn-group">
     <view class="item-btn">
-      <button class="btn">确认发放</button>
+      <button class="btn" formType="submit">确认发放</button>
     </view>
     <view class="item-btn">
       <button class="btn btn-white">取消</button>
     </view>
   </view>
+  </form>
 </view>

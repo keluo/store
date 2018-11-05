@@ -62,9 +62,17 @@ page {
   justify-content: space-between;
 }
 .valid-wrap .valid-btn{
-  display: flex;
-  width: 200rpx;
-  padding-left: 30rpx;
-  border-left: 1rpx solid #eee;
-  font-size: 34rpx;
+  display:flex;
+  min-width:200rpx;
+  padding: 0rpx;
+  padding-left:20rpx;
+  border-left:1rpx solid #eee;
+  font-size:34rpx;
+  border-radius:0;
+  background-color:#fff;
+  line-height:1.5;
+  margin: 0rpx;
+}
+button[disabled] {
+  background-color: #fff !important;
 }

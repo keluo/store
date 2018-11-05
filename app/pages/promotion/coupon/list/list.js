@@ -6,22 +6,22 @@ Page({
    */
   data: {
     dateId: '',
-    selectArray: [{
-      "id": "7",
-      "name": "近7天"
-    }, {
-      "id": "15",
-      "name": "近15天"
-    }, {
-      "id": "30",
-      "name": "近30天"
-    }, {
-      "id": "90",
-      "name": "近90天"
-    }, {
-      "id": "180",
-      "name": "近180天"
-    }
+    range_date_group: [{
+        "key": "7",
+        "value": "近7天"
+      }, {
+        "key": "15",
+        "value": "近15天"
+      }, {
+        "key": "30",
+        "value": "近30天"
+      }, {
+        "key": "90",
+        "value": "近90天"
+      }, {
+        "key": "180",
+        "value": "近180天"
+      }
     ]
   },
   bindDateSelected: function (id) {

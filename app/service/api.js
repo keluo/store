@@ -28,6 +28,15 @@ const customerReturnDaysAjax = '/inner-api/customer/return_days'; //进店行为
 const oldCustomerReturnDaysDayAjax = '/inner-api/customer/day/return_days'; //进店行为 —— 返店周期 —— 趋势
 
 const loginApi = '/etma/login/'; //登录
+const logoutApi = '/etma/logout/'; //退出
+const smsSendApi = '/etma/sms/send/'; //获取验证码
+const restPasswordApi = '/etma/password/pwdreset/'; //重置验证码
+const forgotPasswordApi = '/etma/password/smsreset/'; //忘记密码
+
+
+const couponCatInitApi = '/apo/cv/temp/init/'; //优惠券初始化cat
+const couponAddApi = '/apo/cv/temp/'; //优惠券创建
+const couponListApi = '/apo/cv/temp/list/'; //优惠券列表
 
 
 module.exports = {
@@ -52,5 +61,12 @@ module.exports = {
   customerStayTimeAjax,
   customerReturnDaysAjax,
   oldCustomerReturnDaysDayAjax,
-  loginApi
+  loginApi,
+  logoutApi,
+  smsSendApi,
+  restPasswordApi,
+  forgotPasswordApi,
+  couponCatInitApi,
+  couponAddApi,
+  couponListApi
 }
