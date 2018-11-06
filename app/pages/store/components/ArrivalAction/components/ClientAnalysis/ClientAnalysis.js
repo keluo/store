@@ -141,15 +141,18 @@ Component({
     },
     ptdc: {
       count: 0,
-      lrr: 0
+      lrr: 0,
+      plus_minus: true
     },
     sdc: {
       count: 0,
-      lrr: 0
+      lrr: 0,
+      plus_minus: true
     },
     vudc: {
       count: 0,
-      lrr: 0
+      lrr: 0,
+      plus_minus: true
     }
   },
 
@@ -162,6 +165,13 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
+      app.https(marketingSgCustomAnalyze, {
+        sg_id: this.data.params.id,
+        from_time: this.data.params.begin_time,
+        to_time: this.data.params.end_time,
+        lrr: 0}, 'POST').then(res => {
+          console.log(res)
+        })
       return
       wx.request({
         url: `https://cloud1.ubiwifi.cn${marketingSgCustomAnalyze}`,
@@ -217,6 +227,14 @@ Component({
         option.xAxis.data[i] = list[i].date;
         option.series[obj.index].data[i] = list[i].count;
       }
-    }
+    },
+    openQuestion(e) {// 打开弹窗
+      this.selectComponent('.' + e.target.dataset.btn).show({
+        close: false
+      });
+    },
+    closeBtn(e) {// 关闭弹窗
+      this.selectComponent('.' + e.target.dataset.btn).hide({});
+    },
   }
 })

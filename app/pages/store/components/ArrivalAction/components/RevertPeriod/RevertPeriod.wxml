@@ -10,7 +10,7 @@
     <view class="overview-box">
       <view class='overview-item'>
         <view class='overview-title'>
-          顾客平均返店周期 <view class='icon-question'></view>
+          顾客平均返店周期 <view class='icon-question' bindtap="openQuestion" data-btn="revertPeriod-pop"></view>
         </view>
         <view class='overview-num'>
           {{old_customer_avg_return}}<view class='overview-unit'>天</view>
@@ -36,4 +36,16 @@
       <ec-canvas id="mychart2" canvas-id="mychart2" ec="{{ ec2 }}"></ec-canvas>
     </view>
   </view>
+</view>
+
+<view class="question">
+  <component-pop class="revertPeriod-pop">
+    <view slot="title">平均返店周期</view>
+    <view slot="content">
+      在这段时间内，有过2次及以上到店记录的进店客的平均到店间隔天数。
+    </view>
+    <view slot="foot">
+      <text bindtap="closeBtn" data-btn="revertPeriod-pop">知道了</text>
+    </view>
+  </component-pop>
 </view>

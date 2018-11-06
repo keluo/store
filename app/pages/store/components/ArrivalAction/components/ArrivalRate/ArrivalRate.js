@@ -214,6 +214,14 @@ Component({
       }
       return obj
     },
+    openQuestion(e) {// 打开弹窗
+      this.selectComponent('.' + e.target.dataset.btn).show({
+        close: false
+      });
+    },
+    closeBtn(e) {// 关闭弹窗
+      this.selectComponent('.' + e.target.dataset.btn).hide({});
+    },
     fmtDate: function (obj) {
       var date = new Date(obj);
       var y = 1900 + date.getYear();

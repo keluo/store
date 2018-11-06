@@ -1,5 +1,7 @@
 const homeInit = '/ubiasset/home/';
 
+const dayList = '/inner-api/day/list';// 日期列表
+const exportInfo = '/inner-api/customer/export';// 导出报表
 const queryAssetGroup = '/etma/sg/cond/'; //店铺列表
 
 const keLiuAllTotalAjax = '/inner-api/ke_liu/all/total'; //客流统计 —— 客流、进店客 总
@@ -44,6 +46,8 @@ const couponListInitApi = '/apo/cv/temp/list/init/'; //优惠券列表初始化s
 module.exports = {
   homeInitApi: homeInit,
   queryAssetGroup,
+  exportInfo,
+  dayList,
   keLiuAllTotalAjax,
   totalCustomerAjax,
   keLiuDayAjax,

@@ -13,29 +13,29 @@
           {{ptdc.count}}
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class='icon-increase'></view> 23.21%
+          环比 <view class="{{ptdc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{ptdc.lrr}}%
         </view>
       </view>
       <view class='overview-item'>
         <view class='overview-title'>
-          推广人数 <view class='icon-question'></view>
+          推广人数 <view class='icon-question' bindtap="openQuestion" data-btn="tuiGuang-pop"></view>
         </view>
         <view class='overview-num'>
           {{sdc.count}}
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class='icon-increase'></view> 23.21%
+          环比 <view class="{{sdc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{sdc.lrr}}%
         </view>
       </view>
       <view class='overview-item'>
         <view class='overview-title'>
-          核销人数 <view class='icon-question'></view>
+          核销人数 <view class='icon-question' bindtap="openQuestion" data-btn="heXiao-pop"></view>
         </view>
         <view class='overview-num'>
           {{vudc.count}}
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class='icon-increase'></view> 23.21%
+          环比 <view class="{{vudc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{vudc.lrr}}%
         </view>
       </view>
     </view>
@@ -43,4 +43,25 @@
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
     </view>
   </view>
+</view>
+
+<view class="question">
+  <component-pop class="tuiGuang-pop">
+    <view slot="title">推广人数</view>
+    <view slot="content">
+      进店连接wifi后分享店铺推广海报的人数。
+    </view>
+    <view slot="foot">
+      <text bindtap="closeBtn" data-btn="tuiGuang-pop">知道了</text>
+    </view>
+  </component-pop>
+  <component-pop class="heXiao-pop">
+    <view slot="title">核销人数</view>
+    <view slot="content">
+      连接wifi领取优惠券并成功核销的人数。
+    </view>
+    <view slot="foot">
+      <text bindtap="closeBtn" data-btn="heXiao-pop">知道了</text>
+    </view>
+  </component-pop>
 </view>

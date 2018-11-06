@@ -1,5 +1,5 @@
 let https = require('../../service/https.js');
-let { queryAssetGroup } = require('../../service/api.js');
+let { queryAssetGroup, dayList, exportInfo } = require('../../service/api.js');
 
 // miniprogram/pages/store/index.js
 Page({
@@ -34,7 +34,7 @@ Page({
         checked: false
       }
     ],
-    subMail: []
+    emails: []
   },
   bindSelected: function(id){
     let name = this.data.selectArray.find((item) => {
@@ -140,7 +140,7 @@ Page({
     wx.request({
       url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=phbp687rp04gz4a2a3o6k8negjd5yzuk;csrftoken=PQM2HXecw1jEZxdITSeIgqdmGFfNG6QX;'
+        'Cookie': 'sessionid=wrplc2hgwjuz6xw8ke1xyvg6hbkadtb0;csrftoken=ArDz1UqvkrnWaDWjUNtCPube3QbREfiW;'
       },
       success (res) {
         that.setData({
@@ -175,7 +175,7 @@ Page({
   },
   hadnleConfirm (e) {
     console.log(e)
-    let subArr = this.data.subMail;
+    let subArr = this.data.emails;
     let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
     if (!regMail.test(e.detail.value)){
       wx.showToast({
@@ -187,17 +187,17 @@ Page({
     }
     //通过验证 邮箱push到mailList 发到后台
     subArr.push(e.detail.value);
-    https('/xxx', {
+    https(exportInfo, {
       id: this.data.params.id,
-      time: 'xxx',
-      subArr: subArr
+      day_time: 'xxx',
+      emails: subArr
     }, 'post').then(res => {
       console.log(res)
     })
   },
   radioChange(e) {//多选框事件
     this.setData({
-      subMail: e.detail.value
+      emails: e.detail.value
     })
   },
   selectAll () {
@@ -210,7 +210,7 @@ Page({
     })
   },
   handleSubMail () {
-    let subArr = this.data.subMail;
+    let subArr = this.data.emails;
     let list = this.data.mailList;    
     let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
 
@@ -232,9 +232,9 @@ Page({
     }
 
     if (subArr.length > 0){
-      https('/xxx', {
+      https(exportInfo, {
         id: this.data.params.id,
-        time: 'xxx',
+        day_time: 'xxx',
         subArr: subArr
       }, 'post').then(res => {
         console.log(res)
