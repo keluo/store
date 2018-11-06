@@ -1,5 +1,5 @@
 let https = require('../../service/https.js');
-let { queryAssetGroup, dayList } = require('../../service/api.js');
+let { queryAssetGroup, dayList, exportInfo } = require('../../service/api.js');
 
 // miniprogram/pages/store/index.js
 Page({
@@ -140,7 +140,7 @@ Page({
     wx.request({
       url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=znmi2n8nnhll8begf34gjt5o0dqth93j;csrftoken=U481mKu5Zg2DJYrIhz8uZrvDvVzAzYBI;'
+        'Cookie': 'sessionid=wrplc2hgwjuz6xw8ke1xyvg6hbkadtb0;csrftoken=ArDz1UqvkrnWaDWjUNtCPube3QbREfiW;'
       },
       success (res) {
         that.setData({
@@ -187,10 +187,10 @@ Page({
     }
     //通过验证 邮箱push到mailList 发到后台
     subArr.push(e.detail.value);
-    https('/xxx', {
+    https(exportInfo, {
       id: this.data.params.id,
-      time: 'xxx',
-      subArr: subArr
+      day_time: 'xxx',
+      emails: subArr
     }, 'post').then(res => {
       console.log(res)
     })
@@ -232,9 +232,9 @@ Page({
     }
 
     if (subArr.length > 0){
-      https('/xxx', {
+      https(exportInfo, {
         id: this.data.params.id,
-        time: 'xxx',
+        day_time: 'xxx',
         subArr: subArr
       }, 'post').then(res => {
         console.log(res)
