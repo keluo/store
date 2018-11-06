@@ -2,22 +2,24 @@
 <view class="container">
   <view class="item">
     <view class="item-options">
-      <component-select options="{{range_date_group}}" selected="bindSelected" left="true"></component-select>
+      <component-select options="{{range_date_group}}" selected="bindDateSelected" left="true"></component-select>
       <view class="item-options-right">
-        <button class="btn">+ 发放优惠券</button>
+        <navigator url = "/pages/promotion/coupon/add/add">
+          <button class="btn">+ 发放优惠券</button>
+        </navigator>
       </view>
     </view>
-    <view class="item-list">
+    <view class="item-list" wx:for="{{coupon_list}}"  wx:key="{{index}}">
       <view class="item-list-content">
         <view class="item-list-txt">
-          10元商户优惠券 <text class="blue">（有效）</text>
+          {{item.desc}} <text class="{{item.is_valid == '1'?'blue':'grey'}}">（{{item.is_valid == '1'?'有效':'无效'}}）</text>
         </view>
         <view class="item-list-txt-ext first">
           <view class="item-label">
             发放时间：
           </view>
           <view class="item-span">
-            2018/06/29 15:31
+            {{item.join_time}}
           </view>
         </view>
         <view class="item-list-txt-ext">
@@ -25,39 +27,15 @@
             发放数量：
           </view>
           <view class="item-span">
-            3000张
+            {{item.voucher_quantity}}
           </view>
         </view>
       </view>
       <view class="item-list-right">
-        <button class="btn btn-white">复制</button>
+        <navigator url = "/pages/promotion/coupon/add/add?id={{item.id}}">
+          <button class="btn btn-white">复制</button>
+        </navigator>
       </view>
     </view>
-    <view class="item-list">
-        <view class="item-list-content">
-          <view class="item-list-txt">
-            10元商户优惠券 <text class="blue">（有效）</text>
-          </view>
-          <view class="item-list-txt-ext first">
-            <view class="item-label">
-              发放时间：
-            </view>
-            <view class="item-span">
-              2018/06/29 15:31
-            </view>
-          </view>
-          <view class="item-list-txt-ext">
-            <view class="item-label">
-              发放数量：
-            </view>
-            <view class="item-span">
-              3000张
-            </view>
-          </view>
-        </view>
-        <view class="item-list-right">
-          <button class="btn btn-white">复制</button>
-        </view>
-      </view>
   </view>
 </view>

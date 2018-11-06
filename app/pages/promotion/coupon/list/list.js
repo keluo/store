@@ -1,39 +1,67 @@
 // pages/promotion/coupon/list/list.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    dateId: '',
-    range_date_group: [{
-        "key": "7",
-        "value": "近7天"
-      }, {
-        "key": "15",
-        "value": "近15天"
-      }, {
-        "key": "30",
-        "value": "近30天"
-      }, {
-        "key": "90",
-        "value": "近90天"
-      }, {
-        "key": "180",
-        "value": "近180天"
-      }
-    ]
+    fromday: '',
+    range_date_group: [],
+    coupon_list:[],
+    hasNotMore: true,
+    isLoadingMore: false,
+    page: 1,
+    total: 0
   },
   bindDateSelected: function (id) {
     this.setData({
-      dateId: id
+      page: 1,
+      page: [],
+      fromday: id
+    });
+    this.getList();
+  },
+  getSelectInitList: function () {
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      app.https(app.api.couponListInitApi, {
+      }, 'get').then(function (data) {
+        data = data.data;
+        that.setData({
+          range_date_group: data.list_day || []
+        });
+        resolve();
+      });
+    });
+  },
+  getList: function () {
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      app.https(app.api.couponListApi, {
+        page: that.data.page,
+        length: 10,
+        fromday: that.data.fromday
+      }, 'get').then(function (data) {
+        data = data.data;
+        var coupon_list = that.data.coupon_list.concat(data.vcts || []);
+        that.setData({
+          coupon_list: coupon_list,
+          total: data.total_count || 0,
+          hasNotMore: coupon_list.length === data.total_count,
+          page: (coupon_list.length === data.total_count) ? that.data.page : (that.data.page + 1)
+        });
+        resolve();
+      });
     });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.getSelectInitList();
+    that.getList();
   },
 
   /**

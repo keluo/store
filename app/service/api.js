@@ -34,9 +34,11 @@ const restPasswordApi = '/etma/password/pwdreset/'; //重置验证码
 const forgotPasswordApi = '/etma/password/smsreset/'; //忘记密码
 
 
-const couponCatInitApi = '/apo/cv/temp/init/'; //优惠券初始化cat
+const couponAddInitApi = '/apo/cv/temp/init/'; //优惠券创建初始化cat
 const couponAddApi = '/apo/cv/temp/'; //优惠券创建
 const couponListApi = '/apo/cv/temp/list/'; //优惠券列表
+const couponListInitApi = '/apo/cv/temp/list/init/'; //优惠券列表初始化select
+
 
 
 module.exports = {
@@ -66,7 +68,8 @@ module.exports = {
   smsSendApi,
   restPasswordApi,
   forgotPasswordApi,
-  couponCatInitApi,
   couponAddApi,
-  couponListApi
+  couponAddInitApi,
+  couponListApi,
+  couponListInitApi
 }

@@ -7,13 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id:'',
     amount:'',
     floor_amount: '',
     voucer_valid:'1',
     voucer_valid_index:'0',
     voucer_valid_group: [
-      { key: '1', value: '固定时间'},
-      { key: '2', value: '相对时间' },
+      { id: '1', name: '固定时间'},
+      { id: '2', name: '相对时间' },
     ],
     time_rule: '',
     time_rule_checked:'',
@@ -36,27 +37,31 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    var id = options.id;
+    that.setData({
+      id: id
+    });
     that.getCatInitList();
     that.initValidate();
   },
   getCatInitList: function () {
     var that = this;
     return new Promise(function (resolve, reject) {
-      app.https(app.api.couponCatInitApi, {
+      app.https(app.api.couponAddInitApi, {
       }, 'get').then(function (data) {
         data = data.data;
         that.setData({
           time_rule_group: data.time_rules,
-          time_rule: data.time_rules[0].key,
-          time_rule_checked: data.time_rules[0].key,
+          time_rule: data.time_rules[0].id,
+          time_rule_checked: data.time_rules[0].id,
           day_rule_group: data.day_rules,
-          day_rule: data.day_rules[0].key,
+          day_rule: data.day_rules[0].id,
           day_rule_index: 0,
           voucher_valid_after_group: data.valid_after_rules,
-          voucher_valid_after: data.valid_after_rules[0].key,
+          voucher_valid_after: data.valid_after_rules[0].id,
           voucher_valid_after_index: 0,
           voucher_quantity_group: data.voucher_quantity_rules,
-          voucher_quantity: data.voucher_quantity_rules[0].key,
+          voucher_quantity: data.voucher_quantity_rules[0].id,
           voucher_quantity_index: 0
         });
         resolve();
@@ -72,22 +77,22 @@ Page({
     var type = e.currentTarget.dataset.type;
     if (type === 'expiry_date') {
       this.setData({
-        voucer_valid: this.data.voucer_valid_group[e.detail.value].key,
+        voucer_valid: this.data.voucer_valid_group[e.detail.value].id,
         voucer_valid_index: e.detail.value
       })
     } else if (type === 'day_rule') {
       this.setData({
-        day_rule: this.data.day_rule_group[e.detail.value].key,
+        day_rule: this.data.day_rule_group[e.detail.value].id,
         day_rule_index: e.detail.value
       })
     } else if (type === 'voucher_quantity') {
       this.setData({
-        voucher_quantity: this.data.voucher_quantity_group[e.detail.value].key,
+        voucher_quantity: this.data.voucher_quantity_group[e.detail.value].id,
         voucher_quantity_index: e.detail.value
       })
     } else if (type === 'voucher_valid_after') {
       this.setData({
-        voucher_valid_after: this.data.voucher_valid_after_group[e.detail.value].key,
+        voucher_valid_after: this.data.voucher_valid_after_group[e.detail.value].id,
         voucher_valid_after_index: e.detail.value
       })
     } else if (type === 'voucher_valid_end') {

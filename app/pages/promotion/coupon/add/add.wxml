@@ -26,10 +26,10 @@
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <picker name="voucer_valid" bindchange="bindPickerChange" value="{{voucer_valid}}" range="{{voucer_valid_group}}" range-key="value" data-type="expiry_date">
+          <picker name="voucer_valid" bindchange="bindPickerChange" value="{{voucer_valid}}" range="{{voucer_valid_group}}" range-key="name" data-type="expiry_date">
             <view class="picker blue">
               <block wx:if="{{voucer_valid_index === ''}}">请选择</block>
-              <block wx:else>{{voucer_valid_group[voucer_valid_index].value}}</block>
+              <block wx:else>{{voucer_valid_group[voucer_valid_index].name}}</block>
               <icon class="iconfont icon-next"></icon>
             </view>
           </picker>
@@ -42,10 +42,10 @@
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <picker name="voucher_valid_after" bindchange="bindPickerChange" value="{{voucher_valid_after}}" range="{{voucher_valid_after_group}}" range-key="value" data-type="voucher_valid_after"  wx:if="{{voucer_valid == '1'}}">
+          <picker name="voucher_valid_after" bindchange="bindPickerChange" value="{{voucher_valid_after}}" range="{{voucher_valid_after_group}}" range-key="name" data-type="voucher_valid_after"  wx:if="{{voucer_valid == '1'}}">
             <view class="picker blue">
               <block wx:if="{{voucher_valid_after_index === ''}}">请选择</block>
-              <block wx:else>{{voucher_valid_after_group[voucher_valid_after_index].value}}</block>
+              <block wx:else>{{voucher_valid_after_group[voucher_valid_after_index].name}}</block>
               <icon class="iconfont icon-next"></icon>
             </view>
           </picker>
@@ -66,10 +66,10 @@
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <picker name="day_rule" bindchange="bindPickerChange" value="{{day_rule}}" range="{{day_rule_group}}" range-key="value" data-type="day_rule">
+          <picker name="day_rule" bindchange="bindPickerChange" value="{{day_rule}}" range="{{day_rule_group}}" range-key="name" data-type="day_rule">
             <view class="picker blue">
               <block wx:if="{{day_rule_index === ''}}">请选择</block>
-              <block wx:else>{{day_rule_group[day_rule_index].value}}</block>
+              <block wx:else>{{day_rule_group[day_rule_index].name}}</block>
               <icon class="iconfont icon-next"></icon>
             </view>
           </picker>
@@ -78,8 +78,8 @@
     </view>
     <view class="item-info item-radio">
       <radio-group bindchange="bindRadioChange">
-          <label class="radio" wx:for="{{time_rule_group}}" wx:key="{{key}}">
-              <radio  value="{{item.key}}" checked="{{item.key == time_rule_checked}}" color='#108EE9'/>{{item.value}}
+          <label class="radio" wx:for="{{time_rule_group}}" wx:key="{{id}}">
+              <radio  value="{{item.id}}" checked="{{item.id == time_rule_checked}}" color='#108EE9'/>{{item.name}}
           </label>
       </radio-group>
     </view>
@@ -92,10 +92,10 @@
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <picker name="voucher_quantity" bindchange="bindPickerChange" value="{{voucher_quantity}}" range="{{voucher_quantity_group}}" range-key="value" data-type="voucher_quantity">
+          <picker name="voucher_quantity" bindchange="bindPickerChange" value="{{voucher_quantity}}" range="{{voucher_quantity_group}}" range-key="name" data-type="voucher_quantity">
             <view class="picker blue">
               <block wx:if="{{voucher_quantity_index === ''}}">请选择</block>
-              <block wx:else>{{voucher_quantity_group[voucher_quantity_index].value}}张</block>
+              <block wx:else>{{voucher_quantity_group[voucher_quantity_index].name}}张</block>
               <icon class="iconfont icon-next"></icon>
             </view>
           </picker>
