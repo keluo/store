@@ -1,5 +1,5 @@
 let https = require('../../service/https.js');
-let { queryAssetGroup } = require('../../service/api.js');
+let { queryAssetGroup, dayList } = require('../../service/api.js');
 
 // miniprogram/pages/store/index.js
 Page({
@@ -34,7 +34,7 @@ Page({
         checked: false
       }
     ],
-    subMail: []
+    emails: []
   },
   bindSelected: function(id){
     let name = this.data.selectArray.find((item) => {
@@ -140,7 +140,7 @@ Page({
     wx.request({
       url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=phbp687rp04gz4a2a3o6k8negjd5yzuk;csrftoken=PQM2HXecw1jEZxdITSeIgqdmGFfNG6QX;'
+        'Cookie': 'sessionid=znmi2n8nnhll8begf34gjt5o0dqth93j;csrftoken=U481mKu5Zg2DJYrIhz8uZrvDvVzAzYBI;'
       },
       success (res) {
         that.setData({
@@ -175,7 +175,7 @@ Page({
   },
   hadnleConfirm (e) {
     console.log(e)
-    let subArr = this.data.subMail;
+    let subArr = this.data.emails;
     let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
     if (!regMail.test(e.detail.value)){
       wx.showToast({
@@ -197,7 +197,7 @@ Page({
   },
   radioChange(e) {//多选框事件
     this.setData({
-      subMail: e.detail.value
+      emails: e.detail.value
     })
   },
   selectAll () {
@@ -210,7 +210,7 @@ Page({
     })
   },
   handleSubMail () {
-    let subArr = this.data.subMail;
+    let subArr = this.data.emails;
     let list = this.data.mailList;    
     let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
 

@@ -140,3 +140,8 @@
   background-size: 100%;
   vertical-align: middle;
 }
+
+/* 提示弹框文字居中 */
+.question component-pop view{
+  text-align: center;
+}

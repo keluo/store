@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "ec-canvas": "../../../../ec-canvas/ec-canvas",
-    "component-select": "../../../../../../component/select/select"
+    "component-select": "../../../../../../component/select/select",
+    "component-pop": "../../../../../../component/pop/pop"
   }
 }

@@ -564,6 +564,14 @@ Component({
       option2.xAxis.data = option.xAxis.data;
       option2.series[0] = option.series[0]
     },
+    openQuestion (e) {// 打开弹窗
+      this.selectComponent('.' + e.target.dataset.btn).show({
+        close: false
+      });
+    },
+    closeBtn (e) {// 关闭弹窗
+      this.selectComponent( '.' + e.target.dataset.btn).hide({});
+    },
     fmtMin (obj) {
       var date = new Date(obj);
       var h = date.getHours();

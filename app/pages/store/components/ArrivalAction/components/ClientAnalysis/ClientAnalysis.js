@@ -217,6 +217,14 @@ Component({
         option.xAxis.data[i] = list[i].date;
         option.series[obj.index].data[i] = list[i].count;
       }
-    }
+    },
+    openQuestion(e) {// 打开弹窗
+      this.selectComponent('.' + e.target.dataset.btn).show({
+        close: false
+      });
+    },
+    closeBtn(e) {// 关闭弹窗
+      this.selectComponent('.' + e.target.dataset.btn).hide({});
+    },
   }
 })

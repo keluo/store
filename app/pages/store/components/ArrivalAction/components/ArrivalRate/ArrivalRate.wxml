@@ -8,7 +8,7 @@
     <view class='overview-box'>
       <view class='overview-item'>
         <view class='overview-title'>
-          顾客平均到店频次 <view class='icon-question'></view>
+          顾客平均到店频次 <view class='icon-question' bindtap="openQuestion" data-btn="arrivalRate-pop"></view>
         </view>
         <view class='overview-num'>
           {{old_customer_avg_times}}<view class='overview-unit'>次</view>
@@ -22,4 +22,16 @@
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
     </view>
   </view>
+</view>
+
+<view class="question">
+  <component-pop class="arrivalRate-pop">
+    <view slot="title">平均到店频次</view>
+    <view slot="content">
+      在这段时间内的所有进店客的平均到店次数。
+    </view>
+    <view slot="foot">
+      <text bindtap="closeBtn" data-btn="arrivalRate-pop">知道了</text>
+    </view>
+  </component-pop>
 </view>
