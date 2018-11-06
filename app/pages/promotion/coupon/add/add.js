@@ -10,8 +10,8 @@ Page({
     id:'',
     amount:'',
     floor_amount: '',
-    voucer_valid:'1',
-    voucer_valid_index:'0',
+    voucer_valid:'2',
+    voucer_valid_index:'1',
     voucer_valid_group: [
       { id: '1', name: '固定时间'},
       { id: '2', name: '相对时间' },
@@ -37,12 +37,55 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var id = options.id;
+    var id = options.id || '';
     that.setData({
       id: id
     });
-    that.getCatInitList();
+    that.getCatInitList().then(function(){
+      if (id){
+        that.getInitinfo();
+      }
+    });
     that.initValidate();
+  },
+  getIndexForKey: function (list, key, keyForValue) {
+    if (!list || !key || !keyForValue) {
+      return '';
+    }
+    var result = '';
+    list.forEach(function (item, index) {
+      if (item[key] == keyForValue) {
+        result = index;
+        return;
+      }
+    });
+    return result;
+  },
+  getInitinfo: function(){
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      app.https(app.api.couponCopyApi, {
+        id: that.data.id
+      }, 'get').then(function (data) {
+        data = data.data;
+        that.setData({
+          amount: data.amount || '',
+          floor_amount: data.floor_amount || '',
+          voucer_valid: data.voucer_valid || '',
+          voucer_valid_index: that.getIndexForKey(that.data.voucer_valid_group, 'id', data.voucer_valid),
+          voucher_valid_after: data.voucher_valid_after || '',
+          voucher_valid_after_index: that.getIndexForKey(that.data.voucher_valid_after_group, 'id', data.voucher_valid_after),
+          voucher_valid_end: data.voucher_valid_end || app.utils.util.formatDate(new Date()),
+          day_rule: data.day_rule || '',
+          day_rule_index: that.getIndexForKey(that.data.day_rule_group, 'id', data.day_rule),
+          time_rule_checked: data.time_rule,
+          time_rule: data.time_rule,
+          voucher_quantity: data.voucher_quantity,
+          voucher_quantity_index: that.getIndexForKey(that.data.voucher_quantity_group, 'id', data.voucher_quantity)
+        });
+        resolve();
+      });
+    });
   },
   getCatInitList: function () {
     var that = this;
@@ -129,6 +172,11 @@ Page({
         icon: 'success',
         mask: true
       });
+      setTimeout(function(){
+        wx.navigateBack({
+          delta: 1
+        })
+      },1500);
     }).catch(function (data) {
       wx.showToast({
         title: data.msg,

@@ -38,18 +38,18 @@
     </view>
     <view class="item-info">
       <view class="item-label">
-        {{voucer_valid == '1'?'失效时间':'结束时间'}}
+        {{voucer_valid == '2'?'失效时间':'结束时间'}}
       </view>
       <view class="item-input">
         <view class="item-input-right">
-          <picker name="voucher_valid_after" bindchange="bindPickerChange" value="{{voucher_valid_after}}" range="{{voucher_valid_after_group}}" range-key="name" data-type="voucher_valid_after"  wx:if="{{voucer_valid == '1'}}">
+          <picker name="voucher_valid_after" bindchange="bindPickerChange" value="{{voucher_valid_after}}" range="{{voucher_valid_after_group}}" range-key="name" data-type="voucher_valid_after"  wx:if="{{voucer_valid == '2'}}">
             <view class="picker blue">
               <block wx:if="{{voucher_valid_after_index === ''}}">请选择</block>
               <block wx:else>{{voucher_valid_after_group[voucher_valid_after_index].name}}</block>
               <icon class="iconfont icon-next"></icon>
             </view>
           </picker>
-          <picker mode="date" value="{{voucher_valid_end}}" start="{{now_date}}" bindchange="bindPickerChange"  data-type="voucher_valid_end" wx:if="{{voucer_valid == '2'}}">
+          <picker mode="date" value="{{voucher_valid_end}}" start="{{now_date}}" bindchange="bindPickerChange"  data-type="voucher_valid_end" wx:if="{{voucer_valid == '1'}}">
             <view class="picker blue">
               {{voucher_valid_end}}
               <icon class="iconfont icon-next"></icon>

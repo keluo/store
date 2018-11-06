@@ -21,10 +21,11 @@ page {
   display: block;
 }
 .item-login-input .login-input {
-  line-height: 48rpx;
+  line-height: 52rpx;
   padding: 28rpx 32rpx;
   position: relative;
-  font-size: 34rpx; 
+  font-size: 34rpx;
+  height: 52rpx;
 }
 .item-login-input .login-input:after {
   content: " ";
@@ -73,6 +74,18 @@ page {
   line-height:1.5;
   margin: 0rpx;
 }
-button[disabled] {
-  background-color: #fff !important;
+.login-input-password {
+  display: flex;
+}
+.login-input-password input {
+  width: 100%;
+}
+.login-input-password .icon-password {
+  width:80rpx;
+  color:#999;
+  text-align:center;
+  font-size:40rpx;
+}
+.login-input-password .icon-password.blue {
+  color:#108EE9;
 }

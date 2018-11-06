@@ -7,10 +7,11 @@
     <form bindsubmit="formSubmit" wx:if="{{method === '1'}}">
     <view class="item-login-input actived">
       <view class="login-input">
-        <input type="text" name="username" value="{{username}}" placeholder="请输入登录账号"></input>
+        <input type="text" name="username" confirm-type="next" value="{{username}}" placeholder="请输入登录账号"></input>
       </view>
-      <view class="login-input">
-      <input type="password" name="password" value="{{password}}" placeholder="请输入登录密码"></input>
+      <view class="login-input login-input-password">
+        <input type="text" password="{{isPassword}}" name="password" value="{{password}}" placeholder="请输入登录密码"></input>
+        <icon class="iconfont icon-password {{isPassword?'':'blue'}}" bindtap="bindSwitchPassword"></icon>
       </view>
     </view>
     <view class="item-btn-group">
@@ -22,10 +23,10 @@
     <form bindsubmit="formSubmit"  wx:if="{{method === '3'}}">
     <view class="item-login-input actived">
       <view class="login-input">
-        <input type="text" name="username" value="{{username}}" placeholder="请输入手机号码" bindinput="inputPhone"></input>
+        <input type="text" name="phone" value="{{phone}}" placeholder="请输入手机号码" bindinput="inputPhone" maxlength="11"></input>
       </view>
       <view class="login-input valid-wrap">
-        <input type="text" name="password" value="{{password}}" placeholder="请输入验证码"></input>
+        <input type="number" name="password" value="{{password}}" placeholder="请输入验证码" maxlength="4"></input>
         <button class="valid-btn blue" bindtap="bindGetValid" disabled="{{valid_disabled}}">{{valid_text}}</button>
       </view>
     </view>

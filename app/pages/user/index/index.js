@@ -27,6 +27,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           app.https(app.api.logoutApi, {
+            'openid': wx.getStorageSync('openid')
           }, 'post').then(function (data) {
             wx.setStorageSync('user', '');
             wx.reLaunch({

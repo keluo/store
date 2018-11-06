@@ -10,7 +10,9 @@
     </view>
     <view class="item-money">
       <text class="blue">账户余额:1230.0元</text>
-      <button class="btn">点击充值</button>
+        <navigator url = "/pages/user/money/add/add">
+          <button class="btn">点击充值</button>
+        </navigator>
     </view>
   </view>
   <view class="item">

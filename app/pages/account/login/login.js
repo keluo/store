@@ -1,4 +1,5 @@
 // pages/account/login/login.js
+import formValidate from '../../../utils/formValidate';
 var app = getApp();
 Page({
 
@@ -8,21 +9,28 @@ Page({
   data: {
     method: '1',
     username:'',
+    phone:'',
     password: '',
     timmer:'',
     valid_disabled:false,
-    valid_text:'获取验证码'
+    valid_text:'获取验证码',
+    isPassword:true
+  },
+  bindSwitchPassword: function(){
+    this.setData({
+      isPassword: !this.data.isPassword
+    });
   },
   inputPhone:function(e){
     this.setData({
-      username: e.detail.value
+      phone: e.detail.value
     });
   },
   bindGetValid: function(){
-    if (this.data.username){
+    if (this.data.phone){
       this.countDown(60);
       app.https(app.api.smsSendApi, {
-        'username': this.data.username
+        'username': this.data.phone
       }, 'post').then(function (data) {
         wx.showToast({
           title: data.msg,
@@ -76,39 +84,102 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.initValidate();
   },
   formSubmit: function (e) {
     var that = this;
-    if (e.detail.value && e.detail.value.username && e.detail.value.password) {
-      app.https(app.api.loginApi, {
-        'username': e.detail.value.username,
-        'password': e.detail.value.password,
-        'usertype': this.data.method,
-        'openid': wx.getStorageSync('openid')
-      }, 'post').then(function (data) {
-        data = data.data;
-        var token = wx.setStorageSync('user', {
-          token: data.token || '',
-          market_role: data.market_role || '',
-          username: data.username
-        });
-        wx.switchTab({
-          url: '/pages/promotion/index/index'
-        });
-      }).catch(function (data) {
+    if (this.data.method == '1'){
+      if (!this.formValidateForUser.checkForm(e)) {
+        const error = this.formValidateForUser.errorList[0];
         wx.showToast({
-          title: data.msg,
+          title: error.msg,
           icon: 'none',
-          mask: true
+          mask: true,
+          duration: 1500,
         });
-      });
-    } else {
-      let msg = this.data.method === '1' ? '请输入账号或密码' : '请输入手机号码或验证码';
-      wx.showToast({
-        title: msg,
-        icon: 'none'
-      });
+        return false;
+      }
     }
+    if (this.data.method == '3') {
+      if (!this.formValidateForPhone.checkForm(e)) {
+        const error = this.formValidateForPhone.errorList[0];
+        wx.showToast({
+          title: error.msg,
+          icon: 'none',
+          mask: true,
+          duration: 1500,
+        });
+        return false;
+      }
+    } 
+    app.https(app.api.loginApi, {
+      'username': this.data.method == '1' ? e.detail.value.username : e.detail.value.phone,
+      'password': e.detail.value.password,
+      'usertype': this.data.method,
+      'openid': wx.getStorageSync('openid') 
+    }, 'post').then(function (data) {
+      data = data.data;
+      var token = wx.setStorageSync('user', {
+        token: data.token || '',
+        market_role: data.market_role || '',
+        username: data.username
+      });
+      wx.switchTab({
+        url: '/pages/promotion/index/index'
+      });
+    }).catch(function (data) {
+      wx.showToast({
+        title: data.msg,
+        icon: 'none',
+        mask: true
+      });
+    });
+  },
+  /**
+   * 初始化校验规则
+   */
+  initValidate: function () {
+    const rules_phone = {
+      phone: {
+        required: true,
+        tel:true
+      },
+      password: {
+        required: true
+      }
+    }
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages_phone = {
+      phone: {
+        required: '请输入手机号码',
+        tel:'请输入正确的手机号码'
+      },
+      password: {
+        required: '请输入验证码'
+      }
+    }
+
+    // 创建实例对象
+    this.formValidateForPhone = new formValidate(rules_phone, messages_phone);
+
+    const rules_user = {
+      username: {
+        required: true,
+      },
+      password: {
+        required: true
+      }
+    }
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages_user = {
+      username: {
+        required: '请输入登录账号',
+      },
+      password: {
+        required: '请输入登录密码'
+      }
+    }
+    this.formValidateForUser = new formValidate(rules_user, messages_user);
   }
 })

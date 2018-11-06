@@ -8,12 +8,12 @@ App({
     this.globalData = {};
     wx.login({
       success: res => {
-        if (res && res.code && !wx.getStorageSync('openid')) {
+        if (res && res.code && !wx.getStorageSync('openid') && wx.getStorageSync('openid') != 'undefined') {
           this.https(loginApi, {
             js_code: res.code
           }, 'get').then(function (data) {
             data = data.data;
-            wx.setStorageSync('openid', data.openid);
+            wx.setStorageSync('openid', data.openid || '');
           });
         }
       }

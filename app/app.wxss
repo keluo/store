@@ -11,7 +11,6 @@ button::after{
   background-color: inherit;
   opacity:1;
 }
-
 .container {
   height: 100%;
   width: 100%;
@@ -52,6 +51,20 @@ button::after{
   opacity: 0.3;
   color: #fff !important;
 }
+
+.loading-tip {
+  text-align: center;
+  font-size:24rpx;
+  padding: 10rpx;
+  padding-bottom: 16rpx;
+  letter-spacing:2rpx;
+  display: none;
+  background-color: #fff; 
+}
+.loading-tip.show {
+  display: block;
+}
+
 /*item css*/
 .item {
   position: relative;
