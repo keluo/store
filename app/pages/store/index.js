@@ -15,13 +15,8 @@ Page({
       begin_time: '',
       end_time: '',
     },
-    dateList: [
-      { id: 0, name: '今天', begin_time: '2018-11-07', end_time: '2018-11-07'},
-      { id: 1, name: '昨天', begin_time: '2018-11-06', end_time: '2018-11-06'},
-      { id: 6, name: '近7天', begin_time: '2018-11-01', end_time: '2018-11-07'},
-      { id: 14, name: '近15天', begin_time: '2018-10-24', end_time: '2018-11-07'},
-      { id: 29, name: '近30天', begin_time: '2018-10-09', end_time: '2018-11-07'}
-    ],
+    day_time: 0,
+    dateList: [],
     selectArray: [],
     emailInputVal: '', 
     mailList:[],
@@ -153,7 +148,8 @@ Page({
     let obj = this.data.dateList[e.detail.value]
     this.setData({
       ['params.begin_time']: obj.begin_time,
-      ['params.end_time']: obj.end_time
+      ['params.end_time']: obj.end_time,
+      day_time: e.detail.value
     })
   },
   notToday (e) {
@@ -184,9 +180,9 @@ Page({
     subArr.push(e.detail.value);
     https(exportInfo, {
       id: this.data.params.id,
-      day_time: 'xxx',
+      day_time: this.data.day_time,
       emails: subArr
-    }, 'post').then(res => {
+    }, 'get').then(res => {
       console.log(res)
 
       this.selectComponent('.pop-box').hide({});
@@ -231,7 +227,7 @@ Page({
     if (subArr.length > 0){
       https(exportInfo, {
         id: this.data.params.id,
-        day_time: 'xxx',
+        day_time: this.data.day_time,
         subArr: subArr
       }, 'post').then(res => {
         console.log(res)
