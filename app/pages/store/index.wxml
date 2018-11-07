@@ -23,7 +23,7 @@
   <view slot="title">导出报表</view>
   <view slot="content">
     <view class="label">发送至邮箱:</view>
-    <input placeholder="请输入邮箱地址" bindinput="emailInput" bindconfirm="hadnleConfirm"></input>
+    <input placeholder="请输入邮箱地址" bindinput="emailInput"></input>
     <view class="select-title">
       <view class="select-title-txt">选择历史邮箱:</view>
       <view class="select-all" bindtap="selectAll">全选</view>

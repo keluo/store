@@ -516,6 +516,7 @@ Component({
       option3.series[0] = option2.series[0]
     },
     setToadyChart(obj) {
+      obj.begin_time = obj.begin_time.replace(/-/g, '/');
       for (var i = 0; i < 24; i++) {
         var time = new Date(obj.begin_time);
         time = time.setHours(time.getHours() + i);

@@ -364,8 +364,10 @@ Component({
           }
 
           if(!this.data.isVs){
-            chart.hideLoading();
-            chart.setOption(option, true);
+            setTimeout(() => {
+              chart.hideLoading();
+              chart.setOption(option, true);
+            }, 1000)
           }
         }
       })
@@ -501,13 +503,40 @@ Component({
               index: 0,
               name: 'new_customers'
             });
-            chart.hideLoading();
-            chart.setOption(option, true);
+            if(!this.data.isVs){
+              setTimeout(() => {
+                chart.hideLoading();
+                chart.setOption(option, true);
+              }, 1000)
+            }
           }
         }
       })
       if(this.data.isVs){
+        https(newCustomerAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
+          let myList = res.data.data
 
+          if (this.data.params.begin_time == this.data.params.end_time) {
+            this.setTodayChart({
+              begin_time: res.data.begin_time,
+              option: option2,
+              index: 1,
+              myList: myList,
+              name: 'new_customers'
+            })
+          } else {
+            this.setNotToadyChart({
+              myList: myList,
+              option: option2,
+              index: 1,
+              name: 'new_customers'
+            });
+          }
+          setTimeout(() => {
+            chart.hideLoading();
+            chart.setOption(option2, true);
+          }, 1000)
+        })
       }
     },
     bindSelected (id) {
@@ -550,10 +579,10 @@ Component({
       option2.series[0] = option.series[0]
     },
     setTodayChart(obj) {
+      obj.begin_time = obj.begin_time.replace(/-/g, '/');
       for (var i = 0; i < 24; i++) {
         var time = new Date(obj.begin_time);
         time = time.setHours(time.getHours() + i);
-
         obj.option.xAxis.data[i] = this.fmtMin(time);
         obj.option.series[obj.index].data[i] = 0;
 

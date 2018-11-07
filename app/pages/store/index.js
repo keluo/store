@@ -164,30 +164,6 @@ Page({
       emailInputVal: e.detail.value
     })
   },
-  hadnleConfirm (e) {
-    console.log(e)
-    let subArr = this.data.emails;
-    let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
-    if (!regMail.test(e.detail.value)){
-      wx.showToast({
-        title: '邮箱格式错误',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    }
-    //通过验证 邮箱push到mailList 发到后台
-    subArr.push(e.detail.value);
-    https(exportInfo, {
-      id: this.data.params.id,
-      day_time: this.data.day_time,
-      emails: subArr
-    }, 'get').then(res => {
-      console.log(res)
-
-      this.selectComponent('.pop-box').hide({});
-    })
-  },
   radioChange(e) {//多选框事件
     this.setData({
       emails: e.detail.value
@@ -195,18 +171,21 @@ Page({
   },
   selectAll () {
     let list = this.data.mailList;
+    let subList = [];
     for(let i=0;i<list.length;i++){
-      list[i].checked = true
+      list[i].checked = true,
+      subList.push(list[i].value)
     }
     this.setData({
-      mailList: list
+      mailList: list,
+      emails: subList
     })
   },
   handleSubMail () {
-    let subArr = this.data.emails;
+    let subArr = this.data.emails;// 多选框选中的email
     let list = this.data.mailList;    
     let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
-
+    
     if (this.data.emailInputVal) {
       if (regMail.test(this.data.emailInputVal)){
         subArr.push(this.data.emailInputVal);
@@ -224,28 +203,41 @@ Page({
       }
     }
 
+    // 邮箱去重
+    let hash = {};
+    list = list.reduce(function (item, next) {
+      hash[next.value] ? '' : hash[next.value] = true && item.push(next);
+      return item
+    }, [])
+
     if (subArr.length > 0){
       https(exportInfo, {
         id: this.data.params.id,
         day_time: this.data.day_time,
-        subArr: subArr
-      }, 'post').then(res => {
+        emails: subArr
+      }, 'get').then(res => {
         console.log(res)
+
+        for (let i = 0; i < list.length; i++) {
+          list[i].checked = false
+        }
+        try {
+          wx.setStorage({
+            key: "mailList",
+            data: list
+          })
+        } catch (e) {
+          console.log(e)
+        }
+        this.selectComponent('.pop-box').hide({});
+      })    
+    }else{
+      wx.showToast({
+        title: '请选择邮箱',
+        icon: 'none',
+        duration: 1500
       })
-      
-      for (let i = 0; i < list.length; i++) {
-        list[i].checked = false
-      }
-      try {
-        wx.setStorage({
-          key: "mailList",
-          data: list
-        })
-      } catch (e) {
-        console.log(e)
-      }
-      this.selectComponent('.pop-box').hide({});
-    }   
+    }
   },
   fmtDate (obj) {
     var date = new Date(obj);
