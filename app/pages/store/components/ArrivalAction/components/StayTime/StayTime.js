@@ -293,11 +293,12 @@ Component({
       type: Object,
       observer: function (newVal, oldVal, changedPath) {
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
-
-        setTimeout(() => {
-          this.distAll();
-          this.trendAll();
-        }, 1000)
+        if (newVal.id != '' && newVal.begin_time != '') {
+          setTimeout(() => {
+            this.distAll();
+            this.trendAll();
+          }, 1000)
+        }
       }
     },
     isToday: {
@@ -478,8 +479,8 @@ Component({
         https(oldCustomerStayInfoAjax, ratioParams, 'get').then(res => {
           if (res.code === "1") {
             this.setData({
-              svg_stay_time_lrr: this.getRatio(this.data.svg_stay_time, res.data.data.all_customer_avg_stay_time),
-              bounce_rate_lrr: this.getRatio(this.data.bounce_rate, res.data.data.shallow_customer)
+              svg_stay_time_lrr: this.getRatio(res.data.data.all_customer_avg_stay_time, this.data.svg_stay_time),
+              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, this.data.bounce_rate)
             })
           }
         })
@@ -511,15 +512,19 @@ Component({
     getRatio: function (oldVal, newVal) {// 获取增减比例
       let obj = {
         plus_minus: true,
-        lrr: 0
+        lrr: '--'
+      }
+      if (oldVal === 0) {
+        obj.lrr = 100;
+        return obj
       }
       if (oldVal > newVal) {
         let num = oldVal - newVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
         obj.plus_minus = false;
       } else if (oldVal < newVal) {
         let num = newVal - oldVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
       }
       return obj
     },
@@ -774,9 +779,10 @@ Component({
         obj.option.xAxis.data[i] = this.fmtMin(time);
         obj.option.series[obj.index].data[i] = 0;
         for (var j = 0; j < obj.myList.length; j++) {
-          if (this.fmtMin(time) == obj.myList[j].HourTime.slice(11, 16)) {
-            obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
-          }
+          // if (this.fmtMin(time) == obj.myList[j].HourTime.slice(11, 16)) {
+          //   obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
+          // }
+          obj.option.series[obj.index].data[i] = obj.myList[0][obj.name];
         }
       }
       option3.xAxis.data = option2.xAxis.data;

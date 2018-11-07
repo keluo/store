@@ -13,7 +13,7 @@
           {{ptdc.count}}
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class="{{ptdc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{ptdc.lrr}}%
+          环比 <view class="{{ptdc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{ptdc.lrr}}
         </view>
       </view>
       <view class='overview-item'>
@@ -24,7 +24,7 @@
           {{sdc.count}}
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class="{{sdc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{sdc.lrr}}%
+          环比 <view class="{{sdc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{sdc.lrr}}
         </view>
       </view>
       <view class='overview-item'>
@@ -35,7 +35,7 @@
           {{vudc.count}}
         </view>
         <view class='overview-RingRatio'>
-          环比 <view class="{{vudc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{vudc.lrr}}%
+          环比 <view class="{{vudc.plus_minus? 'icon-increase' : 'icon-decline'}}"></view> {{vudc.lrr}}
         </view>
       </view>
     </view>

@@ -24,16 +24,7 @@ Page({
     ],
     selectArray: [],
     emailInputVal: '', 
-    mailList:[
-      {
-        value: '12321321@qq.com',
-        checked: false
-      },
-      {
-        value: '12321321@qq.com',
-        checked: false
-      }
-    ],
+    mailList:[],
     emails: []
   },
   bindSelected: function(id){
@@ -61,16 +52,16 @@ Page({
     this.getShopList();
     this.getDayList();
 
-    // try {
-    //   let list = wx.getStorageSync('mailList')
-    //   if (list) {
-    //     this.setData({
-    //       mailList: list
-    //     })
-    //   }
-    // } catch (e) {
-    //   console.log(e)
-    // }
+    try {
+      let list = wx.getStorageSync('mailList')
+      if (list) {
+        this.setData({
+          mailList: list
+        })
+      }
+    } catch (e) {
+      console.log(e)
+    }
     
   },
 
@@ -135,37 +126,31 @@ Page({
     })
   },
   getShopList () {
-    let that = this;
-    // https(queryAssetGroup, {}, 'get').then(res => {
-    //   console.log(res)
-    // })
-    wx.request({
-      url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
-      header: {
-        'Cookie': 'sessionid=iml4i8ci1qidnbkx979e62jr99fk6myd;csrftoken=asc31JbUqmR2hw5jcEvthII23E3GOSar;'
-      },
-      success (res) {
-        that.setData({
-          selectArray: res.data.data.bgs
+    https(queryAssetGroup, {}, 'get').then(res => {
+      let arr = []
+      for(let i=0;i<res.data.sgs.length;i++){
+        arr.push({
+          id: res.data.sgs[i].id,
+          name: res.data.sgs[i].place_name
         })
       }
+      this.setData({
+        selectArray: arr
+      })
     })
   },
-  getDayList () {
+  getDayList () {// 
     https(dayList, {}, 'get').then(res => {
-      console.log(res)
+      let data = res.data;
       this.setData({
         dateList: res.data,
         ['params.begin_time']: data[0].begin_time,
         ['params.end_time']: data[0].end_time
       })
-
     })
   },
   bindDateChange (e) {
-    let obj = this.data.dateList.find(obj => {
-      return obj.id = e.detail.value
-    })
+    let obj = this.data.dateList[e.detail.value]
     this.setData({
       ['params.begin_time']: obj.begin_time,
       ['params.end_time']: obj.end_time
@@ -190,7 +175,7 @@ Page({
     if (!regMail.test(e.detail.value)){
       wx.showToast({
         title: '邮箱格式错误',
-        icon: 'loading',
+        icon: 'none',
         duration: 1500
       })
       return false;
@@ -203,6 +188,8 @@ Page({
       emails: subArr
     }, 'post').then(res => {
       console.log(res)
+
+      this.selectComponent('.pop-box').hide({});
     })
   },
   radioChange(e) {//多选框事件
@@ -234,7 +221,7 @@ Page({
       }else{
         wx.showToast({
           title: '邮箱格式错误',
-          icon: 'loading',
+          icon: 'none',
           duration: 1500
         })
         return false;

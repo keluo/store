@@ -293,11 +293,12 @@ Component({
       type: Object,
       observer: function (newVal, oldVal, changedPath) {
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
-
-        setTimeout(() => {
-          this.getDist();
-          this.getTrend();
-        }, 1000)
+        if (newVal.id != '' && newVal.begin_time != '') {
+          setTimeout(() => {
+            this.getDist();
+            this.getTrend();
+          }, 1000)
+        }
       }
     },
     isToday: {
@@ -395,15 +396,19 @@ Component({
     getRatio: function (oldVal, newVal) {// 获取增减比例
       let obj = {
         plus_minus: true,
-        lrr: 0
+        lrr: '--'
+      }
+      if (oldVal === 0) {
+        obj.lrr = 100;
+        return obj
       }
       if (oldVal > newVal) {
         let num = oldVal - newVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
         obj.plus_minus = false;
       } else if (oldVal < newVal) {
         let num = newVal - oldVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
       }
       return obj
     },
@@ -522,7 +527,7 @@ Component({
         //     obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
         //   }
         // }
-        obj.option.series[obj.index].data[i] = myList[0][obj.name]
+        obj.option.series[obj.index].data[i] = obj.myList[0][obj.name]
       }
       option3.xAxis.data = option2.xAxis.data;
       option3.series[0] = option2.series[0]
@@ -534,6 +539,14 @@ Component({
     },
     closeBtn(e) {// 关闭弹窗
       this.selectComponent('.' + e.target.dataset.btn).hide({});
+    },
+    fmtMin(obj) {
+      var date = new Date(obj);
+      var h = date.getHours();
+      if (h < 10) { h = '0' + h }
+      var m = date.getMinutes();
+      if (m < 10) { m = '0' + m }
+      return h + ':' + m
     },
     fmtDate: function (obj) {
       var date = new Date(obj);

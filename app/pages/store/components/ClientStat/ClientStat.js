@@ -205,11 +205,10 @@ Component({
       observer: function (newVal, oldVal, changedPath) {
         // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
-              
-        setTimeout(() => {
+        if (newVal.id != '' && newVal.begin_time != ''){
           this.getTotalInfo();
           this.isKeliu();
-        }, 1000)
+        }
       }
     },
     selectArray: {
@@ -273,15 +272,15 @@ Component({
         https(totalCustomerAjax, ratioParams, 'get').then(res => {//新客环比
           if (res.code === "1") {
             this.setData({
-              newCustomer_lrr: this.getRatio(this.data.totalNewCustomer, res.data.data.totalNewCustomer)
+              newCustomer_lrr: this.getRatio(res.data.data.totalNewCustomer, this.data.totalNewCustomer)
             })
           }
         })
         https(keLiuAllTotalAjax, ratioParams, 'get').then(res => {//客流、进店环比
           if (res.code === "1") {
             this.setData({
-              keLiu_lrr: this.getRatio(this.data.keLiu_total, res.data.ke_liu),
-              jinDian_lrr: this.getRatio(this.data.jinDian_total, res.data.ru_dian)
+              keLiu_lrr: this.getRatio(res.data.ke_liu, this.data.keLiu_total),
+              jinDian_lrr: this.getRatio(res.data.ru_dian, this.data.jinDian_total)
             })
           }
         })
@@ -315,13 +314,17 @@ Component({
         plus_minus: true,
         lrr: 0
       }
+      if(oldVal === 0){
+        obj.lrr = '--';
+        return obj
+      }
       if (oldVal > newVal){
         let num = oldVal - newVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
         obj.plus_minus = false;
       }else if(oldVal < newVal){
         let num = newVal - oldVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
       }
       return obj
     },
