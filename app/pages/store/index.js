@@ -10,17 +10,17 @@ Page({
   data: {
     isActive: 0,
     params:{
-      id: 2,
+      id: '',
       name: '',
       begin_time: '',
       end_time: '',
     },
     dateList: [
-      { id: 0, name: '今天'},
-      { id: 1, name: '昨天' },
-      { id: 6, name: '近7天' },
-      { id: 14, name: '近15天' },
-      { id: 29, name: '近30天' }
+      { id: 0, name: '今天', begin_time: '2018-11-07', end_time: '2018-11-07'},
+      { id: 1, name: '昨天', begin_time: '2018-11-06', end_time: '2018-11-06'},
+      { id: 6, name: '近7天', begin_time: '2018-11-01', end_time: '2018-11-07'},
+      { id: 14, name: '近15天', begin_time: '2018-10-24', end_time: '2018-11-07'},
+      { id: 29, name: '近30天', begin_time: '2018-10-09', end_time: '2018-11-07'}
     ],
     selectArray: [],
     emailInputVal: '', 
@@ -51,10 +51,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      ['params.begin_time']: this.fmtDate(new Date().setDate(new Date().getDate() - 6)),
-      ['params.end_time']: this.fmtDate(new Date())
-    })
+
   },
 
   /**
@@ -62,6 +59,7 @@ Page({
    */
   onReady: function () {
     this.getShopList();
+    this.getDayList();
 
     // try {
     //   let list = wx.getStorageSync('mailList')
@@ -118,9 +116,7 @@ Page({
 
   },
   handleDownLoad () {
-    this.selectComponent('.pop-box').show({
-
-    });
+    this.selectComponent('.pop-box').show({});
   },
   isKeliu() {
     this.setData({
@@ -132,6 +128,12 @@ Page({
       isActive: 1
     })
   },
+  isGuke() {
+    wx.showToast({
+      title: '敬请期待',
+      image: '../../images/store/smile.png'
+    })
+  },
   getShopList () {
     let that = this;
     // https(queryAssetGroup, {}, 'get').then(res => {
@@ -140,7 +142,7 @@ Page({
     wx.request({
       url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
       header: {
-        'Cookie': 'sessionid=wrplc2hgwjuz6xw8ke1xyvg6hbkadtb0;csrftoken=ArDz1UqvkrnWaDWjUNtCPube3QbREfiW;'
+        'Cookie': 'sessionid=iml4i8ci1qidnbkx979e62jr99fk6myd;csrftoken=asc31JbUqmR2hw5jcEvthII23E3GOSar;'
       },
       success (res) {
         that.setData({
@@ -149,16 +151,24 @@ Page({
       }
     })
   },
+  getDayList () {
+    https(dayList, {}, 'get').then(res => {
+      console.log(res)
+      this.setData({
+        dateList: res.data,
+        ['params.begin_time']: data[0].begin_time,
+        ['params.end_time']: data[0].end_time
+      })
+
+    })
+  },
   bindDateChange (e) {
-    let currentId = this.data.dateList[e.detail.value].id;
-    let begin = new Date().setDate(new Date().getDate() - currentId);
-    let end = new Date();
-    if (currentId == 1){
-      end = new Date().setDate(new Date().getDate() - currentId)
-    }
+    let obj = this.data.dateList.find(obj => {
+      return obj.id = e.detail.value
+    })
     this.setData({
-      ['params.begin_time']: this.fmtDate(begin),
-      ['params.end_time']: this.fmtDate(end)
+      ['params.begin_time']: obj.begin_time,
+      ['params.end_time']: obj.end_time
     })
   },
   notToday (e) {
