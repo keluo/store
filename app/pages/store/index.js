@@ -131,8 +131,8 @@ Page({
       }
       this.setData({
         selectArray: arr,
-        ['params.id']: res.data.sgs[0].id,
-        ['params.name']: res.data.sgs[0].place_name
+        ['params.id']: res.data.sgs[0] ? (res.data.sgs[0].id ? res.data.sgs[0].id: '' ) : '',
+        ['params.name']: res.data.sgs[0] ? (res.data.sgs[0].place_name ? res.data.sgs[0].place_name : '请选择') : '请选择'
       })
     })
   },
@@ -141,8 +141,8 @@ Page({
       let data = res.data;
       this.setData({
         dateList: res.data,
-        ['params.begin_time']: data[2].begin_time,
-        ['params.end_time']: data[2].end_time
+        ['params.begin_time']: data[2] ? (data[2].begin_time ? data[2].begin_time : '') : '' ,
+        ['params.end_time']: data[2] ? (data[2].end_time ? data[2].end_time : '') : ''
       })
     })
   },
