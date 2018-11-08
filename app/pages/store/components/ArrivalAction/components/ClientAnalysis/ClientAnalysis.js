@@ -178,9 +178,9 @@ Component({
           let vudcList = res.data.vudc.vudc;
 
           this.setData({
-            ['ptdc.count']: res.data.pdtc.total_count || 0,
-            ['ptdc.lrr']: res.data.pdtc.lrr_percent || 0,
-            ['ptdc.plus_minus']: res.data.pdtc.plus_minus || true,
+            ['ptdc.count']: res.data.ptdc.total_count || 0,
+            ['ptdc.lrr']: res.data.ptdc.lrr_percent || 0,
+            ['ptdc.plus_minus']: res.data.ptdc.plus_minus || true,
             ['sdc.count']: res.data.sdc.total_count || 0,
             ['sdc.lrr']: res.data.sdc.lrr_percent || 0,
             ['sdc.plus_minus']: res.data.sdc.plus_minus || true,

@@ -178,7 +178,7 @@ Component({
         https(customerStayTimeAjax, ratioParams, 'get').then(res => {
           if (res.code === "1") {
             this.setData({
-              time_lrr: this.getRatio(this.data.old_customer_avg_times, res.data.data.old_customer_avg_times.toFixed()),
+              time_lrr: this.getRatio(res.data.data.old_customer_avg_times, this.data.old_customer_avg_times),
             })
           }
         })
@@ -218,11 +218,11 @@ Component({
       }
       if (oldVal > newVal) {
         let num = oldVal - newVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
         obj.plus_minus = false;
       } else if (oldVal < newVal) {
         let num = newVal - oldVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
       }
       return obj
     },
