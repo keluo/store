@@ -16,7 +16,7 @@
     </view>
   </view>
   <view class="item">
-    <view class="item-list item-list-icon">
+    <view class="item-list item-list-icon"  bindtap="bindToPage" data-url="/pages/user/money/list/list">
       <view class="item-list-content">
         <icon class="icon icon-trade"></icon>
         交易明细
@@ -25,7 +25,7 @@
           <icon class="iconfont icon-next"></icon>
       </view>
     </view>
-    <view class="item-list item-list-icon">
+    <view class="item-list item-list-icon" bindtap="bindToPage" data-url="/pages/user/qualifications/index" >
       <view class="item-list-content">
         <icon class="icon icon-qualifications"></icon>
         资质信息

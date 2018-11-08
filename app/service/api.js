@@ -41,7 +41,20 @@ const couponAddApi = '/apo/cv/temp/'; //优惠券创建
 const couponCopyApi = '/apo/cv/temp/copy/'; //优惠券复制
 const couponListApi = '/apo/cv/temp/list/'; //优惠券列表
 const couponListInitApi = '/apo/cv/temp/list/init/'; //优惠券列表初始化select
+const commiSettingApi = '/apo/busi/commi/'; //设置返佣
 
+const payApi = '/etma/api/custom/pay/'; //充值
+
+const sgCustomShareApi = '/etma/sg/custom/share/'; //店铺统计
+const bgCustomShareApi = '/etma/bg/custom/share/'; //商户统计
+
+const bgCustomShareMapApi = '/etma/bg/custom/share/create_statis/'; //总发放数Map
+const bgCustomSendMapApi = '/etma/bg/custom/share/send_statis/'; //总领取数Map
+const bgCustomUsedMapApi = '/etma/bg/custom/share/used_statis/'; //总核销数Map
+
+const tradeListApi = '/etma/trade/'; //交易明细
+const tradeDetailApi = '/etma/trade/detail/'; //交易详情
+const bgInfoApi = '/etma/bg/info/'; //商户信息
 
 
 module.exports = {
@@ -77,5 +90,15 @@ module.exports = {
   couponCopyApi,
   couponAddInitApi,
   couponListApi,
-  couponListInitApi
+  couponListInitApi,
+  payApi,
+  commiSettingApi,
+  sgCustomShareApi,
+  bgCustomShareApi,
+  bgCustomShareMapApi,
+  bgCustomSendMapApi,
+  bgCustomUsedMapApi, 
+  tradeListApi,
+  tradeDetailApi,
+  bgInfoApi
 }

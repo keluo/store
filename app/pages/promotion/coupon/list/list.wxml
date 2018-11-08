@@ -9,7 +9,7 @@
         </navigator>
       </view>
     </view>
-    <view class="item-list" wx:for="{{coupon_list}}"  wx:key="{{index}}">
+    <view class="item-list" wx:for="{{coupon_list}}"  wx:key="{{index}}" data-id="{{item.id}}" bindtap="bindToPage">
       <view class="item-list-content">
         <view class="item-list-txt">
           {{item.desc}} <text class="{{item.is_valid == '1'?'blue':'grey'}}">（{{item.is_valid == '1'?'有效':'无效'}}）</text>

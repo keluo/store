@@ -14,6 +14,12 @@ Page({
     page: 1,
     total: 0
   },
+  bindToPage: function (e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/promotion/coupon/detail/detail?id=' + id,
+    });
+  },
   bindDateSelected: function (e) {
     this.setData({
       page: 1,

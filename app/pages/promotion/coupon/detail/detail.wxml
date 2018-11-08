@@ -6,7 +6,7 @@
         面额：
       </view>
       <view class="item-input">
-        <text class="txt">2元</text>
+        <text class="txt">{{amount}}元</text>
       </view>
     </view>
     <view class="item-info">
@@ -14,7 +14,7 @@
         最低消费：
       </view>
       <view class="item-input">
-        <text class="txt">100元</text>
+        <text class="txt">{{floor_amount}}元</text>
       </view>
     </view>
     <view class="item-info">
@@ -22,7 +22,7 @@
         券有效期：
       </view>
       <view class="item-input">
-        <text class="txt">2018/09/29-2018/10/05</text>
+        <text class="txt">{{valid_period}}</text>
       </view>
     </view>
     <view class="item-info">
@@ -30,7 +30,7 @@
         券可用时段：
       </view>
       <view class="item-input">
-        <text class="txt"> 周一至周五 中11:00-16:00可用</text>
+        <text class="txt">{{valid_daytime}}</text>
       </view>
     </view>
   </view>
@@ -46,7 +46,7 @@
             总领取数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{send_total_count}}
           </view>
         </view>
         <view class="item-statistics-box last">
@@ -54,7 +54,7 @@
             总核销数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{used_total_count}}
           </view>
         </view>
       </view>

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "交易明细"
+  "navigationBarTitleText": "交易明细",
+  "usingComponents": {
+    "component-select": "../../../../component/select/select"
+  }
 }

@@ -1,6 +1,7 @@
 {
   "cloud": true,
   "pages": [
+    "pages/common/loading/loading",
     "pages/promotion/index/index",
     "pages/promotion/coupon/list/list",
     "pages/promotion/coupon/add/add",
@@ -19,6 +20,7 @@
     "pages/store/index",
     "pages/account/login/login",
     "pages/account/password/password"
+
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",

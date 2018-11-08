@@ -1,94 +1,90 @@
 // pages/promotion/index/index.js
+var app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     tabType:'1',
-    dateId:'',
-    selectArray: [{
-        "id": "7",
-        "name": "近7天"
-      }, {
-        "id": "15",
-        "name": "近15天"
-      }, {
-        "id": "30",
-        "name": "近30天"
-      }, {
-        "id": "90",
-        "name": "近90天"
-      }, {
-        "id": "180",
-        "name": "近180天"
-      }
-    ]
-  },
-  bindTabSelected: function (e) {
-    this.setData({
-      tabType: e.currentTarget.dataset.type
-    });
-  },
-  bindDateSelected: function(id){
-    this.setData({
-      dateId:id
-    });
+    range_date_group: [],
+    fromday: '',
+    create_count: 0,
+    voucher_send_count: 0,
+    voucher_used_count: 0
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.selectComponent('.pop-box').show({
-      
+    // this.selectComponent('.pop-box').show({
+    // });
+    var that = this;
+    that.getDateInitList().then(function () {
+      that.getBgCustomShare();
+      that.getMapList();
     });
   },
-
+  getBgCustomShare: function () {
+    var that = this;
+    app.https(app.api.bgCustomShareApi, {
+      fromday: that.data.fromday,
+    }, 'get').then(function (data) {
+      data = data.data;
+      that.setData({
+        create_count: data.create_count || 0,
+        voucher_send_count: data.voucher_send_count || 0,
+        voucher_used_count: data.voucher_used_count || 0
+      });
+    });
+  },
+  getDateInitList: function () {
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      app.https(app.api.couponListInitApi, {
+      }, 'get').then(function (data) {
+        data = data.data;
+        that.setData({
+          range_date_group: data.list_day || [],
+          fromday: data.list_day ? (data.list_day[0].id || '') : ''
+        });
+        resolve();
+      });
+    });
+  },
+  getMapList: function () {
+    var that = this;
+    var url = app.api.bgCustomShareMapApi;
+    if (that.data.tabType == '2'){
+      url = app.api.bgCustomSendMapApi;
+    } else if (that.data.tabType == '3') {
+      url = app.api.bgCustomUsedMapApi;
+    }
+    return new Promise(function (resolve, reject) {
+      app.https(url, {
+        fromday: that.data.fromday
+      }, 'get').then(function (data) {
+        data = data.data;
+        resolve();
+      });
+    });
+  },
+  bindTabSelected: function (e) {
+    this.setData({
+      tabType: e.currentTarget.dataset.type
+    });
+    this.getMapList();
+  },
+  bindDataSelected: function(e){
+    this.setData({
+      fromday:e.detail
+    });
+    this.getBgCustomShare();
+    this.getMapList();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

@@ -1,0 +1,3 @@
+<!--pages/common/loading/loading.wxml-->
+<image src="/images/logo-loading.gif" class="loading"></image>
+

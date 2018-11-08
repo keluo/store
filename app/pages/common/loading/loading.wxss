@@ -1,0 +1,14 @@
+/* pages/common/loading/loading.wxss */
+page {
+  background-color: #fafcff;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items:center;
+}
+.loading {
+  width: 400rpx;
+  height: 308rpx;
+  margin-top:-100rpx;
+
+}

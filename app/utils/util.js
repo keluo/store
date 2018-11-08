@@ -15,6 +15,12 @@ const formatDate = date => {
 
   return [year, month, day].map(formatNumber).join('-')
 }
+
+const formatMonth = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  return [year, month].map(formatNumber).join('-')
+}
 // const formatTimeNew = date => {
 //   const year = date.getFullYear()
 //   const month = date.getMonth() + 1
@@ -37,11 +43,16 @@ const getGroupForIndex = (group, id, key) => {
   key = key || 'id';
   var result = '';
   group.forEach(function (item, index) {
-    if (item[key] === id) {
+    if (item[key] == id) {
       result = index;
     }
   })
   return result;
+}
+//通过key取得name的值
+const getGroupForName = (group, id, key, name) => {
+  let index = getGroupForIndex(group, id, key);
+  return group[index] ? (group[index][name] || '') : '';
 }
 //检测是否有中文  
 //有：true
@@ -53,6 +64,8 @@ const hasChinese = (val) => {
 module.exports = {
   formatTime,
   formatDate,
+  formatMonth,
   getGroupForIndex,
+  getGroupForName,
   hasChinese
 }

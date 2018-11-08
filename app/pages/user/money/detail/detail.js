@@ -1,20 +1,56 @@
 // pages/user/money/detail/detail.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    id:'',
+    amount: 0,
+    trade_type_name:'',
+    timestamp:'',
+    transaction_number:'',
+    extend_alipay_id:'',
+    consume_alipay_id:'',
+    account_balance:'',
+    recharge_method:'',
+    trade_type:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    var id = options.id || '';
+    that.setData({
+      id: id
+    });
+    that.getDetailInfo();
   },
-
+  getDetailInfo: function(){
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      app.https(app.api.tradeDetailApi, {
+        id: that.data.id
+      }, 'get').then(function (data) {
+        data = data.data;
+        that.setData({
+          amount: data.amount || 0,
+          trade_type_name: data.trade_type_name,
+          timestamp: data.timestamp,
+          transaction_number: data.transaction_number,
+          extend_alipay_id: data.extend_alipay_id,
+          consume_alipay_id: data.consume_alipay_id,
+          account_balance: data.account_balance || 0,
+          recharge_method: data.recharge_method,
+          trade_type: data.trade_type
+        });
+        resolve();
+      });
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

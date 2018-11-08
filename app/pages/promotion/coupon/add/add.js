@@ -10,8 +10,8 @@ Page({
     id:'',
     amount:'',
     floor_amount: '',
-    voucer_valid:'2',
-    voucer_valid_index:'1',
+    voucer_valid:'1',
+    voucer_valid_index:'0',
     voucer_valid_group: [
       { id: '1', name: '固定时间'},
       { id: '2', name: '相对时间' },
@@ -75,7 +75,7 @@ Page({
           voucer_valid_index: that.getIndexForKey(that.data.voucer_valid_group, 'id', data.voucer_valid),
           voucher_valid_after: data.voucher_valid_after || '',
           voucher_valid_after_index: that.getIndexForKey(that.data.voucher_valid_after_group, 'id', data.voucher_valid_after),
-          voucher_valid_end: data.voucher_valid_end || app.utils.util.formatDate(new Date()),
+          voucher_valid_end: app.utils.util.formatDate(new Date()),
           day_rule: data.day_rule || '',
           day_rule_index: that.getIndexForKey(that.data.day_rule_group, 'id', data.day_rule),
           time_rule_checked: data.time_rule,
@@ -153,6 +153,7 @@ Page({
         title: error.msg,
         icon: 'none',
         mask: true,
+        image: '../../../../images/icon/tip.png',
         duration: 1500,
       });
       return false;
@@ -191,20 +192,28 @@ Page({
   initValidate: function () {
     const rules = {
       amount: {
-        required: true
+        required: true,
+        digits:true,
+        min: 1,
+        max: 999
       },
       floor_amount: {
         required: true,
+        digits: true
       }
     }
 
     // 验证字段的提示信息，若不传则调用默认的信息
     const messages = {
       amount: {
-        required: '请输入优惠券面额'
+        required: '请输入面额',
+        digits: '面额:1~999',
+        min: '面额：1~999',
+        max: '面额：1~999'
       },
       floor_amount: {
-        required: '输入最低消费额度',
+        required: '输入最低消费',
+        digits: '最低消费大于0'
       }
     }
 

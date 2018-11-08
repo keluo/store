@@ -42,8 +42,12 @@ App({
     // 展示本地存储能力
     var token = wx.getStorageSync('user') || '';
     if (!token) {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '/pages/account/login/login'
+      });
+    } else {
+      wx.switchTab({
+        url: '/pages/promotion/index/index'
       });
     }
   },

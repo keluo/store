@@ -2,43 +2,43 @@
 <view class="container">
   <view class="item">
     <view class="item-options">
-      <text class="blue">星巴克新街口店</text>
+      <component-select options="{{sg_group}}" bind:selected="bindSgSelected" left="true" key-name="place_name" selected="{{sg_id}}" now-text=""></component-select>
       <view class="item-options-right">
-        <text class="blue">近7天</text>
+        <component-select options="{{range_date_group}}" bind:selected="bindDateSelected" selected="{{fromday}}"></component-select>
       </view>
     </view>
     <view class="item-content">
       <view class="item-statistics-group column-2">
         <view class="item-statistics-box border-bottom">
           <view>
-            总领取数 
+            推广人数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{share_count}}
           </view>
         </view>
         <view class="item-statistics-box last border-bottom">
           <view>
-            总核销数 
+            触达人数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{touch_count}}
           </view>
         </view>
         <view class="item-statistics-box">
           <view>
-            总领取数 
+            领券人数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{voucher_send_count}}
           </view>
         </view>
         <view class="item-statistics-box last">
           <view>
-            总核销数 
+            核销人数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{voucher_used_count}}
           </view>
         </view>
       </view>

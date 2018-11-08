@@ -1,1 +1,6 @@
-{}
+{
+  "navigationBarTitleText": "门店推广统计",
+  "usingComponents": {
+    "component-select": "../../../../component/select/select"
+  }
+}

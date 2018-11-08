@@ -9,13 +9,13 @@
         </navigator>
       </view>
       <view class="item-box">
-        <navigator url = "/pages/promotion/coupon/list/list">
+        <navigator url = "/pages/promotion/statistics/index">
           <image src="/images/promotion/index/promotion_statistics.png"></image>
           <text>门店推广统计</text>
         </navigator>
       </view>
       <view class="item-box">
-        <navigator url = "/pages/promotion/coupon/list/list">
+        <navigator url = "/pages/promotion/commission/seting">
           <image src="/images/promotion/index/commission_record.png"></image>
           <text>返佣设置</text>
         </navigator>
@@ -30,7 +30,7 @@
   <view class="item">
     <view class="item-title">
       <view>优惠券发放情况</view>
-      <component-select  options="{{selectArray}}" selected="bindSelected"></component-select>
+      <component-select  options="{{range_date_group}}" bind:selected="bindDataSelected"  selected="{{fromday}}"></component-select>
     </view>
     <view class="item-content">
       <view class="item-statistics-group column-3">
@@ -39,7 +39,7 @@
             总发放数
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{create_count}}
           </view>
         </view>
         <view class="item-statistics-box">
@@ -47,7 +47,7 @@
             总领取数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{voucher_send_count}}
           </view>
         </view>
         <view class="item-statistics-box last">
@@ -55,7 +55,7 @@
             总核销数 
           </view>
           <view class="item-statistics-box-num">
-            54353
+            {{voucher_used_count}}
           </view>
         </view>
       </view>

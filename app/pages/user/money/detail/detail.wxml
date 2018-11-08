@@ -4,27 +4,35 @@
     <view class="item-money-info">
       <view class="money-info-list info-head">
         <text class="info-cat">交易金额</text>
-        <text class="info-value">＋20.80</text>
+        <text class="info-value">＋{{amount}}</text>
       </view>
       <view class="money-info-list">
         <text class="info-cat">交易类型</text>
-        <text class="info-value">分享返佣</text>
+        <text class="info-value">{{trade_type_name}}</text>
       </view>
       <view class="money-info-list">
         <text class="info-cat">交易时间</text>
-        <text class="info-value">2017/02/30 12:30:20</text>
+        <text class="info-value">{{timestamp}}</text>
       </view>
       <view class="money-info-list">
         <text class="info-cat">流水单号</text>
-        <text class="info-value">12349585904088858</text>
+        <text class="info-value">{{transaction_number}}</text>
       </view>
-      <view class="money-info-list">
+      <view class="money-info-list" wx:if="{{trade_type == '1' || trade_type == '2'}}">
         <text class="info-cat">推广人支付宝</text>
-        <text class="info-value">180xxxx874</text>
+        <text class="info-value">{{extend_alipay_id}}</text>
+      </view>
+      <view class="money-info-list" wx:if="{{trade_type == '1'}}">
+        <text class="info-cat">核销人支付宝</text>
+        <text class="info-value">{{consume_alipay_id}}</text>
+      </view>
+      <view class="money-info-list" wx:if="{{trade_type == '0'}}">
+        <text class="info-cat">充值方式</text>
+        <text class="info-value">{{recharge_method}}</text>
       </view>
       <view class="money-info-list">
         <text class="info-cat">账户余额</text>
-        <text class="info-value">10023.00</text>
+        <text class="info-value">{{account_balance}}</text>
       </view>
     </view>
   </view>

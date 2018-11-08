@@ -2,64 +2,42 @@
 <view class="container">
   <view class="item">
     <view class="item-options">
-      <text class="blue">筛选</text>
+      <component-select options="{{cat_group}}" bind:selected="bindCatSelected" left="true" selected="{{cat_id}}"></component-select>
       <view class="item-options-right">
-        <text class="blue">日期</text>
+        <picker mode="date"  fields="month" bindchange="bindDateChange">
+          <view class="picker">
+            <icon class="iconfont icon-time"></icon>
+          </view>
+        </picker>
       </view>
     </view>
     <view class="item-money-info">
-      <text>2018/06</text>
-      <text>充值2000.00元</text>
-      <text>消耗：1000.00元</text>
+      <text>{{month}}</text>
+      <text>充值：{{total_charge}}元</text>
+      <text>消耗：{{total_consume}}元</text>
     </view>
-    <view class="item-list">
+    <view class="item-list" wx:for="{{trade_list}}"  wx:key="{{index}}" data-id="{{item.transaction_number}}" bindtap="bindToPage">
       <view class="item-list-content">
         <view class="item-list-txt">
-          充值
+          {{item.trade_type_name}}
         </view>
         <view class="item-list-txt-ext first">
           <view class="">
-            2018/06/18 21:13:20
+            {{item.timestamp}}
           </view>
         </view>
       </view>
       <view class="item-list-right">
-        <text>＋10000.00</text>
+        <text>＋{{item.amount || 0}}</text>
         <icon class="iconfont icon-next"></icon>
       </view>
     </view>
-    <view class="item-list">
-      <view class="item-list-content">
-        <view class="item-list-txt">
-          分享返佣
-        </view>
-        <view class="item-list-txt-ext first">
-          <view class="">
-            2018/06/18 21:13:20
-          </view>
-        </view>
-      </view>
-      <view class="item-list-right">
-        <text>＋20.80</text>
-        <icon class="iconfont icon-next"></icon>
-      </view>
-    </view>
-    <view class="item-list">
-      <view class="item-list-content">
-        <view class="item-list-txt">
-          核销返佣
-        </view>
-        <view class="item-list-txt-ext first">
-          <view class="">
-            2018/06/18 21:13:20
-          </view>
-        </view>
-      </view>
-      <view class="item-list-right">
-        <text>＋10000.00</text>
-        <icon class="iconfont icon-next"></icon>
-      </view>
-    </view>
+  </view>
+  <view class="loading-tip {{isLoadingMore ? 'show' : ''}}">
+    正在加载中...
+  </view>
+  <view class="loading-tip {{hasNotMore ? 'show' : ''}}">
+    没有更多数据了
   </view>
 </view>
 

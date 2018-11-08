@@ -1,4 +1,5 @@
 // component/select/select.js
+import { getGroupForName} from '../../utils/util';
 Component({
   /**
    * 组件的属性列表
@@ -22,6 +23,26 @@ Component({
     keyName: {
       type: String,
       value: 'name'
+    },
+    selected: {
+      type: String,
+      value: '',
+      observer: function (newVal, oldVal, changedPath) {
+        if (newVal){
+          this.setData({
+            nowId: newVal,
+            nowText: getGroupForName(this.data.options, newVal, this.data.keyId, this.data.keyName)
+          });
+        }
+      }
+    }
+  },
+  attached: function (e) {
+    if (this.data.selected) {
+      this.setData({
+        nowId: this.data.selected,
+        nowText: getGroupForName(this.data.options, this.data.selected, this.data.keyId, this.data.keyName)
+      });
     }
   },
   /**
