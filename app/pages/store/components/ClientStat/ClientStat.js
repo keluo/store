@@ -342,7 +342,8 @@ Component({
           let myList = res.data.data;
 
           option.xAxis.data = [];
-          option.xAxis.name = ' ';
+          option.xAxis.name = '';
+          option2.xAxis.name = '';
           option.series[0].data = [];
           //查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
@@ -413,7 +414,8 @@ Component({
           let myList = res.data.data;
 
           option.xAxis.data = [];
-          option.xAxis.name = ' ';
+          option.xAxis.name = '';
+          option2.xAxis.name = '';
           option.series[0].data = [];
           //查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
@@ -482,6 +484,8 @@ Component({
 
           option.xAxis.data = [];
           option.series[0].data = [];
+          option.xAxis.name = '';
+          option2.xAxis.name = '';
           // 查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
             for (var i = 0; i < 24; i++) {
@@ -517,13 +521,22 @@ Component({
           let myList = res.data.data
 
           if (this.data.params.begin_time == this.data.params.end_time) {
-            this.setTodayChart({
-              begin_time: res.data.begin_time,
-              option: option2,
-              index: 1,
-              myList: myList,
-              name: 'new_customers'
-            })
+            // this.setTodayChart({
+            //   begin_time: res.data.begin_time,
+            //   option: option2,
+            //   index: 1,
+            //   myList: myList,
+            //   name: 'new_customers'
+            // })
+            for (var i = 0; i < 24; i++) {
+              var time = new Date(res.data.begin_time);
+              time = time.setHours(time.getHours() + i);
+
+              option2.xAxis.data[i] = ' ',
+              option2.series[1].data[i] = myList[0].new_customers;
+              option2.xAxis.name = this.data.params.begin_time.substring(5, 10);
+
+            }
           } else {
             this.setNotToadyChart({
               myList: myList,

@@ -1,5 +1,5 @@
 <view class='header'>
-  <component-select options="{{selectArray}}" bind:selected="bindSelected" left="{{true}}"></component-select>
+  <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="{{params.name}}" left="{{true}}"></component-select>
   <view class='icon-download' bindtap="handleDownLoad"></view>
   <picker value="{{date}}" range="{{dateList}}" range-key="name" bindchange="bindDateChange">
     <view class='icon-time'></view>

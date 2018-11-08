@@ -341,12 +341,19 @@ Component({
         if(res.code === "1"){
           let data = res.data.data;
           let total = data.return_1to2_day + data.return_3to7_day + data.return_8to15_day + data.return_16to30_day + data.return_30_day
-
-          option.series[0].data[0] = (data.return_1to2_day / total * 100).toFixed();
-          option.series[0].data[1] = (data.return_3to7_day / total * 100).toFixed();
-          option.series[0].data[2] = (data.return_8to15_day / total * 100).toFixed();
-          option.series[0].data[3] = (data.return_16to30_day / total * 100).toFixed();
-          option.series[0].data[4] = (data.return_30_day / total * 100).toFixed();
+          if(total != 0){
+            option.series[0].data[0] = (data.return_1to2_day / total * 100).toFixed();
+            option.series[0].data[1] = (data.return_3to7_day / total * 100).toFixed();
+            option.series[0].data[2] = (data.return_8to15_day / total * 100).toFixed();
+            option.series[0].data[3] = (data.return_16to30_day / total * 100).toFixed();
+            option.series[0].data[4] = (data.return_30_day / total * 100).toFixed();
+          }else{
+            option.series[0].data[0] = 0;
+            option.series[0].data[1] = 0;
+            option.series[0].data[2] = 0;
+            option.series[0].data[3] = 0;
+            option.series[0].data[4] = 0;
+          }
 
           chart.hideLoading();
           chart.setOption(option, true);
