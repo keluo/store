@@ -136,13 +136,13 @@ Page({
       })
     })
   },
-  getDayList () {// 
+  getDayList () {// 获取时间列表
     https(dayList, {}, 'get').then(res => {
       let data = res.data;
       this.setData({
         dateList: res.data,
-        ['params.begin_time']: data[0].begin_time,
-        ['params.end_time']: data[0].end_time
+        ['params.begin_time']: data[2].begin_time,
+        ['params.end_time']: data[2].end_time
       })
     })
   },

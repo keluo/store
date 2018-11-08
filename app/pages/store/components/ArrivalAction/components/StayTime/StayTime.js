@@ -347,11 +347,13 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
+      let now_shallow_customer = 0;
       https(allCustomerStayInfoAjax, this.data.params, 'get').then(res => {
         if(res.code === "1"){
           let data = res.data.data;
           let total = data.deep_customer + data.shallow_customer;
           let shallow = 0;
+          now_shallow_customer = data.shallow_customer;
           if(total != 0){
             shallow = (data.shallow_customer / total * 100).toFixed();
           }
@@ -390,8 +392,8 @@ Component({
         https(allCustomerStayInfoAjax, ratioParams, 'get').then(res => {
           if(res.code === "1"){
             this.setData({
-              svg_stay_time_lrr: this.getRatio(this.data.svg_stay_time, res.data.data.all_customer_avg_stay_time),
-              bounce_rate_lrr: this.getRatio(this.data.bounce_rate, res.data.data.shallow_customer)
+              svg_stay_time_lrr: this.getRatio(res.data.data.all_customer_avg_stay_time, this.data.svg_stay_time),
+              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
             })
           }
         })
@@ -405,11 +407,13 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
+      let now_shallow_customer = 0;
       https(newCustomerStayInfoAjax, this.data.params, 'get').then(res => {
         if (res.code === "1") {
           let data = res.data.data;
           let total = data.deep_customer + data.shallow_customer;
           let shallow = 0;
+          now_shallow_customer = data.shallow_customer;
           if (total != 0) {
             shallow = (data.shallow_customer / total * 100).toFixed();
           }
@@ -448,8 +452,8 @@ Component({
         https(newCustomerStayInfoAjax, ratioParams, 'get').then(res => {
           if (res.code === "1") {
             this.setData({
-              svg_stay_time_lrr: this.getRatio(this.data.svg_stay_time, res.data.data.all_customer_avg_stay_time),
-              bounce_rate_lrr: this.getRatio(this.data.bounce_rate, res.data.data.shallow_customer)
+              svg_stay_time_lrr: this.getRatio(res.data.data.new_customer_avg_stay_time, this.data.svg_stay_time),
+              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
             })
           }
         })
@@ -463,11 +467,13 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
+      let now_shallow_customer = 0;
       https(oldCustomerStayInfoAjax, this.data.params, 'get').then(res => {
         if (res.code === "1") {
           let data = res.data.data;
           let total = data.deep_customer + data.shallow_customer;
           let shallow = 0;
+          now_shallow_customer = data.shallow_customer;
           if (total != 0) {
             shallow = (data.shallow_customer / total * 100).toFixed();
           }
@@ -506,8 +512,8 @@ Component({
         https(oldCustomerStayInfoAjax, ratioParams, 'get').then(res => {
           if (res.code === "1") {
             this.setData({
-              svg_stay_time_lrr: this.getRatio(res.data.data.all_customer_avg_stay_time, this.data.svg_stay_time),
-              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, this.data.bounce_rate)
+              svg_stay_time_lrr: this.getRatio(res.data.data.old_customer_avg_stay_time, this.data.svg_stay_time),
+              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
             })
           }
         })
@@ -539,19 +545,19 @@ Component({
     getRatio: function (oldVal, newVal) {// 获取增减比例
       let obj = {
         plus_minus: true,
-        lrr: '--'
+        lrr: 0
       }
       if (oldVal === 0) {
-        obj.lrr = 100;
+        obj.lrr = '--';
         return obj
       }
       if (oldVal > newVal) {
         let num = oldVal - newVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
         obj.plus_minus = false;
       } else if (oldVal < newVal) {
         let num = newVal - oldVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
       }
       return obj
     },

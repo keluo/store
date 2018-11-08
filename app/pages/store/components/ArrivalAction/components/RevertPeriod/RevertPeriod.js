@@ -371,7 +371,7 @@ Component({
         https(customerStayTimeAjax, ratioParams, 'get').then(res => {
           if (res.code === "1") {
             this.setData({
-              return_lrr: this.getRatio(this.data.old_customer_avg_return, res.data.data.old_customer_avg_return.toFixed()),
+              return_lrr: this.getRatio(res.data.data.old_customer_avg_return, this.data.old_customer_avg_return),
             })
           }
         })
@@ -403,19 +403,19 @@ Component({
     getRatio: function (oldVal, newVal) {// 获取增减比例
       let obj = {
         plus_minus: true,
-        lrr: '--'
+        lrr: 0
       }
       if (oldVal === 0) {
-        obj.lrr = 100;
+        obj.lrr = '--';
         return obj
       }
       if (oldVal > newVal) {
         let num = oldVal - newVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
         obj.plus_minus = false;
       } else if (oldVal < newVal) {
         let num = newVal - oldVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
       }
       return obj
     },

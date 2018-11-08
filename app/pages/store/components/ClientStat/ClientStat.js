@@ -320,11 +320,11 @@ Component({
       }
       if (oldVal > newVal){
         let num = oldVal - newVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
         obj.plus_minus = false;
       }else if(oldVal < newVal){
         let num = newVal - oldVal;
-        obj.lrr = ((num / oldVal) * 100).toFixed();
+        obj.lrr = ((num / oldVal) * 100).toFixed(2);
       }
       return obj
     },
