@@ -364,16 +364,25 @@ Component({
       https(allCustomerStayTimeAjax, this.data.params, 'get').then(res => {
         if(res.code === "1"){
           let data = res.data.data;
-          var total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
+          let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
 
-          option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
-          option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
-          option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
-          option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
-          option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
-
-          chart.hideLoading();
-          chart.setOption(option, true)
+          if(total != 0){
+            option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
+            option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
+            option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
+            option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
+            option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
+          }else{
+            option.series[0].data[0] = 0;
+            option.series[0].data[1] = 0;
+            option.series[0].data[2] = 0;
+            option.series[0].data[3] = 0;
+            option.series[0].data[4] = 0;
+          }
+          setTimeout(() => {
+            chart.hideLoading();
+            chart.setOption(option, true)
+          }, 1000)
         }
       })
       setTimeout(() => {// 获取环比信息
@@ -413,16 +422,25 @@ Component({
       https(newCustomerStayTimeAjax, this.data.params, 'get').then(res => {
         if (res.code === "1") {
           let data = res.data.data;
-          var total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
+          let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
 
-          option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
-          option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
-          option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
-          option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
-          option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
-
-          chart.hideLoading();
-          chart.setOption(option, true)
+          if (total != 0) {
+            option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
+            option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
+            option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
+            option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
+            option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
+          } else {
+            option.series[0].data[0] = 0;
+            option.series[0].data[1] = 0;
+            option.series[0].data[2] = 0;
+            option.series[0].data[3] = 0;
+            option.series[0].data[4] = 0;
+          }
+          setTimeout(() => {
+            chart.hideLoading();
+            chart.setOption(option, true)
+          }, 1000)
         }
       })
       setTimeout(() => {// 获取环比信息
@@ -462,16 +480,25 @@ Component({
       https(oldCustomerStayTimeAjax, this.data.params, 'get').then(res => {
         if (res.code === "1") {
           let data = res.data.data;
-          var total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
+          let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
 
-          option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
-          option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
-          option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
-          option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
-          option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
-
-          chart.hideLoading();
-          chart.setOption(option, true)
+          if (total != 0) {
+            option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
+            option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
+            option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
+            option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
+            option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
+          } else {
+            option.series[0].data[0] = 0;
+            option.series[0].data[1] = 0;
+            option.series[0].data[2] = 0;
+            option.series[0].data[3] = 0;
+            option.series[0].data[4] = 0;
+          }
+          setTimeout(() => {
+            chart.hideLoading();
+            chart.setOption(option, true)
+          }, 1000)
         }
       })
       setTimeout(() => {// 获取环比信息

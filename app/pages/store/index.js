@@ -130,7 +130,9 @@ Page({
         })
       }
       this.setData({
-        selectArray: arr
+        selectArray: arr,
+        ['params.id']: res.data.sgs[0].id,
+        ['params.name']: res.data.sgs[0].place_name
       })
     })
   },
@@ -217,19 +219,31 @@ Page({
         emails: subArr
       }, 'get').then(res => {
         console.log(res)
-
-        for (let i = 0; i < list.length; i++) {
-          list[i].checked = false
-        }
-        try {
-          wx.setStorage({
-            key: "mailList",
-            data: list
+        if(res.code === "1"){
+          wx.showToast({
+            title: '发送成功',
+            duration: 1500
           })
-        } catch (e) {
-          console.log(e)
+
+          for (let i = 0; i < list.length; i++) {
+            list[i].checked = false
+          }
+          try {
+            wx.setStorage({
+              key: "mailList",
+              data: list
+            })
+          } catch (e) {
+            console.log(e)
+          }
+          this.selectComponent('.pop-box').hide({});
+        }else{
+          wx.showToast({
+            title: '发送失败',
+            icon: 'none',
+            duration: 1500
+          })
         }
-        this.selectComponent('.pop-box').hide({});
       })    
     }else{
       wx.showToast({
