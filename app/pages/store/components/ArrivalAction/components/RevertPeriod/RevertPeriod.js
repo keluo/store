@@ -293,11 +293,12 @@ Component({
       type: Object,
       observer: function (newVal, oldVal, changedPath) {
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
-
-        setTimeout(() => {
-          this.getDist();
-          this.getTrend();
-        }, 1000)
+        if (newVal.id != '' && newVal.begin_time != '') {
+          setTimeout(() => {
+            this.getDist();
+            this.getTrend();
+          }, 1000)
+        }
       }
     },
     isToday: {
@@ -340,12 +341,19 @@ Component({
         if(res.code === "1"){
           let data = res.data.data;
           let total = data.return_1to2_day + data.return_3to7_day + data.return_8to15_day + data.return_16to30_day + data.return_30_day
-
-          option.series[0].data[0] = (data.return_1to2_day / total * 100).toFixed();
-          option.series[0].data[1] = (data.return_3to7_day / total * 100).toFixed();
-          option.series[0].data[2] = (data.return_8to15_day / total * 100).toFixed();
-          option.series[0].data[3] = (data.return_16to30_day / total * 100).toFixed();
-          option.series[0].data[4] = (data.return_30_day / total * 100).toFixed();
+          if(total != 0){
+            option.series[0].data[0] = (data.return_1to2_day / total * 100).toFixed();
+            option.series[0].data[1] = (data.return_3to7_day / total * 100).toFixed();
+            option.series[0].data[2] = (data.return_8to15_day / total * 100).toFixed();
+            option.series[0].data[3] = (data.return_16to30_day / total * 100).toFixed();
+            option.series[0].data[4] = (data.return_30_day / total * 100).toFixed();
+          }else{
+            option.series[0].data[0] = 0;
+            option.series[0].data[1] = 0;
+            option.series[0].data[2] = 0;
+            option.series[0].data[3] = 0;
+            option.series[0].data[4] = 0;
+          }
 
           chart.hideLoading();
           chart.setOption(option, true);
@@ -395,15 +403,19 @@ Component({
     getRatio: function (oldVal, newVal) {// 获取增减比例
       let obj = {
         plus_minus: true,
-        lrr: 0
+        lrr: '--'
+      }
+      if (oldVal === 0) {
+        obj.lrr = 100;
+        return obj
       }
       if (oldVal > newVal) {
         let num = oldVal - newVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
         obj.plus_minus = false;
       } else if (oldVal < newVal) {
         let num = newVal - oldVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
       }
       return obj
     },
@@ -511,6 +523,7 @@ Component({
       option3.series[0] = option2.series[0]
     },
     setToadyChart(obj) {
+      obj.begin_time = obj.begin_time.replace(/-/g, '/');
       for (var i = 0; i < 24; i++) {
         var time = new Date(obj.begin_time);
         time = time.setHours(time.getHours() + i);
@@ -522,7 +535,7 @@ Component({
         //     obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
         //   }
         // }
-        obj.option.series[obj.index].data[i] = myList[0][obj.name]
+        obj.option.series[obj.index].data[i] = obj.myList[0][obj.name]
       }
       option3.xAxis.data = option2.xAxis.data;
       option3.series[0] = option2.series[0]
@@ -534,6 +547,14 @@ Component({
     },
     closeBtn(e) {// 关闭弹窗
       this.selectComponent('.' + e.target.dataset.btn).hide({});
+    },
+    fmtMin(obj) {
+      var date = new Date(obj);
+      var h = date.getHours();
+      if (h < 10) { h = '0' + h }
+      var m = date.getMinutes();
+      if (m < 10) { m = '0' + m }
+      return h + ':' + m
     },
     fmtDate: function (obj) {
       var date = new Date(obj);

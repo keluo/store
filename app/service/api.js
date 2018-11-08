@@ -2,7 +2,7 @@ const homeInit = '/ubiasset/home/';
 
 const dayList = '/inner-api/day/list';// 日期列表
 const exportInfo = '/inner-api/customer/export';// 导出报表
-const queryAssetGroup = '/etma/sg/cond/'; //店铺列表
+const queryAssetGroup = '/etma/sg/select/'; //店铺列表
 
 const keLiuAllTotalAjax = '/inner-api/ke_liu/all/total'; //客流统计 —— 客流、进店客 总
 const totalCustomerAjax = '/inner-api/customer/total/customer'; //客流统计 —— 新顾客、老顾客 总
@@ -10,7 +10,7 @@ const keLiuDayAjax = '/inner-api/ke_liu/day'; // 客流统计 —— 客流趋�
 const jinDianDayAjax = '/inner-api/jin_dian/day'; // 客流统计 —— 进店趋势图
 const newCustomerAjax = '/inner-api/customer/new'; //客流统计 —— 新顾客趋势图
 
-const marketingSgCustomAnalyze = '/etma/sg/custom_analyze/'; //进店行为 —— 顾客分析
+const marketingSgCustomAnalyze = '/etma/sg/custom/analyze/'; //进店行为 —— 顾客分析
 
 const allCustomerStayInfoAjax = '/inner-api/customer/all/stay_info'; //进店行为 —— 驻店时长 —— 全部 平均驻店时长、离店率
 const newCustomerStayInfoAjax = '/inner-api/customer/new/stay_info'; //进店行为 —— 驻店时长 —— 新 平均驻店时长、离店率

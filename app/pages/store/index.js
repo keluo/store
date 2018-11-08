@@ -10,30 +10,16 @@ Page({
   data: {
     isActive: 0,
     params:{
-      id: 2,
+      id: '',
       name: '',
       begin_time: '',
       end_time: '',
     },
-    dateList: [
-      { id: 0, name: '今天'},
-      { id: 1, name: '昨天' },
-      { id: 6, name: '近7天' },
-      { id: 14, name: '近15天' },
-      { id: 29, name: '近30天' }
-    ],
+    day_time: 0,
+    dateList: [],
     selectArray: [],
     emailInputVal: '', 
-    mailList:[
-      {
-        value: '12321321@qq.com',
-        checked: false
-      },
-      {
-        value: '12321321@qq.com',
-        checked: false
-      }
-    ],
+    mailList:[],
     emails: []
   },
   bindSelected: function(id){
@@ -51,10 +37,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      ['params.begin_time']: this.fmtDate(new Date().setDate(new Date().getDate() - 6)),
-      ['params.end_time']: this.fmtDate(new Date())
-    })
+
   },
 
   /**
@@ -62,17 +45,18 @@ Page({
    */
   onReady: function () {
     this.getShopList();
+    this.getDayList();
 
-    // try {
-    //   let list = wx.getStorageSync('mailList')
-    //   if (list) {
-    //     this.setData({
-    //       mailList: list
-    //     })
-    //   }
-    // } catch (e) {
-    //   console.log(e)
-    // }
+    try {
+      let list = wx.getStorageSync('mailList')
+      if (list) {
+        this.setData({
+          mailList: list
+        })
+      }
+    } catch (e) {
+      console.log(e)
+    }
     
   },
 
@@ -118,9 +102,7 @@ Page({
 
   },
   handleDownLoad () {
-    this.selectComponent('.pop-box').show({
-
-    });
+    this.selectComponent('.pop-box').show({});
   },
   isKeliu() {
     this.setData({
@@ -132,33 +114,44 @@ Page({
       isActive: 1
     })
   },
+  isGuke() {
+    wx.showToast({
+      title: '敬请期待',
+      image: '../../images/store/smile.png'
+    })
+  },
   getShopList () {
-    let that = this;
-    // https(queryAssetGroup, {}, 'get').then(res => {
-    //   console.log(res)
-    // })
-    wx.request({
-      url: 'https://cloud1.ubiwifi.cn/etma/bg/cond/',
-      header: {
-        'Cookie': 'sessionid=wrplc2hgwjuz6xw8ke1xyvg6hbkadtb0;csrftoken=ArDz1UqvkrnWaDWjUNtCPube3QbREfiW;'
-      },
-      success (res) {
-        that.setData({
-          selectArray: res.data.data.bgs
+    https(queryAssetGroup, {}, 'get').then(res => {
+      let arr = []
+      for(let i=0;i<res.data.sgs.length;i++){
+        arr.push({
+          id: res.data.sgs[i].id,
+          name: res.data.sgs[i].place_name
         })
       }
+      this.setData({
+        selectArray: arr,
+        ['params.id']: res.data.sgs[0].id,
+        ['params.name']: res.data.sgs[0].place_name
+      })
+    })
+  },
+  getDayList () {// 
+    https(dayList, {}, 'get').then(res => {
+      let data = res.data;
+      this.setData({
+        dateList: res.data,
+        ['params.begin_time']: data[0].begin_time,
+        ['params.end_time']: data[0].end_time
+      })
     })
   },
   bindDateChange (e) {
-    let currentId = this.data.dateList[e.detail.value].id;
-    let begin = new Date().setDate(new Date().getDate() - currentId);
-    let end = new Date();
-    if (currentId == 1){
-      end = new Date().setDate(new Date().getDate() - currentId)
-    }
+    let obj = this.data.dateList[e.detail.value]
     this.setData({
-      ['params.begin_time']: this.fmtDate(begin),
-      ['params.end_time']: this.fmtDate(end)
+      ['params.begin_time']: obj.begin_time,
+      ['params.end_time']: obj.end_time,
+      day_time: e.detail.value
     })
   },
   notToday (e) {
@@ -173,28 +166,6 @@ Page({
       emailInputVal: e.detail.value
     })
   },
-  hadnleConfirm (e) {
-    console.log(e)
-    let subArr = this.data.emails;
-    let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
-    if (!regMail.test(e.detail.value)){
-      wx.showToast({
-        title: '邮箱格式错误',
-        icon: 'loading',
-        duration: 1500
-      })
-      return false;
-    }
-    //通过验证 邮箱push到mailList 发到后台
-    subArr.push(e.detail.value);
-    https(exportInfo, {
-      id: this.data.params.id,
-      day_time: 'xxx',
-      emails: subArr
-    }, 'post').then(res => {
-      console.log(res)
-    })
-  },
   radioChange(e) {//多选框事件
     this.setData({
       emails: e.detail.value
@@ -202,18 +173,21 @@ Page({
   },
   selectAll () {
     let list = this.data.mailList;
+    let subList = [];
     for(let i=0;i<list.length;i++){
-      list[i].checked = true
+      list[i].checked = true,
+      subList.push(list[i].value)
     }
     this.setData({
-      mailList: list
+      mailList: list,
+      emails: subList
     })
   },
   handleSubMail () {
-    let subArr = this.data.emails;
+    let subArr = this.data.emails;// 多选框选中的email
     let list = this.data.mailList;    
     let regMail = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');
-
+    
     if (this.data.emailInputVal) {
       if (regMail.test(this.data.emailInputVal)){
         subArr.push(this.data.emailInputVal);
@@ -224,35 +198,60 @@ Page({
       }else{
         wx.showToast({
           title: '邮箱格式错误',
-          icon: 'loading',
+          icon: 'none',
           duration: 1500
         })
         return false;
       }
     }
 
+    // 邮箱去重
+    let hash = {};
+    list = list.reduce(function (item, next) {
+      hash[next.value] ? '' : hash[next.value] = true && item.push(next);
+      return item
+    }, [])
+
     if (subArr.length > 0){
       https(exportInfo, {
         id: this.data.params.id,
-        day_time: 'xxx',
-        subArr: subArr
-      }, 'post').then(res => {
+        day_time: this.data.day_time,
+        emails: subArr
+      }, 'get').then(res => {
         console.log(res)
+        if(res.code === "1"){
+          wx.showToast({
+            title: '发送成功',
+            duration: 1500
+          })
+
+          for (let i = 0; i < list.length; i++) {
+            list[i].checked = false
+          }
+          try {
+            wx.setStorage({
+              key: "mailList",
+              data: list
+            })
+          } catch (e) {
+            console.log(e)
+          }
+          this.selectComponent('.pop-box').hide({});
+        }else{
+          wx.showToast({
+            title: '发送失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      })    
+    }else{
+      wx.showToast({
+        title: '请选择邮箱',
+        icon: 'none',
+        duration: 1500
       })
-      
-      for (let i = 0; i < list.length; i++) {
-        list[i].checked = false
-      }
-      try {
-        wx.setStorage({
-          key: "mailList",
-          data: list
-        })
-      } catch (e) {
-        console.log(e)
-      }
-      this.selectComponent('.pop-box').hide({});
-    }   
+    }
   },
   fmtDate (obj) {
     var date = new Date(obj);

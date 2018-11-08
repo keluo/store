@@ -109,10 +109,11 @@ Component({
       type: Object,
       observer: function (newVal, oldVal, changedPath) {
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
-
-        setTimeout(() => {
-          this.getInfo();
-        }, 1000)
+        if (newVal.id != '' && newVal.begin_time != '') {
+          setTimeout(() => {
+            this.getInfo();
+          }, 1000)
+        }
       }
     },
     isToday: {
@@ -147,12 +148,19 @@ Component({
         if(res.code === "1"){
           let data = res.data.data;
           let total = data.arrived_1_time + data.arrived_2_time + data.arrived_3to5_time + data.arrived_6to9_time + data.arrived_10_time
-
-          option.series[0].data[0] = ( data.arrived_1_time / total * 100 ).toFixed();
-          option.series[0].data[1] = ( data.arrived_2_time / total * 100 ).toFixed();
-          option.series[0].data[2] = ( data.arrived_3to5_time / total * 100 ).toFixed();
-          option.series[0].data[3] = ( data.arrived_6to9_time / total * 100 ).toFixed();
-          option.series[0].data[4] = ( data.arrived_10_time / total * 100 ).toFixed();
+          if(total != 0){
+            option.series[0].data[0] = (data.arrived_1_time / total * 100).toFixed();
+            option.series[0].data[1] = (data.arrived_2_time / total * 100).toFixed();
+            option.series[0].data[2] = (data.arrived_3to5_time / total * 100).toFixed();
+            option.series[0].data[3] = (data.arrived_6to9_time / total * 100).toFixed();
+            option.series[0].data[4] = (data.arrived_10_time / total * 100).toFixed();
+          }else{
+            option.series[0].data[0] = 0;
+            option.series[0].data[1] = 0;
+            option.series[0].data[2] = 0;
+            option.series[0].data[3] = 0;
+            option.series[0].data[4] = 0;
+          }
 
           chart.hideLoading();
           chart.setOption(option, true);
@@ -202,15 +210,19 @@ Component({
     getRatio: function (oldVal, newVal) {// 获取增减比例
       let obj = {
         plus_minus: true,
-        lrr: 0
+        lrr: '--'
+      }
+      if (oldVal === 0) {
+        obj.lrr = 100;
+        return obj
       }
       if (oldVal > newVal) {
         let num = oldVal - newVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
         obj.plus_minus = false;
       } else if (oldVal < newVal) {
         let num = newVal - oldVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
       }
       return obj
     },

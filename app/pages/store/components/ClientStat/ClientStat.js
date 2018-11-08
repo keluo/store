@@ -205,11 +205,10 @@ Component({
       observer: function (newVal, oldVal, changedPath) {
         // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
-              
-        setTimeout(() => {
+        if (newVal.id != '' && newVal.begin_time != ''){
           this.getTotalInfo();
           this.isKeliu();
-        }, 1000)
+        }
       }
     },
     selectArray: {
@@ -273,15 +272,15 @@ Component({
         https(totalCustomerAjax, ratioParams, 'get').then(res => {//新客环比
           if (res.code === "1") {
             this.setData({
-              newCustomer_lrr: this.getRatio(this.data.totalNewCustomer, res.data.data.totalNewCustomer)
+              newCustomer_lrr: this.getRatio(res.data.data.totalNewCustomer, this.data.totalNewCustomer)
             })
           }
         })
         https(keLiuAllTotalAjax, ratioParams, 'get').then(res => {//客流、进店环比
           if (res.code === "1") {
             this.setData({
-              keLiu_lrr: this.getRatio(this.data.keLiu_total, res.data.ke_liu),
-              jinDian_lrr: this.getRatio(this.data.jinDian_total, res.data.ru_dian)
+              keLiu_lrr: this.getRatio(res.data.ke_liu, this.data.keLiu_total),
+              jinDian_lrr: this.getRatio(res.data.ru_dian, this.data.jinDian_total)
             })
           }
         })
@@ -315,13 +314,17 @@ Component({
         plus_minus: true,
         lrr: 0
       }
+      if(oldVal === 0){
+        obj.lrr = '--';
+        return obj
+      }
       if (oldVal > newVal){
         let num = oldVal - newVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
         obj.plus_minus = false;
       }else if(oldVal < newVal){
         let num = newVal - oldVal;
-        obj.lrr = (num / oldVal) * 100;
+        obj.lrr = ((num / oldVal) * 100).toFixed();
       }
       return obj
     },
@@ -339,7 +342,8 @@ Component({
           let myList = res.data.data;
 
           option.xAxis.data = [];
-          option.xAxis.name = ' ';
+          option.xAxis.name = '';
+          option2.xAxis.name = '';
           option.series[0].data = [];
           //查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
@@ -361,8 +365,10 @@ Component({
           }
 
           if(!this.data.isVs){
-            chart.hideLoading();
-            chart.setOption(option, true);
+            setTimeout(() => {
+              chart.hideLoading();
+              chart.setOption(option, true);
+            }, 1000)
           }
         }
       })
@@ -408,7 +414,8 @@ Component({
           let myList = res.data.data;
 
           option.xAxis.data = [];
-          option.xAxis.name = ' ';
+          option.xAxis.name = '';
+          option2.xAxis.name = '';
           option.series[0].data = [];
           //查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
@@ -477,6 +484,8 @@ Component({
 
           option.xAxis.data = [];
           option.series[0].data = [];
+          option.xAxis.name = '';
+          option2.xAxis.name = '';
           // 查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
             for (var i = 0; i < 24; i++) {
@@ -498,13 +507,49 @@ Component({
               index: 0,
               name: 'new_customers'
             });
-            chart.hideLoading();
-            chart.setOption(option, true);
+            if(!this.data.isVs){
+              setTimeout(() => {
+                chart.hideLoading();
+                chart.setOption(option, true);
+              }, 1000)
+            }
           }
         }
       })
       if(this.data.isVs){
+        https(newCustomerAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
+          let myList = res.data.data
 
+          if (this.data.params.begin_time == this.data.params.end_time) {
+            // this.setTodayChart({
+            //   begin_time: res.data.begin_time,
+            //   option: option2,
+            //   index: 1,
+            //   myList: myList,
+            //   name: 'new_customers'
+            // })
+            for (var i = 0; i < 24; i++) {
+              var time = new Date(res.data.begin_time);
+              time = time.setHours(time.getHours() + i);
+
+              option2.xAxis.data[i] = ' ',
+              option2.series[1].data[i] = myList[0].new_customers;
+              option2.xAxis.name = this.data.params.begin_time.substring(5, 10);
+
+            }
+          } else {
+            this.setNotToadyChart({
+              myList: myList,
+              option: option2,
+              index: 1,
+              name: 'new_customers'
+            });
+          }
+          setTimeout(() => {
+            chart.hideLoading();
+            chart.setOption(option2, true);
+          }, 1000)
+        })
       }
     },
     bindSelected (id) {
@@ -547,10 +592,10 @@ Component({
       option2.series[0] = option.series[0]
     },
     setTodayChart(obj) {
+      obj.begin_time = obj.begin_time.replace(/-/g, '/');
       for (var i = 0; i < 24; i++) {
         var time = new Date(obj.begin_time);
         time = time.setHours(time.getHours() + i);
-
         obj.option.xAxis.data[i] = this.fmtMin(time);
         obj.option.series[obj.index].data[i] = 0;
 

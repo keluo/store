@@ -1,5 +1,5 @@
 <view class='header'>
-  <component-select options="{{selectArray}}" bind:selected="bindSelected" left="{{true}}"></component-select>
+  <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="{{params.name}}" left="{{true}}"></component-select>
   <view class='icon-download' bindtap="handleDownLoad"></view>
   <picker value="{{date}}" range="{{dateList}}" range-key="name" bindchange="bindDateChange">
     <view class='icon-time'></view>
@@ -9,7 +9,7 @@
 <view class='tab-box'>
   <view class='tab-item {{isActive == 0 ? "active" : ""}}' bindtap="isKeliu">客流统计</view>
   <view class='tab-item {{isActive == 1 ? "active" : ""}}' bindtap="isJindian">进店行为</view>
-  <view class='tab-item'>顾客画像</view>
+  <view class='tab-item' bindtap="isGuke">顾客画像</view>
 </view>
 
 <view class='time'>
@@ -23,7 +23,7 @@
   <view slot="title">导出报表</view>
   <view slot="content">
     <view class="label">发送至邮箱:</view>
-    <input placeholder="请输入邮箱地址" bindinput="emailInput" bindconfirm="hadnleConfirm"></input>
+    <input placeholder="请输入邮箱地址" bindinput="emailInput"></input>
     <view class="select-title">
       <view class="select-title-txt">选择历史邮箱:</view>
       <view class="select-all" bindtap="selectAll">全选</view>
