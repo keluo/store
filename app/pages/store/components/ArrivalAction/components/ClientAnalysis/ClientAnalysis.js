@@ -154,6 +154,11 @@ Component({
       count: 0,
       lrr: 0,
       plus_minus: true
+    },
+    pop: {
+      close: true,
+      title: '',
+      content: ''
     }
   },
 
@@ -219,13 +224,17 @@ Component({
         option.series[obj.index].data[i] = obj.list[i].count;
       }
     },
-    openQuestion(e) {// 打开弹窗
-      this.selectComponent('.' + e.target.dataset.btn).show({
-        close: false
-      });
+    openPop(e) {// 打开弹窗
+      this.setData({
+        ['pop.close']: false,
+        ['pop.title']: e.target.dataset.title,
+        ['pop.content']: e.target.dataset.content
+      })
     },
-    closeBtn(e) {// 关闭弹窗
-      this.selectComponent('.' + e.target.dataset.btn).hide({});
-    },
+    closePop(e) {// 关闭弹窗
+      this.setData({
+        ['pop.close']: true
+      })
+    }
   }
 })

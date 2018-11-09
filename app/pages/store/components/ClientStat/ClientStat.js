@@ -240,7 +240,12 @@ Component({
       plus_minus: true
     },
     isVs: false,
-    vsId: ''
+    vsId: '',
+    pop: {
+      close: true,
+      title: '',
+      content: '' 
+    }
   },
 
   /**
@@ -609,13 +614,17 @@ Component({
       option2.xAxis.data = option.xAxis.data;
       option2.series[0] = option.series[0]
     },
-    openQuestion (e) {// 打开弹窗
-      this.selectComponent('.' + e.target.dataset.btn).show({
-        close: false
-      });
+    openPop (e) {// 打开弹窗
+      this.setData({
+        ['pop.close']: false,
+        ['pop.title']: e.target.dataset.title,
+        ['pop.content']: e.target.dataset.content
+      })
     },
-    closeBtn (e) {// 关闭弹窗
-      this.selectComponent( '.' + e.target.dataset.btn).hide({});
+    closePop (e) {// 关闭弹窗
+      this.setData({
+        ['pop.close']: true
+      })
     },
     fmtMin (obj) {
       var date = new Date(obj);

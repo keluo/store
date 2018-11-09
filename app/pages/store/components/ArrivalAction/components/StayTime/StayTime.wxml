@@ -13,7 +13,7 @@
     <view class='overview-box'>
       <view class='overview-item'>
         <view class='overview-title'>
-          平均驻店时长 <view class='icon-question' bindtap="openQuestion" data-btn="stayTime-pop"></view>
+          平均驻店时长 <view class='icon-question' bindtap="openPop" data-title="平均驻店时长" data-content="此类进店客在店内的平均停留时长。"></view>
         </view>
         <view class='overview-num'>
           {{svg_stay_time}}<view class='overview-unit'>分钟</view>
@@ -24,7 +24,7 @@
       </view>
       <view class='overview-item'>
         <view class='overview-title'>
-          离店率 <view class='icon-question' bindtap="openQuestion" data-btn="out-pop"></view>
+          离店率 <view class='icon-question' bindtap="openPop" data-title="离店率" data-content="进店客中停留时长小于3分钟的人数除以进店客总人数。"></view>
         </view>
         <view class='overview-num'>
           {{bounce_rate}}<view class='overview-unit'>%</view>
@@ -57,23 +57,13 @@
   </view>
 </view>
 
-<view class="question">
-  <component-pop class="stayTime-pop">
-    <view slot="title">平均驻店时长</view>
-    <view slot="content">
-      此类进店客在店内的平均停留时长。
-    </view>
-    <view slot="foot">
-      <text bindtap="closeBtn" data-btn="stayTime-pop">知道了</text>
-    </view>
-  </component-pop>
-  <component-pop class="out-pop">
-    <view slot="title">离店率</view>
-    <view slot="content">
-      进店客中停留时长小于3分钟的人数除以进店客总人数。
-    </view>
-    <view slot="foot">
-      <text bindtap="closeBtn" data-btn="out-pop">知道了</text>
-    </view>
-  </component-pop>
-</view>
+<!-- 弹层 -->
+<cover-view class="pop-up" hidden="{{pop.close}}">
+  <cover-view class="pop-up-container">
+    <cover-view class="pop-title">{{pop.title}}</cover-view>
+    <cover-view class="pop-content">{{pop.content}}</cover-view>
+    <cover-view class="pop-foot" bindtap='closePop'>
+      知道了
+    </cover-view> 
+  </cover-view>
+</cover-view>

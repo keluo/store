@@ -1,7 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "ec-canvas": "../../../../ec-canvas/ec-canvas",
-    "component-pop": "../../../../../../component/pop/pop"
+    "ec-canvas": "../../../../ec-canvas/ec-canvas"
   }
 }
