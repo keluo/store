@@ -24,7 +24,7 @@
   </view>
   <view class='overview-item'>
     <view class='overview-title'>
-      新顾客 <view class='icon-question' bindtap="openPop" data-title="新顾客" data-content="首次到店的人数。"></view>
+      新顾客 <view class='icon-question' bindtap="openPop" data-title="新顾客" data-content="首次到店的人。"></view>
     </view>
     <view class='overview-num'>
       {{totalNewCustomer}}

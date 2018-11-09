@@ -195,14 +195,11 @@ Component({
         begin_time: '',
         end_time: ''
       }
-      if (this.data.params.begin_time === this.data.params.end_time) {//同一天
-        if (this.fmtDate(new Date(this.data.params.begin_time)) === this.fmtDate(new Date())) {//今天
-          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
-          obj.end_time = obj.begin_time;
-        } else {//昨天
-          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
-          obj.end_time = obj.begin_time;
-        }
+      if (this.data.params.day_time == 0) {//今天
+        obj['day_id'] = 1
+      } else if (this.data.params.day_time == 1) {//昨天
+        obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+        obj.end_time = obj.begin_time;
       } else {//不是同一天
         var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
         days = Math.floor(days) + 1;

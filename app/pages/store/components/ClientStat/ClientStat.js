@@ -52,7 +52,7 @@ let option = {
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
     },
-    formatter: '{b}\n{a}:{c}'
+    formatter: '{b}\n{a}：{c}人'
   },
   yAxis: {
     type: 'value',
@@ -138,7 +138,7 @@ let option2 = {
     formatter: function (params) {
       var res = params[0].name;
       for (var i = 0, l = params.length; i < l; i++) {
-        res +=  '\n' + params[i].seriesName + ' : ' + params[i].value;
+        res +=  '\n' + params[i].seriesName + ' : ' + params[i].value + '人';
       }
       return res
     }
@@ -184,6 +184,7 @@ let option2 = {
 };
 
 function initChart(canvas, width, height) {
+  console.log('初始化图表')
   chart = echarts.init(canvas, null, {
     width: width,
     height: height
@@ -207,6 +208,7 @@ Component({
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
         if (newVal.id != '' && newVal.begin_time != ''){
           this.getTotalInfo();
+          this.setName();
           this.isKeliu();
         }
       }
@@ -247,7 +249,9 @@ Component({
       content: '' 
     }
   },
-
+  detached(){
+    console.log('在组件实例被从页面节点树移除时执行')
+  },
   /**
    * 组件的方法列表
    */
@@ -297,14 +301,11 @@ Component({
         begin_time: '',
         end_time: ''
       }
-      if (this.data.params.begin_time === this.data.params.end_time){//同一天
-        if (this.fmtDate(new Date(this.data.params.begin_time)) === this.fmtDate(new Date())){//今天
-          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
-          obj.end_time = obj.begin_time;
-        }else{//昨天
-          obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
-          obj.end_time = obj.begin_time;
-        }
+      if (this.data.params.day_time == 0){//今天
+        obj['day_id'] = 1
+      } else if (this.data.params.day_time == 1){//昨天
+        obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+        obj.end_time = obj.begin_time;
       }else{//不是同一天
         var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
         days = Math.floor(days) + 1;
@@ -341,7 +342,6 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
-      this.setName();
       https(keLiuDayAjax, this.data.params, 'get').then(res => {
         if(res.code === "1"){
           let myList = res.data.data;
@@ -413,7 +413,6 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
-      this.setName();
       https(jinDianDayAjax, this.data.params, 'get').then(res => {
         if(res.code === "1"){
           let myList = res.data.data;
@@ -482,7 +481,6 @@ Component({
         text: '',
         color: '#5b9bd1',
       });
-      this.setName();
       https(newCustomerAjax, this.data.params, 'get').then(res => {
         if(res.code === "1"){
           let myList = res.data.data;

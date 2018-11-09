@@ -14,6 +14,7 @@ Page({
       name: '',
       begin_time: '',
       end_time: '',
+      day_time: ''
     },
     day_time: 0,
     dateList: [],
@@ -142,7 +143,8 @@ Page({
       this.setData({
         dateList: res.data,
         ['params.begin_time']: data[2] ? (data[2].begin_time ? data[2].begin_time : '') : '' ,
-        ['params.end_time']: data[2] ? (data[2].end_time ? data[2].end_time : '') : ''
+        ['params.end_time']: data[2] ? (data[2].end_time ? data[2].end_time : '') : '',
+        ['params.day_time']: data[2] ? (data[2].id ? data[2].id : '') : ''
       })
     })
   },
@@ -151,14 +153,16 @@ Page({
     this.setData({
       ['params.begin_time']: obj.begin_time,
       ['params.end_time']: obj.end_time,
+      ['params.day_time']: obj.id,
       day_time: e.detail.value
     })
   },
   notToday (e) {
-    let time = new Date().setDate(new Date().getDate() - 1);
+    let time = this.data.dateList[1];
     this.setData({
-      ['params.begin_time']: this.fmtDate(time),
-      ['params.end_time']: this.fmtDate(time)
+      ['params.begin_time']:time.begin_time,
+      ['params.end_time']: time.end_time,
+      ['params.day_time']: time.id
     })
   },
   emailInput (e) {//input输入事件

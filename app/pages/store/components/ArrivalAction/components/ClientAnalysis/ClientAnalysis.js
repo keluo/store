@@ -48,9 +48,10 @@ let option = {
       return obj;
     },
     formatter: function (params) {
+      let actions = ['次', '人', '张'];
       var res = params[0].name;
       for (var i = 0, l = params.length; i < l; i++) {
-        res += '\n' + params[i].seriesName + ' : ' + params[i].value;
+        res += '\n' + params[i].seriesName + ' : ' + params[i].value + actions[params[i].componentIndex];
       }
       return res
     }
@@ -108,7 +109,7 @@ function initChart(canvas, width, height) {
     height: height
   });
   canvas.setChart(chart);
-
+  console.log('初始化顾客分析图标')
   chart.setOption(option);
   return chart;
 }
@@ -161,7 +162,10 @@ Component({
       content: ''
     }
   },
-
+  detached() {
+    chart.dispose()
+    console.log('在组件实例被从页面节点树移除时执行')
+  },
   /**
    * 组件的方法列表
    */
@@ -175,8 +179,7 @@ Component({
         sg_id: this.data.params.id,
         from_time: this.data.params.begin_time,
         to_time: this.data.params.end_time,
-        lrr: 0}, 'POST').then(res => {
-          console.log(res)
+        lrr: '1'}, 'POST').then(res => {
 
           let ptdcList = res.data.ptdc.ptdc;
           let sdcList = res.data.sdc.sdc;
@@ -212,10 +215,8 @@ Component({
             index: 2
           });
 
-          setTimeout(() => {
-            chart.hideLoading();
-            chart.setOption(option, true);
-          }, 1000)
+          chart.hideLoading();
+          chart.setOption(option, true);
         })
     },
     setChart (obj) {
