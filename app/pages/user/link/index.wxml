@@ -9,7 +9,7 @@
             客服电话
           </view>
           <view class="item-list-txt-ext first">
-            13934383210
+            {{phone}}
           </view>
         </view>
       </view>
@@ -22,7 +22,7 @@
             客服QQ
           </view>
           <view class="item-list-txt-ext first">
-            278514009
+            {{qq}}
           </view>
         </view>
       </view>

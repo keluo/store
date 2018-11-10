@@ -1,42 +1,24 @@
 <!--pages/user/message/index.wxml-->
 <view class="container">
   <view class="item">
-    <view class="item-list bd-top">
-        <view class="item-list-content">
-          <view class="item-list-txt">
-            预警消息：根据您设置的返佣金额和目前已领券人数，您的账户余额将无法支付所有的推广费用，请提前充值保证推广效果~
-          </view>
-          <view class="item-list-txt-ext first">
-            <view>
-              2018/06/27 19:07:23
-            </view>
+    <view wx:for="{{message_list}}"  wx:key="{{index}}" class="item-list {{index == 0 ? 'bd-top' : ''}}">
+      <view class="item-list-content">
+        <view class="item-list-txt">
+          {{item.content}}
+        </view>
+        <view class="item-list-txt-ext first">
+          <view>
+            {{item.join_time}}
           </view>
         </view>
       </view>
-    <view class="item-list">
-        <view class="item-list-content">
-          <view class="item-list-txt">
-            预警消息：根据您设置的返佣金额和目前已领券人数，您的账户余额将无法支付所有的推广费用，请提前充值保证推广效果~
-          </view>
-          <view class="item-list-txt-ext first">
-            <view>
-              2018/06/27 19:07:23
-            </view>
-          </view>
-        </view>
-      </view>
-    <view class="item-list">
-        <view class="item-list-content">
-          <view class="item-list-txt">
-            预警消息：根据您设置的返佣金额和目前已领券人数，您的账户余额将无法支付所有的推广费用，请提前充值保证推广效果~
-          </view>
-          <view class="item-list-txt-ext first">
-            <view>
-              2018/06/27 19:07:23
-            </view>
-          </view>
-        </view>
-      </view>
+    </view>
+  </view>
+  <view class="loading-tip {{isLoadingMore ? 'show' : ''}}">
+    正在加载中...
+  </view>
+  <view class="loading-tip {{hasNotMore ? 'show' : ''}}">
+    没有更多数据了
   </view>
 </view>
 

@@ -22,7 +22,7 @@
         商户类型：
       </view>
       <view class="item-input">
-        <text class="txt">{{cat_name}}</text>
+        <text class="txt">{{category}}</text>
       </view>
     </view>
     <view class="item-info">

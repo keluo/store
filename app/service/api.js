@@ -56,6 +56,13 @@ const tradeListApi = '/etma/trade/'; //交易明细
 const tradeDetailApi = '/etma/trade/detail/'; //交易详情
 const bgInfoApi = '/etma/bg/info/'; //商户信息
 
+const serviceLinkApi = '/etma/service/'; //联系客服
+const messageApi = '/notification/notice/'; //消息通知
+
+const authCheckApi = '/apo/auth/query/'; //授权检测
+
+
+
 
 module.exports = {
   homeInitApi: homeInit,
@@ -100,5 +107,8 @@ module.exports = {
   bgCustomUsedMapApi, 
   tradeListApi,
   tradeDetailApi,
-  bgInfoApi
+  bgInfoApi,
+  serviceLinkApi,
+  messageApi,
+  authCheckApi
 }

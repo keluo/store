@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    whole_address:'',
+    contact_name:'',
+    now_fee:0,
   },
   /**
    * 
@@ -50,55 +52,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.getInfo();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  getInfo: function () {
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      app.https(app.api.bgInfoApi, {
+      }, 'get').then(function (data) {
+        data = data.data;
+        that.setData({
+          whole_address: data.whole_address || '',
+          contact_name: data.contact_name || '',
+          now_fee: data.now_fee || 0
+        });
+        resolve();
+      });
+    });
   }
 })
