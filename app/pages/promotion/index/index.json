@@ -4,6 +4,7 @@
   "navigationBarTextStyle": "white",
   "usingComponents": {
     "component-select": "../../../component/select/select",
-    "component-pop": "../../../component/pop/pop"
+    "component-pop": "../../../component/pop/pop",
+    "ec-canvas": "../../../pages/store/ec-canvas/ec-canvas"
   }
 }

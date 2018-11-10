@@ -1,4 +1,4 @@
-// var rootDocment = 'https://cloud.ubiwifi.cn';//你的域名
+// var rootDocment = 'https://mart.ubiwifi.cn';//你的域名
 var rootDocment = 'https://cloud1.ubiwifi.cn';//你的域名
 
 function https(url, data, callBack, method) {

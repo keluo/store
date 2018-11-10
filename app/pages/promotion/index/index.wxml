@@ -2,11 +2,11 @@
 <view class="container">
   <view class="top-wrap">
     <view class="item-top-group">
-      <view class="item-box" bindtap="bindToPage">
-        <navigator>
+      <view class="item-box" bindtap="bindToPage" data-url="/pages/promotion/coupon/list/list">
+        <view class="coupon-record-box">
           <image src="/images/promotion/index/coupon_record.png"></image>
           <text>发券记录</text>
-        </navigator>
+        </view>
       </view>
       <view class="item-box">
         <navigator url = "/pages/promotion/statistics/index">
@@ -22,9 +22,7 @@
       </view>
     </view>
     <view class="item-btn">
-      <navigator url = "/pages/promotion/coupon/add/add">
-        <button class="btn">发放优惠券</button>
-      </navigator>
+      <button class="btn" bindtap="bindToPage" data-url="/pages/promotion/coupon/add/add">发放优惠券</button>
     </view>
   </view>
   <view class="item">
@@ -65,20 +63,20 @@
     <view class="item-title">
       <view>趋势图</view>
     </view>
-    <view class="item-content">
+    <view class="item-content item-content-ec">
       <view class="item item-tab">
         <view class="item-tab-bar {{tabType === '1'?'actived':''}}" data-type="1" bindtap="bindTabSelected">总发放数</view>
         <view class="item-tab-bar {{tabType === '2'?'actived':''}}" data-type="2" bindtap="bindTabSelected">总领取数</view>
         <view class="item-tab-bar {{tabType === '3'?'actived':''}}" data-type="3" bindtap="bindTabSelected">总核销数</view>
       </view>
       <view class="item-tab-box {{tabType==='1'?'actived':''}}">
-        总发放数
+        <ec-canvas id="mychart-dom-multi-create" canvas-id="mychart-multi-create" ec="{{ ecCreate }}" style="height:400rpx;"></ec-canvas>
       </view>
       <view class="item-tab-box {{tabType==='2'?'actived':''}}">
-        总领取数
+        <ec-canvas id="mychart-dom-multi-send" canvas-id="mychart-multi-send" ec="{{ ecSend }}" style="height:400rpx;"></ec-canvas>
       </view>
       <view class="item-tab-box {{tabType==='3'?'actived':''}}">
-        总核销数
+        <ec-canvas id="mychart-dom-multi-used" canvas-id="mychart-multi-used" ec="{{ ecUsed }}" style="height:400rpx;"></ec-canvas>
       </view>
     </view>
   </view>
@@ -95,12 +93,12 @@
 
 <component-pop class="pop-box pop-qrcode">
   <view slot="content" style="text-align: center;">
-    <canvas class='canvas' canvas-id='canvasid' bindlongtap='saveImg' style="width: 300rpx; display:inline-block;"></canvas>
+    <canvas class='canvas' canvas-id='canvasid' style="width: 300rpx; display:inline-block;"></canvas>
     <view>
       保存二维码图片到本地，打开支付宝扫描相册中的该图。（支付宝账号必须是商家账号哦~）
     </view>  
   </view>
-  <view slot="foot">
-      确定
+  <view slot="foot" bindtap='saveImg'>
+      保存图片
   </view>
 </component-pop>

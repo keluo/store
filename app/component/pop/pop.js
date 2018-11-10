@@ -39,10 +39,13 @@ Component({
         footShow: foot
       });
     },
-    hide: function () {
+    hide: function (callback) {
       this.setData({
         isShow: false
       });
+      if (typeof callback == 'function'){
+        callback();
+      }
     }
   }
 })

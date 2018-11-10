@@ -22,7 +22,7 @@
   font-size:28rpx;
   color: #333;
 }
-.top-wrap .item-top-group navigator {
+.top-wrap .item-top-group navigator ,.top-wrap .item-top-group .coupon-record-box{
   display:flex;
   flex-direction:column;
   height:170rpx;
@@ -46,4 +46,24 @@
 }
 .top-wrap .item-btn button{
   width: 622rpx;
+}
+
+.item .item-content.item-content-ec{
+  position: relative;
+  padding: 20rpx 32rpx;
+  height: 464rpx;
+}
+.item-tab-box {
+  height: 400rpx;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 84rpx;
+  left: 0rpx;
+  background-color: #fff;
+  z-index: 1;
+}
+.item-tab-box.actived {
+  display: block;
+  z-index: 11;
 }

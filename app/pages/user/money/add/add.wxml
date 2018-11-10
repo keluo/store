@@ -21,7 +21,7 @@
     <view class="item item-money">
       <view class="money-txt">转入金额</view>
       <view class="money-num">
-        ￥<input value="0" name="fee"></input>
+        ￥<input text="digit" value="0" name="fee"></input>
       </view>
     </view>
     <view class="item-btn form-btn">
