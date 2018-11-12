@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    canvensHide:false,
     tabType:'2',
     range_date_group: [],
     fromday: '',
@@ -29,8 +30,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.selectComponent('.pop-box').show({
-    // });
     var that = this;
     that.ecCreateComponnet = that.selectComponent('#mychart-dom-multi-create');
     that.optionCreate = that.getOption();
@@ -50,28 +49,39 @@ Page({
   },
   onDrawEc: function (data) {
     var that = this;
+    var dateList = [];
+    var countList = [];
     if (that.data.tabType == '1') {
       data = data.data;
       for (var i = 0; i < data.length; i++) {
-        that.optionCreate.xAxis.data[i] = data[i].date;
-        that.optionCreate.series[0].data[i] = data[i].count;
+        dateList[i] = data[i].date;
+        countList[i] = data[i].count;
       }
+      that.optionCreate.xAxis.data = dateList;
+      that.optionCreate.series[0].data = countList;
       that.createChart.setOption(that.optionCreate, true);
     } else if (that.data.tabType == '2') {
       data = data.data.vsdc.vsdc;
       for (var i = 0; i < data.length; i++) {
-        that.optionSend.xAxis.data[i] = data[i].date;
-        that.optionSend.series[0].data[i] = data[i].count;
+        dateList[i] = data[i].date;
+        countList[i] = data[i].count;
       }
+      that.optionSend.xAxis.data = dateList;
+      that.optionSend.series[0].data = countList;
       that.sendChart.setOption(that.optionSend, true);
     } else if (that.data.tabType == '3') {
       data = data.data.vudc.vudc;
       for (var i = 0; i < data.length; i++) {
-        that.optionUsed.xAxis.data[i] = data[i].date;
-        that.optionUsed.series[0].data[i] = data[i].count;
+        dateList[i] = data[i].date;
+        countList[i] = data[i].count;
       }
+      that.optionUsed.xAxis.data = dateList;
+      that.optionUsed.series[0].data = countList;
       that.usedChart.setOption(that.optionUsed, true);
     }
+    that.createChart.hideLoading();
+    that.sendChart.hideLoading();
+    that.usedChart.hideLoading();
   },
   onCreateEcInit: function () {
     var that = this;
@@ -152,8 +162,14 @@ Page({
         })
       }, 500);
     }
-    that.selectComponent('.pop-qrcode').show({
-    });
+    that.selectComponent('.pop-qrcode').init({
+      showCallback: function () {
+        that.triggerCanvensHide();
+      },
+      hideCallback: function () {
+        that.triggerCanvensHide();
+      }
+    }).selectComponent('.pop-qrcode').show();
   },
   saveImg: function (e) {
     var that = this;
@@ -167,7 +183,10 @@ Page({
             wx.saveImageToPhotosAlbum({
               filePath: imgUrl,
               success(res) {
-                that.selectComponent('.pop-qrcode').hide(function(){
+                that.selectComponent('.pop-qrcode').hide(function () {
+                  that.setData({
+                    canvensHide: false
+                  });
                   wx.showToast({
                     title: '保存二维码成功，请在相册中查看',
                     icon: 'none',
@@ -191,7 +210,7 @@ Page({
       app.https(app.api.authCheckApi, {
       }, 'get').then(function (data) {
         data = data.data;
-        if (data.status == '2') {
+        if (data.status == '1') {
           reject(data.auth_url);
         } else {
           resolve();
@@ -229,6 +248,9 @@ Page({
   getMapList: function () {
     var that = this;
     var url = app.api.bgCustomShareMapApi;
+    that.createChart.showLoading();
+    that.sendChart.showLoading();
+    that.usedChart.showLoading();
     if (that.data.tabType == '2'){
       url = app.api.bgCustomSendMapApi;
     } else if (that.data.tabType == '3') {
@@ -259,6 +281,12 @@ Page({
     that.getBgCustomShare();
     that.getMapList().then(function (data) {
       that.onDrawEc(data);
+    });
+  },
+  triggerCanvensHide: function(){
+    var that = this;
+    that.setData({
+      canvensHide: !that.data.canvensHide
     });
   },
   /**

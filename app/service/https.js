@@ -1,5 +1,5 @@
-// var rootDocment = 'https://mart.ubiwifi.cn';//你的域名
-var rootDocment = 'https://cloud1.ubiwifi.cn';//你的域名
+var rootDocment = 'https://mart.ubiwifi.cn';//你的域名
+// var rootDocment = 'https://cloud1.ubiwifi.cn';//你的域名
 
 function https(url, data, callBack, method) {
   if(callBack && typeof callBack !== 'function'){
@@ -19,10 +19,10 @@ function https(url, data, callBack, method) {
           wx.setStorageSync('token', '');
           wx.showModal({
             showCancel: false,
-            content: 'Token已失效，请前往绑定Token',
+            content: '登录已失效，请重新登录',
             success: function (res) {
               if (res.confirm) {
-                wx.navigateTo({
+                wx.reLaunch({
                   url: '/pages/account/login/login'
                 });
               }

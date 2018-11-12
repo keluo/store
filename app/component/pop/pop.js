@@ -16,7 +16,9 @@ Component({
   data: {
     isShow: false,
     closeShow: true,
-    footShow: true
+    footShow: true,
+    hideCallback:null,
+    showCallback:null
   },
 
   /**
@@ -30,16 +32,40 @@ Component({
      * }
      * 
      */
-    show: function(options){
+    init: function (options){
       var closeBtn = options ? (typeof options.close == "boolean" ? options.close : true) : true;
       var foot = options ? (typeof options.foot == "boolean" ? options.foot : true) : true;
+      var hideCallback = options ? (typeof options.hideCallback == "function" ? options.hideCallback : null) : null;
+      var showCallback = options ? (typeof options.showCallback == "function" ? options.showCallback : null) : null;
       this.setData({
-        isShow:true,
+        isShow: true,
         closeShow: closeBtn,
-        footShow: foot
+        footShow: foot,
+        hideCallback: hideCallback,
+        showCallback: showCallback
       });
+      return this;
+    },
+    show: function(options){
+      if (!options) {
+        var closeBtn = options ? (typeof options.close == "boolean" ? options.close : true) : true;
+        var foot = options ? (typeof options.foot == "boolean" ? options.foot : true) : true;
+        var hideCallback = options ? (typeof options.hideCallback == "function" ? options.hideCallback : null) : null;
+        var showCallback = options ? (typeof options.showCallback == "function" ? options.showCallback : null) : null;
+        this.setData({
+          isShow: true,
+          closeShow: closeBtn,
+          footShow: foot,
+          hideCallback: hideCallback,
+          showCallback: showCallback
+        });
+      }
+      if (typeof this.data.showCallback == 'function') {
+        this.data.showCallback();
+      }
     },
     hide: function (callback) {
+      callback = typeof callback == 'function' ? callback : this.data.hideCallback;
       this.setData({
         isShow: false
       });

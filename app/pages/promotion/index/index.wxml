@@ -28,7 +28,7 @@
   <view class="item">
     <view class="item-title">
       <view>优惠券发放情况</view>
-      <component-select  options="{{range_date_group}}" bind:selected="bindDataSelected"  selected="{{fromday}}"></component-select>
+      <component-select  options="{{range_date_group}}" bind:selected="bindDataSelected"  selected="{{fromday}}" bind:showCallback="triggerCanvensHide" bind:hideCallback="triggerCanvensHide" ></component-select>
     </view>
     <view class="item-content">
       <view class="item-statistics-group column-3">
@@ -63,19 +63,19 @@
     <view class="item-title">
       <view>趋势图</view>
     </view>
-    <view class="item-content item-content-ec">
+    <view class="item-content item-content-ec" >
       <view class="item item-tab">
         <view class="item-tab-bar {{tabType === '1'?'actived':''}}" data-type="1" bindtap="bindTabSelected">总发放数</view>
         <view class="item-tab-bar {{tabType === '2'?'actived':''}}" data-type="2" bindtap="bindTabSelected">总领取数</view>
         <view class="item-tab-bar {{tabType === '3'?'actived':''}}" data-type="3" bindtap="bindTabSelected">总核销数</view>
       </view>
-      <view class="item-tab-box {{tabType==='1'?'actived':''}}">
+      <view class="item-tab-box {{tabType==='1' && !canvensHide ?'actived':''}}">
         <ec-canvas id="mychart-dom-multi-create" canvas-id="mychart-multi-create" ec="{{ ecCreate }}" style="height:400rpx;"></ec-canvas>
       </view>
-      <view class="item-tab-box {{tabType==='2'?'actived':''}}">
+      <view class="item-tab-box {{tabType==='2' && !canvensHide?'actived':''}}">
         <ec-canvas id="mychart-dom-multi-send" canvas-id="mychart-multi-send" ec="{{ ecSend }}" style="height:400rpx;"></ec-canvas>
       </view>
-      <view class="item-tab-box {{tabType==='3'?'actived':''}}">
+      <view class="item-tab-box {{tabType==='3' && !canvensHide?'actived':''}}">
         <ec-canvas id="mychart-dom-multi-used" canvas-id="mychart-multi-used" ec="{{ ecUsed }}" style="height:400rpx;"></ec-canvas>
       </view>
     </view>

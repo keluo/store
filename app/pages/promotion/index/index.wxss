@@ -62,8 +62,10 @@
   left: 0rpx;
   background-color: #fff;
   z-index: 1;
+  transform:translateX(-100%);
 }
 .item-tab-box.actived {
   display: block;
   z-index: 11;
+  transform:translateX(0);
 }

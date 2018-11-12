@@ -35,6 +35,14 @@ Component({
           });
         }
       }
+    },
+    showCallback: {
+      type: Object,
+      value:null
+    },
+    hideCallback: {
+      type: Object,
+      value: null
     }
   },
   attached: function (e) {
@@ -80,6 +88,7 @@ Component({
       this.setData({
         selectShow: !nowShow
       })
+      this.triggerEvent('showCallback');
     },
     //设置内容
     setText: function (e) {
@@ -96,6 +105,7 @@ Component({
         animationData: this.animation.export()
       })
       this.triggerEvent('selected', nowId);
+      this.triggerEvent('hideCallback');
     },
     cancelSelect: function () {
       this.animation.rotate(0).step();
@@ -103,6 +113,7 @@ Component({
         selectShow: false,
         animationData: this.animation.export()
       })
+      this.triggerEvent('hideCallback');
     }
   }
 })
