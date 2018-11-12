@@ -105,11 +105,10 @@ let option = {
 
 function initChart(canvas, width, height) {
   chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
+    width: 343,
+    height: 200
   });
   canvas.setChart(chart);
-  console.log('初始化顾客分析图标')
   chart.setOption(option);
   return chart;
 }
@@ -123,8 +122,6 @@ Component({
     params: {
       type: Object,
       observer: function (newVal, oldVal, changedPath) {
-        // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串
-        // 通常 newVal 就是新设置的数据， oldVal 是旧数据
         if (newVal.id != '' && newVal.begin_time != '') {
           setTimeout(() => {
             this.getInfo();
@@ -163,8 +160,7 @@ Component({
     }
   },
   detached() {
-    chart.dispose()
-    console.log('在组件实例被从页面节点树移除时执行')
+    chart.dispose();// 组件实例被从页面节点树移除时销毁echarts实例
   },
   /**
    * 组件的方法列表

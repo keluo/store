@@ -333,7 +333,10 @@ Component({
       content: ''
     }
   },
-
+  detached() {
+    chart.dispose();// 组件实例被从页面节点树移除时销毁echarts实例
+    chart2.dispose();
+  },
   /**
    * 组件的方法列表
    */
