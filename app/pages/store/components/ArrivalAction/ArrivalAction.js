@@ -7,11 +7,13 @@ Component({
     params: {
       type: Object,
       observer: function (newVal, oldVal, changedPath) {
-        if (newVal.begin_time == this.fmtDate(new Date())) {
-          this.triggerEvent('myevent');
-          this.setData({
-            isToday: true
-          })
+        if (newVal.day_time == 0) {
+          if(this.data.isActive != 0){
+            this.triggerEvent('myevent');
+            this.setData({
+              isToday: true
+            })
+          }
         } else {
           this.setData({
             isToday: false
@@ -64,7 +66,7 @@ Component({
       this.cheackToday();
     },
     cheackToday () {
-      if (this.data.params.begin_time == this.fmtDate(new Date())) {
+      if (this.data.params.day_time == 0) {
         this.triggerEvent('myevent');
         this.setData({
           isToday: true
