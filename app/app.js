@@ -4,6 +4,9 @@ var api = require('service/api.js');
 var util = require('utils/util.js');
 import { loginApi } from './service/api'
 App({
+  globalData: {
+    scene: ''
+  },
   onLaunch: function () {
     this.globalData = {};
     wx.login({

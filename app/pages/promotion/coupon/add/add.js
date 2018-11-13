@@ -144,7 +144,11 @@ Page({
       })
     }
   },
-
+  bindCancel: function(){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   formSubmit: function (e) {
     var that = this;
     if (!this.formValidate.checkForm(e)) {
@@ -199,7 +203,8 @@ Page({
       },
       floor_amount: {
         required: true,
-        digits: true
+        digits: true,
+        min: 1
       }
     }
 
@@ -213,7 +218,8 @@ Page({
       },
       floor_amount: {
         required: '输入最低消费',
-        digits: '最低消费大于0'
+        digits: '最低消费大于1',
+        min: '最低消费大于1'
       }
     }
 

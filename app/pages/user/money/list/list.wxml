@@ -28,7 +28,7 @@
         </view>
       </view>
       <view class="item-list-right">
-        <text>＋{{item.amount || 0}}</text>
+        <text>{{item.amount || 0}}</text>
         <icon class="iconfont icon-next"></icon>
       </view>
     </view>

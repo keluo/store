@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "反佣设置"
+  "navigationBarTitleText": "反佣设置",
+  "usingComponents": {
+    "component-pop": "../../../component/pop/pop"
+  }
 }

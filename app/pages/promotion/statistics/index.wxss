@@ -20,3 +20,14 @@
   height: 60rpx;
   border-radius: 50%;
 }
+.item-statistics-group.column-2 .item-statistics-box .iconfont{
+  margin-left:10rpx;
+  margin-top:-14rpx;
+}
+.user-list .iconfont{
+  margin-left:10rpx;
+  margin-top:-8rpx;
+}
+.item.user-list .item-title .btn {
+  margin: 0rpx;
+}

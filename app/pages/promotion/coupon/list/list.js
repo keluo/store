@@ -14,6 +14,12 @@ Page({
     page: 1,
     total: 0
   },
+  bindCopy:function(e){
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/promotion/coupon/add/add?id=' + id,
+    });
+  },
   bindToPage: function (e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
@@ -65,7 +71,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // var that = this;
+    // that.getSelectInitList();
+    // that.getList();
+  },
+  onShow: function (options) {
     var that = this;
+    that.setData({
+      coupon_list: [],
+      total: 0
+    });
     that.getSelectInitList();
     that.getList();
   },

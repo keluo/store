@@ -2,3 +2,10 @@
 .item-info-group .item-info .item-label {
   width: 255rpx;
 }
+.item-info-group .item-info .item-input {
+  display: flex;
+}
+.item-info-group .item-info .item-input .iconfont {
+  margin-top:-5rpx;
+  font-size:38rpx;
+}

@@ -81,13 +81,13 @@
     </view>
   </view>
 </view>
-<component-pop class="pop-box">
+<component-pop class="pop-box pop-money">
   <view slot="title">余额不足</view>
-  <view slot="content">根据您设置的返佣金额和目前已领券人数，您的账户余额将很快无法支付的推广费用，账户余额一旦低于单笔推广返佣金额，种草用户的返佣激励金额为0.1元，对推广效果会有影响，请提前充值保障推广效果~ </view>
+  <view slot="content">根据您设置的返佣金额和目前已领券人数，您的账户余额将很快无法支付剩余的推广费用，账户余额一旦低于单笔推广返佣金额，推广人获得的佣金自动降为0.1元，对推广效果会有影响，请提前充值保障推广效果~</view>
   <view slot="foot">
-    <navigator url = "/pages/user/money/add/add">
+    <view data-url = "/pages/user/money/add/add" bindtap="bindToMoney">
       立即充值
-    </navigator>
+    </view>
   </view>
 </component-pop>
 

@@ -7,7 +7,7 @@
         分享反佣金额：
       </view>
       <view class="item-input">
-        <input type="digit" name="share_commi" class="txt" value="{{share_commi}}" placeholder="输入分享反佣金额（元）" bindinput="formatCommiShare"></input>
+        <input type="digit" name="share_commi" class="txt" value="{{share_commi}}" placeholder="输入分享反佣金额（元）" bindinput="formatCommiShare"></input><icon class="iconfont icon-question" bindtap="bindShowPop" data-index="0"></icon>
       </view>
     </view>
     <view class="item-info">
@@ -15,7 +15,7 @@
         核销反佣金额：
       </view>
       <view class="item-input">
-        <input type="digit" name="voucher_commi" class="txt" value="{{voucher_commi}}" placeholder="输入核销反佣金额（元）" bindinput="formatCommiVoucher"></input>
+        <input type="digit" name="voucher_commi" class="txt" value="{{voucher_commi}}" placeholder="输入核销反佣金额（元）" bindinput="formatCommiVoucher"></input><icon class="iconfont icon-question" bindtap="bindShowPop" data-index="1"></icon>
       </view>
     </view>
   </view>
@@ -24,3 +24,10 @@
   </view>
   </form>
 </view>
+<component-pop class="pop-box">
+  <view slot="title">{{popInfoList[popInfoIndex].title}}</view>
+  <view slot="content">{{popInfoList[popInfoIndex].desc}}</view>
+  <view slot="foot" bindtap="bindClosePop">
+    知道了
+  </view>
+</component-pop>

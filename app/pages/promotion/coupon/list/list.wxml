@@ -12,7 +12,7 @@
     <view class="item-list" wx:for="{{coupon_list}}"  wx:key="{{index}}" data-id="{{item.id}}" bindtap="bindToPage">
       <view class="item-list-content">
         <view class="item-list-txt">
-          {{item.desc}} <text class="{{item.is_valid == '1'?'blue':'grey'}}">（{{item.is_valid == '1'?'有效':'无效'}}）</text>
+          {{item.desc}} <text class="{{item.is_valid == '1'?'blue':'grey'}}">（{{item.is_valid == '1'?'有效':'失效'}}）</text>
         </view>
         <view class="item-list-txt-ext first">
           <view class="item-label">
@@ -31,10 +31,8 @@
           </view>
         </view>
       </view>
-      <view class="item-list-right">
-        <navigator url = "/pages/promotion/coupon/add/add?id={{item.id}}">
+      <view class="item-list-right" catchtap="bindCopy" data-id="{{item.id}}">
           <button class="btn btn-white">复制</button>
-        </navigator>
       </view>
     </view>
   </view>

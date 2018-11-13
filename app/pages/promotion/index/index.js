@@ -42,10 +42,36 @@ Page({
     that.onUsedEcInit();
     that.getDateInitList().then(function () {
       that.getBgCustomShare();
-      that.getMapList().then(function (data) {
-        that.onDrawEc(data);
-      });
+      setTimeout(function(){
+        that.getMapList().then(function (data) {
+          that.onDrawEc(data);
+        });
+      },500);
     });
+    that.checkMoney();
+  },
+  checkMoney: function () {
+    var that = this; 
+    app.https(app.api.moneyCheckApi, {
+    }, 'get').then(function (data) {
+      data = data.data;
+      if (!data.enough) {
+        that.selectComponent('.pop-money').init({
+          showCallback: function () {
+            that.triggerCanvensHide();
+          },
+          hideCallback: function () {
+            that.triggerCanvensHide();
+          }
+        }).show();
+      }
+    });
+  },
+  bindToMoney: function (e) {
+    this.selectComponent('.pop-money').hide();
+    wx.navigateTo({
+      url: e.currentTarget.dataset.url
+    })
   },
   onDrawEc: function (data) {
     var that = this;
@@ -124,10 +150,9 @@ Page({
   },
   bindToPage: function (e) {
     var that = this;
-    var url = e.currentTarget.dataset.url;
     this.checkAuth().then(function(){
       wx.navigateTo({
-        url: url
+        url: e.currentTarget.dataset.url
       })
     }).catch(function (url) {
       that.qrcodeCreate(url);
@@ -169,7 +194,7 @@ Page({
       hideCallback: function () {
         that.triggerCanvensHide();
       }
-    }).selectComponent('.pop-qrcode').show();
+    }).show();
   },
   saveImg: function (e) {
     var that = this;
@@ -210,7 +235,7 @@ Page({
       app.https(app.api.authCheckApi, {
       }, 'get').then(function (data) {
         data = data.data;
-        if (data.status == '1') {
+        if (data.status == '2') {
           reject(data.auth_url);
         } else {
           resolve();
@@ -344,7 +369,7 @@ Page({
           obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
           return obj;
         },
-        formatter: '{b}\n{a}：{c}人'
+        formatter: '{b}\n{a}：{c}张'
       },
       yAxis: {
         type: 'value',

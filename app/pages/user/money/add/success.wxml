@@ -10,7 +10,7 @@
           充值金额
       </view>
       <view class="charge-info-num">
-          ￥1000
+          {{fee}}
       </view>
     </view>
     <view class="charge-info-list">
@@ -23,7 +23,7 @@
     </view>
   </view>
   <view class="item-btn form-btn">
-    <button class="btn">完成</button>
+    <button class="btn" bindtap="bindToComplete">完成</button>
   </view>
 </view>
 

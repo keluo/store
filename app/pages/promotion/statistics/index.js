@@ -14,8 +14,38 @@ Page({
     touch_count: 0,
     voucher_send_count: 0,
     voucher_used_count: 0,
+    popInfoList:[
+      {
+        title:'推广人数',
+        desc:'进店通过WIFI落地页成功分享店铺推广海报的人数。'
+      },
+      {
+        title: '触达人数',
+        desc: '看到过店铺推广海报并识别海报上领券二维码的人数。'
+      },
+      {
+        title: '领券总数',
+        desc: '通过识别店铺推广海报上的领券二维码成功领取的优惠券总数。'
+      },
+      {
+        title: '核销总数',
+        desc: '通过店铺推广海报上的领券二维码领取后到店核销的优惠券总数。'
+      },{
+        title: '微信触达用户',
+        desc: '在微信内看到店铺推广海报并识别海报上二维码到达领券页面的用户。'
+      }
+    ],
+    popInfoIndex: 0
   },
-
+  bindShowPop:function(e){
+    this.setData({
+      popInfoIndex: e.currentTarget.dataset.index
+    });
+    this.selectComponent('.pop-box').show();
+  },
+  bindClosePop: function () {
+    this.selectComponent('.pop-box').hide();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -25,6 +55,9 @@ Page({
       that.getDateInitList().then(function(){
         that.getSgCustomShare();
       });
+    });
+    that.selectComponent('.pop-box').init({
+      close:false
     });
 
   },

@@ -16,9 +16,7 @@ Component({
   data: {
     isShow: false,
     closeShow: true,
-    footShow: true,
-    hideCallback:null,
-    showCallback:null
+    footShow: true
   },
 
   /**
@@ -33,39 +31,42 @@ Component({
      * 
      */
     init: function (options){
+      var that = this;
       var closeBtn = options ? (typeof options.close == "boolean" ? options.close : true) : true;
       var foot = options ? (typeof options.foot == "boolean" ? options.foot : true) : true;
       var hideCallback = options ? (typeof options.hideCallback == "function" ? options.hideCallback : null) : null;
       var showCallback = options ? (typeof options.showCallback == "function" ? options.showCallback : null) : null;
-      this.setData({
-        isShow: true,
+      that.setData({
         closeShow: closeBtn,
         footShow: foot,
-        hideCallback: hideCallback,
-        showCallback: showCallback
       });
-      return this;
+      that.hideCallback = hideCallback;
+      that.showCallback = showCallback;
+      return that;
     },
     show: function(options){
-      if (!options) {
+      var that = this;
+      if (options) {
         var closeBtn = options ? (typeof options.close == "boolean" ? options.close : true) : true;
         var foot = options ? (typeof options.foot == "boolean" ? options.foot : true) : true;
         var hideCallback = options ? (typeof options.hideCallback == "function" ? options.hideCallback : null) : null;
         var showCallback = options ? (typeof options.showCallback == "function" ? options.showCallback : null) : null;
-        this.setData({
-          isShow: true,
+        that.setData({
           closeShow: closeBtn,
-          footShow: foot,
-          hideCallback: hideCallback,
-          showCallback: showCallback
+          footShow: foot
         });
+        that.hideCallback = hideCallback;
+        that.showCallback = showCallback;
       }
-      if (typeof this.data.showCallback == 'function') {
-        this.data.showCallback();
+      if (typeof that.showCallback == 'function') {
+        that.showCallback();
       }
+      that.setData({
+        isShow: true,
+      });
     },
     hide: function (callback) {
-      callback = typeof callback == 'function' ? callback : this.data.hideCallback;
+      callback = typeof callback == 'function' ? callback : this.hideCallback;
       this.setData({
         isShow: false
       });

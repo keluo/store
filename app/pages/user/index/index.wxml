@@ -4,8 +4,8 @@
     <view class="item-user">
       <image src="/images/3.png" class="user-photo"></image>
       <view class="item-user-info">
-        <text class="user-name">{{contact_name}}</text>
-        <text class="user-address">{{whole_address}}</text>
+        <text class="user-name">{{username}}</text>
+        <text class="user-address">{{name}}</text>
       </view>
     </view>
     <view class="item-money">

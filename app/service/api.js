@@ -60,6 +60,8 @@ const serviceLinkApi = '/etma/service/'; //联系客服
 const messageApi = '/notification/notice/'; //消息通知
 
 const authCheckApi = '/apo/auth/query/'; //授权检测
+const moneyCheckApi = '/etma/trade/enough/'; //余额检测
+
 
 
 
@@ -110,5 +112,6 @@ module.exports = {
   bgInfoApi,
   serviceLinkApi,
   messageApi,
-  authCheckApi
+  authCheckApi,
+  moneyCheckApi
 }

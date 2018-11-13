@@ -108,7 +108,7 @@
       <button class="btn" formType="submit">确认发放</button>
     </view>
     <view class="item-btn">
-      <button class="btn btn-white">取消</button>
+      <button class="btn btn-white" bindtap="bindCancel">取消</button>
     </view>
   </view>
   </form>

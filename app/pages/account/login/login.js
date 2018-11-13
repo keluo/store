@@ -87,6 +87,15 @@ Page({
     var that = this;
     that.initValidate();
   },
+  bindShowPhone: function (e) {
+    wx.showModal({
+      title: '合作电话',
+      content: '021-61475149',
+      confirmText:'知道了',
+      confirmColor:'#108EE9',
+      showCancel:false,
+    })
+  },
   formSubmit: function (e) {
     var that = this;
     if (this.data.method == '1'){

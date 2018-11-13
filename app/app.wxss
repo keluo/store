@@ -127,7 +127,6 @@ button::after{
   border-radius: 0rpx 4rpx 4rpx 0rpx;
 }
 .item-tab .item-tab-bar:first-child{
-  border-right: 1rpx solid #108EE9;
   border-radius: 4rpx 0rpx 0rpx 4rpx;
 }
 .item-tab .item-tab-bar.actived {

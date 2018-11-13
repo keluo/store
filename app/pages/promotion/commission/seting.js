@@ -8,7 +8,18 @@ Page({
    */
   data: {
     share_commi:'0.1',
-    voucher_commi:'1'
+    voucher_commi:'1',
+    popInfoList: [
+      {
+        title: '分享返佣',
+        desc: '分享店铺推广海报时获得一笔佣金（当天内同一用户只会获得一次佣金）。'
+      },
+      {
+        title: '核销返佣',
+        desc: '通过店铺推广海报上的二维码领取优惠券并到店核销后，推广人获得一笔佣金。'
+      }
+    ],
+    popInfoIndex: 0
   },
 
   /**
@@ -17,6 +28,18 @@ Page({
   onLoad: function (options) {
     this.initValidate();
     this.getInit();
+    this.selectComponent('.pop-box').init({
+      close: false
+    });
+  },
+  bindShowPop: function (e) {
+    this.setData({
+      popInfoIndex: e.currentTarget.dataset.index
+    });
+    this.selectComponent('.pop-box').show();
+  },
+  bindClosePop: function () {
+    this.selectComponent('.pop-box').hide();
   },
   getInit: function(){
     var that = this;

@@ -10,32 +10,32 @@
     <view class="item-content">
       <view class="item-statistics-group column-2">
         <view class="item-statistics-box border-bottom">
-          <view>
-            推广人数 
+          <view bindtap="bindShowPop" data-index="0">
+            推广人数<icon class="iconfont icon-question"></icon>
           </view>
           <view class="item-statistics-box-num">
             {{share_count}}
           </view>
         </view>
         <view class="item-statistics-box last border-bottom">
-          <view>
-            触达人数 
+          <view  bindtap="bindShowPop" data-index="1">
+            触达人数<icon class="iconfont icon-question"></icon>
           </view>
           <view class="item-statistics-box-num">
             {{touch_count}}
           </view>
         </view>
         <view class="item-statistics-box">
-          <view>
-            领券人数 
+          <view bindtap="bindShowPop" data-index="2">
+            领券总数<icon class="iconfont icon-question"></icon>
           </view>
           <view class="item-statistics-box-num">
             {{voucher_send_count}}
           </view>
         </view>
         <view class="item-statistics-box last">
-          <view>
-            核销人数 
+          <view bindtap="bindShowPop" data-index="3">
+            核销总数<icon class="iconfont icon-question"></icon>
           </view>
           <view class="item-statistics-box-num">
             {{voucher_used_count}}
@@ -47,7 +47,7 @@
   
   <view class="item user-list">
     <view class="item-title">
-      微信内触达用户
+      <view>微信内触达用户<icon class="iconfont icon-question" bindtap="bindShowPop" data-index="4"></icon></view>
       <button class="btn">短信激励核销</button>
     </view>
     <view class="item-options">
@@ -87,3 +87,10 @@
     <button class="btn">返回顶部</button>
   </view>
 </view>
+<component-pop class="pop-box">
+  <view slot="title">{{popInfoList[popInfoIndex].title}}</view>
+  <view slot="content">{{popInfoList[popInfoIndex].desc}}</view>
+  <view slot="foot" bindtap="bindClosePop">
+    知道了
+  </view>
+</component-pop>

@@ -3,6 +3,22 @@
   <view class="item item-info-group">
     <view class="item-info">
       <view class="item-label">
+        用 户 名：
+      </view>
+      <view class="item-input">
+        <text class="txt">{{username}}</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
+        绑定手机：
+      </view>
+      <view class="item-input">
+        <text class="txt">{{contact_link}}</text>
+      </view>
+    </view>
+    <view class="item-info">
+      <view class="item-label">
         商户名称：
       </view>
       <view class="item-input">
@@ -19,10 +35,10 @@
     </view>
     <view class="item-info">
       <view class="item-label">
-        商户类型：
+        邮箱地址：
       </view>
       <view class="item-input">
-        <text class="txt">{{category}}</text>
+        <text class="txt">{{email}}</text>
       </view>
     </view>
     <view class="item-info">
@@ -31,14 +47,6 @@
       </view>
       <view class="item-input">
         <text class="txt">{{contact_name}}</text>
-      </view>
-    </view>
-    <view class="item-info">
-      <view class="item-label">
-        联系电话：
-      </view>
-      <view class="item-input">
-        <text class="txt">{{contact_link}}</text>
       </view>
     </view>
   </view>

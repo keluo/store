@@ -19,6 +19,10 @@ Page({
   formSubmit: function (e) {
     var that = this;
     if (e.detail.value.fee && e.detail.value.fee >= 1){
+      // wx.navigateTo({
+      //   url: '/pages/user/money/add/success?fee=' + e.detail.value.fee
+      // })
+      // return false;
       app.https(app.api.payApi, {
         'cat': '2',
         'fee': e.detail.value.fee,
@@ -40,18 +44,15 @@ Page({
           signType: 'MD5',
           paySign: paySign,
           success(res) {
-            console.log(res);
             if (res.errMsg && res.errMsg == 'requestPayment:ok') {
-              wx.showToast({
-                title: '充值成功',
-                icon: 'success',
-                mask: true
-              });
-              setTimeout(function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }, 1500);
+              // wx.showToast({
+              //   title: '充值成功',
+              //   icon: 'success',
+              //   mask: true
+              // }); 
+              wx.navigateTo({
+                url: '/pages/user/money/add/success?fee=' + e.detail.value.fee
+              })
             }
           },
           fail(res) {

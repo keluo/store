@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    whole_address:'',
-    contact_name:'',
+    username:'',
+    name:'',
     now_fee:0,
   },
   /**
@@ -55,6 +55,12 @@ Page({
     var that = this;
     that.getInfo();
   },
+  onShow:function(){
+    var fee = app.globalData.fee || 0;
+    this.setData({
+      now_fee: fee
+    });
+  },
   getInfo: function () {
     var that = this;
     return new Promise(function (resolve, reject) {
@@ -62,10 +68,11 @@ Page({
       }, 'get').then(function (data) {
         data = data.data;
         that.setData({
-          whole_address: data.whole_address || '',
-          contact_name: data.contact_name || '',
+          username: data.username || '',
+          name: data.name || '',
           now_fee: data.now_fee || 0
         });
+        app.globalData.fee = data.now_fee || 0;
         resolve();
       });
     });

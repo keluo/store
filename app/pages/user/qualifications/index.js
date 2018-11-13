@@ -10,7 +10,9 @@ Page({
     whole_address: '',
     contact_name: '',
     contact_link: '',
-    category: ''
+    category: '',
+    username:'',
+    email:''
   },
 
   /**
@@ -31,7 +33,9 @@ Page({
           whole_address: data.whole_address || '',
           contact_name: data.contact_name || '',
           contact_link: data.contact_link || '',
-          category: data.category || ''
+          category: data.category || '',
+          username: data.username || '',
+          email: data.email || ''
         });
         resolve();
       });

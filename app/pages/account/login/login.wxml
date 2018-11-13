@@ -11,7 +11,7 @@
       </view>
       <view class="login-input login-input-password">
         <input type="text" password="{{isPassword}}" name="password" value="{{password}}" placeholder="请输入登录密码"></input>
-        <icon class="iconfont icon-password {{isPassword?'':'blue'}}" bindtap="bindSwitchPassword"></icon>
+        <icon class="iconfont  {{isPassword?'icon-password-hide':'icon-password'}}" bindtap="bindSwitchPassword"></icon>
       </view>
     </view>
     <view class="item-btn-group">
@@ -41,3 +41,19 @@
       <view class="login-method">游客登录</view>
     </view>
 </view>
+<view class="item-login-footer">
+  <view class="links">
+    <navigator class="link" url="/pages/account/password/password">忘记密码</navigator>
+    <view class="link" bindtap="bindShowPhone">联系我们</view>
+  </view>
+  <view class="company">
+    Powered by 南京赢纳信息科技有限公司
+  </view>
+</view>
+<component-pop class="pop-box">
+  <view slot="title">合作电话</view>
+  <view slot="content">021-61475149</view>
+  <view slot="foot" bindtap="bindClosePhone">
+    知道了
+  </view>
+</component-pop>
