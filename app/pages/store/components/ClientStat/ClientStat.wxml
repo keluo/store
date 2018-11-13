@@ -47,9 +47,9 @@
       <view class="tab-item {{isActive == 2?'active':''}}" bindtap="isXinke">新顾客</view>
     </view>
 
-  <view class="container" wx:if="{{!params.selectShow && chartShow}}">
-    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
-  </view>
+    <view class='container {{params.selectShow && chartShow ? "" : "hidden"}}'>
+      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+    </view>
     
   </view>
 </view>

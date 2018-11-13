@@ -67,7 +67,3 @@ page{
   display: block;
   margin-bottom: 20rpx;
 }
-
-.display{
-  display: none;
-}

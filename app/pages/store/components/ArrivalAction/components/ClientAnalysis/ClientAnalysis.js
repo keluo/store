@@ -124,6 +124,11 @@ Component({
       type: Object,
       observer: function (newVal, oldVal, changedPath) {
         if (newVal.id != '' && newVal.begin_time != '') {
+          if (oldVal) {
+            if (newVal.id == oldVal.id && newVal.end_time == oldVal.end_time) {
+              return
+            }
+          }
           setTimeout(() => {
             this.getInfo();
           }, 1000)

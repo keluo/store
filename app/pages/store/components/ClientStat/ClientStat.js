@@ -207,6 +207,11 @@ Component({
         // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
         if (newVal.id != '' && newVal.begin_time != ''){
+          if(oldVal){
+            if (newVal.id == oldVal.id && newVal.end_time == oldVal.end_time) {
+              return
+            }
+          }
           setTimeout(() => {
             this.getTotalInfo();
             this.setName();
@@ -513,8 +518,6 @@ Component({
               option.xAxis.name = this.data.params.begin_time.substring(5, 10);
 
             }
-            chart.hideLoading();
-            chart.setOption(option, true);
           } else {
             // 不是同一天
             this.setNotToadyChart({

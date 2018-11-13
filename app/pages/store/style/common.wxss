@@ -182,3 +182,12 @@
   color: #108EE9;
   font-size: 36rpx;
 }
+
+/* 隐藏 */
+.hidden{
+  z-index: 1;
+  display: block;
+  position: absolute;
+  top: 84rpx;
+  transform:translateX(-100%);
+}

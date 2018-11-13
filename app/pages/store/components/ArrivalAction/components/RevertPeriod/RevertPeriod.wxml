@@ -20,7 +20,7 @@
         </view>
       </view>
     </view>
-    <view class="container" wx:if="{{!params.selectShow && chartShow}}">
+    <view class='container {{params.selectShow && chartShow ? "" : "hidden"}}'>
       <ec-canvas id="mychart" canvas-id="mychart" ec="{{ ec }}"></ec-canvas>
     </view>
   </view>
@@ -32,7 +32,7 @@
     <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="店铺对比" bind:showCallback="selectShow" bind:hideCallback="selectHide"></component-select>
   </view>
   <view class="item-box-content">
-    <view class="container" wx:if="{{!params.selectShow && chartShow}}">
+    <view class='container {{params.selectShow && chartShow ? "" : "hidden"}}'>
       <ec-canvas id="mychart2" canvas-id="mychart2" ec="{{ ec2 }}"></ec-canvas>
     </view>
   </view>

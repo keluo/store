@@ -15,7 +15,7 @@ Page({
       begin_time: '',
       end_time: '',
       day_time: '',
-      selectShow: false
+      selectShow: true
     },
     day_time: 0,
     dateList: [],
@@ -105,12 +105,12 @@ Page({
   },
   selectShow (e) {
     this.setData({
-      ['params.selectShow']: true
+      ['params.selectShow']: false
     })
   },
   selectHide (e) {
     this.setData({
-      ['params.selectShow']: false
+      ['params.selectShow']: true
     })
   },
   handleDownLoad () {
@@ -118,12 +118,12 @@ Page({
     this.selectComponent('.pop-box').init({
       showCallback () {
         that.setData({
-          ['params.selectShow']: true
+          ['params.selectShow']: false
         })
       },
       hideCallback () {
         that.setData({
-          ['params.selectShow']: false
+          ['params.selectShow']: true
         })
       }
     }).show({});
