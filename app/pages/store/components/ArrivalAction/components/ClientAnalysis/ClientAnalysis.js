@@ -125,7 +125,7 @@ Component({
       observer: function (newVal, oldVal, changedPath) {
         if (newVal.id != '' && newVal.begin_time != '') {
           if (oldVal) {
-            if (newVal.id == oldVal.id && newVal.end_time == oldVal.end_time) {
+            if (newVal.id == oldVal.id && newVal.begin_time == oldVal.begin_time) {
               return
             }
           }
