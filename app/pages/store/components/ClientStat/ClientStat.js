@@ -612,7 +612,7 @@ Component({
         var time = new Date(obj.begin_time);
         time = time.setHours(time.getHours() + i);
         obj.option.xAxis.data[i] = this.fmtMin(time);
-        obj.option.series[obj.index].data[i] = 0;
+        // obj.option.series[obj.index].data[i] = 0;
 
         for (var j = 0; j < obj.myList.length; j++) {
           if (this.fmtMin(time) == obj.myList[j].HourTime.slice(11, 16)) {

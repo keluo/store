@@ -531,7 +531,7 @@ Component({
         obj.option.series[obj.index].data[i] = 0;
         for (var j = 0; j < obj.myList.length; j++) {
           if (time == obj.myList[j].DayTime.slice(0, 10)) {
-            obj.option.series[0].data[i] = obj.myList[j][obj.name];
+            obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
           }
         }
       }
