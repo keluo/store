@@ -39,7 +39,7 @@
         </view>
       </view>
     </view>
-    <view class="container">
+    <view class="container" wx:if="{{!params.selectShow}}">
       <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
     </view>
   </view>

@@ -20,7 +20,7 @@
         </view>
       </view>
     </view>
-    <view class="container">
+    <view class="container" wx:if="{{!params.selectShow && chartShow}}">
       <ec-canvas id="mychart" canvas-id="mychart" ec="{{ ec }}"></ec-canvas>
     </view>
   </view>
@@ -29,10 +29,10 @@
 <view class="item-box">
   <view class="item-title">
     <view class="item-title-txt">返店周期趋势图</view>
-    <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="店铺对比"></component-select>
+    <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="店铺对比" bind:showCallback="selectShow" bind:hideCallback="selectHide"></component-select>
   </view>
   <view class="item-box-content">
-    <view class="container">
+    <view class="container" wx:if="{{!params.selectShow && chartShow}}">
       <ec-canvas id="mychart2" canvas-id="mychart2" ec="{{ ec2 }}"></ec-canvas>
     </view>
   </view>

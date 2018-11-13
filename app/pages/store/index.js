@@ -14,7 +14,8 @@ Page({
       name: '',
       begin_time: '',
       end_time: '',
-      day_time: ''
+      day_time: '',
+      selectShow: false
     },
     day_time: 0,
     dateList: [],
@@ -102,8 +103,30 @@ Page({
   onShareAppMessage: function () {
 
   },
+  selectShow (e) {
+    this.setData({
+      ['params.selectShow']: true
+    })
+  },
+  selectHide (e) {
+    this.setData({
+      ['params.selectShow']: false
+    })
+  },
   handleDownLoad () {
-    this.selectComponent('.pop-box').show({});
+    let that = this;
+    this.selectComponent('.pop-box').init({
+      showCallback () {
+        that.setData({
+          ['params.selectShow']: true
+        })
+      },
+      hideCallback () {
+        that.setData({
+          ['params.selectShow']: false
+        })
+      }
+    }).show({});
   },
   isKeliu() {
     this.setData({
@@ -117,7 +140,7 @@ Page({
   },
   isGuke() {
     wx.showToast({
-      title: '敬请期待',
+      title: '请联系客服开通',
       image: '../../images/store/smile.png'
     })
   },

@@ -1,5 +1,5 @@
 <view class='header'>
-  <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="{{params.name}}" left="{{true}}"></component-select>
+  <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="{{params.name}}" left="{{true}}" bind:showCallback="selectShow" bind:hideCallback="selectHide"></component-select>
   <view class='icon-download' bindtap="handleDownLoad"></view>
   <picker value="{{date}}" range="{{dateList}}" range-key="name" bindchange="bindDateChange">
     <view class='icon-time'></view>
@@ -13,7 +13,7 @@
 </view>
 
 <view class='time'>
-  统计日期：{{params.begin_time}}-{{params.end_time}}
+  统计日期：{{params.begin_time}} - {{params.end_time}}
 </view>
 
 <!-- <client-stat wx:if="{{isActive == 0}}" params="{{params}}" selectArray="{{selectArray}}"></client-stat>

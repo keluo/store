@@ -331,7 +331,8 @@ Component({
       close: true,
       title: '',
       content: ''
-    }
+    },
+    chartShow: true
   },
   detached() {
     chart.dispose();// 组件实例被从页面节点树移除时销毁echarts实例
@@ -341,6 +342,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    selectShow() {//显示选择框回调
+      this.setData({
+        chartShow: false
+      })
+    },
+    selectHide() {//关闭选择框回调
+      this.setData({
+        chartShow: true
+      })
+    },
     getDist () {
       chart.showLoading('default', {
         text: '',
@@ -520,7 +531,7 @@ Component({
         obj.option.series[obj.index].data[i] = 0;
         for (var j = 0; j < obj.myList.length; j++) {
           if (time == obj.myList[j].DayTime.slice(0, 10)) {
-            obj.option.series[0].data[i] = obj.myList[j].return_ds;
+            obj.option.series[0].data[i] = obj.myList[j][obj.name];
           }
         }
       }
