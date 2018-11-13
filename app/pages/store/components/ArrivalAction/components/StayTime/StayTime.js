@@ -307,7 +307,7 @@ Component({
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
         if (newVal.id != '' && newVal.begin_time != '') {
           if (oldVal) {
-            if (newVal.id == oldVal.id && newVal.end_time == oldVal.end_time) {
+            if (newVal.id == oldVal.id && newVal.begin_time == oldVal.begin_time) {
               return
             }
           }
