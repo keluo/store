@@ -163,7 +163,8 @@ let option2 = {
         color: '#999',
         fontSize: 10
       }
-    }
+    },
+    minInterval: 1
   },
   series: [
     {

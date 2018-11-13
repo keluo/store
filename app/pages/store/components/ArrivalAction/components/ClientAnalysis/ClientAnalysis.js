@@ -76,11 +76,12 @@ let option = {
         color: '#999',
         fontSize: 10
       }
-    }
+    },
+    minInterval: 1
   },
   series: [
     {
-      name: '连接WiFi人数',
+      name: '连接WiFi数',
       data: [10, 42, 71, 14, 40, 70, 10],
       type: 'line',
       showSymbol: false,
@@ -94,7 +95,7 @@ let option = {
       smooth: true
     },
     {
-      name: '核销人数',
+      name: '核销券数',
       data: [30, 62, 91, 34, 60, 90, 30],
       type: 'line',
       showSymbol: false,
