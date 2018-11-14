@@ -398,6 +398,12 @@ Component({
             svg_stay_time: data.all_customer_avg_stay_time,
             bounce_rate: shallow
           })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       https(allCustomerStayTimeAjax, this.data.params, 'get').then(res => {
@@ -422,6 +428,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option, true)
           }, 1000)
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       setTimeout(() => {// 获取环比信息
@@ -431,6 +443,12 @@ Component({
             this.setData({
               svg_stay_time_lrr: this.getRatio(res.data.data.all_customer_avg_stay_time, this.data.svg_stay_time),
               bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
+            })
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1500
             })
           }
         })
@@ -458,6 +476,12 @@ Component({
             svg_stay_time: data.new_customer_avg_stay_time,
             bounce_rate: shallow
           })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       https(newCustomerStayTimeAjax, this.data.params, 'get').then(res => {
@@ -482,6 +506,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option, true)
           }, 1000)
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       setTimeout(() => {// 获取环比信息
@@ -491,6 +521,12 @@ Component({
             this.setData({
               svg_stay_time_lrr: this.getRatio(res.data.data.new_customer_avg_stay_time, this.data.svg_stay_time),
               bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
+            })
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1500
             })
           }
         })
@@ -518,6 +554,12 @@ Component({
             svg_stay_time: data.old_customer_avg_stay_time,
             bounce_rate: shallow
           })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       https(oldCustomerStayTimeAjax, this.data.params, 'get').then(res => {
@@ -542,6 +584,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option, true)
           }, 1000)
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       setTimeout(() => {// 获取环比信息
@@ -551,6 +599,12 @@ Component({
             this.setData({
               svg_stay_time_lrr: this.getRatio(res.data.data.old_customer_avg_stay_time, this.data.svg_stay_time),
               bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
+            })
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1500
             })
           }
         })
@@ -631,6 +685,12 @@ Component({
             chart2.hideLoading();
             chart2.setOption(option2, true);
           }
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       if(this.data.isVs){
@@ -658,6 +718,12 @@ Component({
               chart2.hideLoading();
               chart2.setOption(option3, true);
             }, 1000)
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1500
+            })
           }
         })
       }
@@ -698,6 +764,12 @@ Component({
             chart2.hideLoading();
             chart2.setOption(option2, true);
           }
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       if(this.data.isVs){
@@ -725,6 +797,12 @@ Component({
               chart2.hideLoading();
               chart2.setOption(option3, true);
             }, 1000)
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1500
+            })
           }
         })
       }
@@ -765,6 +843,12 @@ Component({
             chart2.hideLoading();
             chart2.setOption(option2, true);
           }
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       if(this.data.isVs){
@@ -792,6 +876,12 @@ Component({
               chart2.hideLoading();
               chart2.setOption(option3, true);
             }, 1000)
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1500
+            })
           }
         })
       }

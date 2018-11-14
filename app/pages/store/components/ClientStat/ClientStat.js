@@ -393,6 +393,12 @@ Component({
               chart.setOption(option, true);
             }, 1000)
           }
+        }else{
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       if (this.data.isVs) {
@@ -461,6 +467,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option, true);
           }
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       if(this.data.isVs){

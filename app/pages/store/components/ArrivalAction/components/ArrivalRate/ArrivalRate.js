@@ -176,12 +176,24 @@ Component({
 
           chart.hideLoading();
           chart.setOption(option, true);
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
       https(customerStayTimeAjax, this.data.params, 'get').then(res => {
         if(res.code === "1"){
           this.setData({
             old_customer_avg_times: res.data.data.old_customer_avg_times.toFixed()
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1500
           })
         }
       })
@@ -191,6 +203,12 @@ Component({
           if (res.code === "1") {
             this.setData({
               time_lrr: this.getRatio(res.data.data.old_customer_avg_times, this.data.old_customer_avg_times),
+            })
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1500
             })
           }
         })
