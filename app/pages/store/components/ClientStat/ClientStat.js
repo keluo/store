@@ -516,22 +516,20 @@ Component({
               option.xAxis.data[i] = ' ',
               option.series[0].data[i] = myList[0].new_customers;
               option.xAxis.name = this.data.params.begin_time.substring(5, 10);
-
             }
-          } else {
-            // 不是同一天
+          } else {// 不是同一天
             this.setNotToadyChart({
               myList: myList,
               option: option,
               index: 0,
               name: 'new_customers'
             });
-            if(!this.data.isVs){
-              setTimeout(() => {
-                chart.hideLoading();
-                chart.setOption(option, true);
-              }, 1000)
-            }
+          }
+          if (!this.data.isVs) {
+            setTimeout(() => {
+              chart.hideLoading();
+              chart.setOption(option, true);
+            }, 1000)
           }
         }
       })
@@ -564,6 +562,7 @@ Component({
               name: 'new_customers'
             });
           }
+          
           setTimeout(() => {
             chart.hideLoading();
             chart.setOption(option2, true);
@@ -616,7 +615,7 @@ Component({
         var time = new Date(obj.begin_time);
         time = time.setHours(time.getHours() + i);
         obj.option.xAxis.data[i] = this.fmtMin(time);
-        // obj.option.series[obj.index].data[i] = 0;
+        obj.option.series[obj.index].data[i] = '';
 
         for (var j = 0; j < obj.myList.length; j++) {
           if (this.fmtMin(time) == obj.myList[j].HourTime.slice(11, 16)) {

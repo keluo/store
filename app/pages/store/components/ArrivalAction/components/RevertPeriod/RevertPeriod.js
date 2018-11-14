@@ -554,11 +554,15 @@ Component({
         obj.option.xAxis.data[i] = this.fmtMin(time);
         // obj.option.series[obj.index].data[i] = 0;
         // for (var j = 0; j < obj.myList.length; j++) {
-        //   if (this.fmtMin(time) == obj.myList[j].HourTime.slice(11, 16)) {
-        //     obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
-        //   }
+          // if (this.fmtMin(time) == obj.myList[j].HourTime.slice(11, 16)) {
+          //   obj.option.series[obj.index].data[i] = obj.myList[j][obj.name];
+          // }
         // }
-        obj.option.series[obj.index].data[i] = obj.myList[0][obj.name]
+        if (obj.myList.length == 0){
+          obj.option.series[obj.index].data[i] = 0;
+        }else{
+          obj.option.series[obj.index].data[i] = obj.myList[0][obj.name];
+        }
       }
       option3.xAxis.data = option2.xAxis.data;
       option3.series[0] = option2.series[0]
