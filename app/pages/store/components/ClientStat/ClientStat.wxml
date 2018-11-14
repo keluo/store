@@ -38,7 +38,7 @@
 <view class='item-box'>
   <view class='item-title'>
     <view class='item-title-txt'>客流趋势图</view>
-    <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="店铺对比" bind:showCallback="selectShow" bind:hideCallback="selectHide"></component-select>
+    <component-select options="{{selectArray}}" bind:selected="bindSelected" nowText="{{nowText}}" bind:showCallback="selectShow" bind:hideCallback="selectHide"></component-select>
   </view>
   <view class='item-box-content'>
     <view class='tab-box'>

@@ -356,6 +356,7 @@ Component({
       title: '',
       content: ''
     },
+    nowText: '店铺对比',
     chartShow: true
   },
   detached() {
@@ -893,10 +894,18 @@ Component({
       option3.series[1].name = this.data.selectArray.find((item) => {
         return item.id == id.detail
       }).name;
-      this.setData({
-        isVs: true,
-        vsId: id.detail,
-      })
+      if (id.detail == this.data.vsId) {
+        this.setData({
+          isVs: false,
+          vsId: '',
+          nowText: '店铺对比'
+        })
+      } else {
+        this.setData({
+          isVs: true,
+          vsId: id.detail,
+        })
+      }
       setTimeout(() => {
         this.trendAll()
       }, 1000)

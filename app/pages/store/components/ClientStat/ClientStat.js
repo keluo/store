@@ -255,6 +255,7 @@ Component({
       title: '',
       content: '' 
     },
+    nowText: '店铺对比',// 店铺名称
     chartShow: true
   },
   detached(){
@@ -582,17 +583,25 @@ Component({
         })
       }
     },
-    bindSelected (id) {
+    bindSelected (id) {// 店铺对比
       option2.legend.data[1] = this.data.selectArray.find((item) => {
         return item.id == id.detail
       }).name;
       option2.series[1].name = this.data.selectArray.find((item) => {
         return item.id == id.detail
       }).name;
-      this.setData({
-        isVs: true,
-        vsId: id.detail,
-      })
+      if(id.detail == this.data.vsId){
+        this.setData({
+          isVs: false,
+          vsId: '',
+          nowText: '店铺对比'
+        })
+      }else{
+        this.setData({
+          isVs: true,
+          vsId: id.detail,
+        })
+      }
       setTimeout(() => {
         this.isKeliu()
       }, 1000)
