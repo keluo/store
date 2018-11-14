@@ -6,8 +6,8 @@
   <view class='item-box-content'>
     <view class='overview-box'>
       <view class='overview-item'>
-        <view class='overview-title'>
-          连接WiFi数 <view class='icon-question' bindtap="openPop" data-title="连接WiFi数" data-content="这段时间内所有进店客连接wifi的总次数。"></view>
+        <view class='overview-title' bindtap="openPop" data-title="连接WiFi数" data-content="这段时间内所有进店客连接wifi的总次数。">
+          连接WiFi数 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{ptdc.count}}
@@ -17,8 +17,8 @@
         </view>
       </view>
       <view class='overview-item'>
-        <view class='overview-title'>
-          推广人数 <view class='icon-question' bindtap="openPop" data-title="推广人数" data-content="进店连接wifi后分享店铺推广海报的人数。"></view>
+        <view class='overview-title' bindtap="openPop" data-title="推广人数" data-content="进店连接wifi后分享店铺推广海报的人数。">
+          推广人数 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{sdc.count}}
@@ -28,8 +28,8 @@
         </view>
       </view>
       <view class='overview-item'>
-        <view class='overview-title'>
-          核销券数 <view class='icon-question' bindtap="openPop" data-title="核销券数" data-content="通过连接wifi领取并成功核销的优惠券数量。"></view>
+        <view class='overview-title' bindtap="openPop" data-title="核销券数" data-content="通过连接wifi领取并成功核销的优惠券数量。">
+          核销券数 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{vudc.count}}

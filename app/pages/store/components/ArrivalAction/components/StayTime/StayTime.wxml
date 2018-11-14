@@ -12,8 +12,8 @@
     </view>
     <view class='overview-box'>
       <view class='overview-item'>
-        <view class='overview-title'>
-          平均驻店时长 <view class='icon-question' bindtap="openPop" data-title="平均驻店时长" data-content="此类进店客在店内的平均停留时长。"></view>
+        <view class='overview-title' bindtap="openPop" data-title="平均驻店时长" data-content="此类进店客在店内的平均停留时长。">
+          平均驻店时长 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{svg_stay_time}}<view class='overview-unit'>分钟</view>
@@ -23,8 +23,8 @@
         </view>
       </view>
       <view class='overview-item'>
-        <view class='overview-title'>
-          离店率 <view class='icon-question' bindtap="openPop" data-title="离店率" data-content="进店客中停留时长小于3分钟的人数除以进店客总人数。"></view>
+        <view class='overview-title' bindtap="openPop" data-title="离店率" data-content="进店客中停留时长小于3分钟的人数除以进店客总人数。">
+          离店率 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{bounce_rate}}<view class='overview-unit'>%</view>

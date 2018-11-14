@@ -7,8 +7,8 @@
   <view class='item-box-content'>
     <view class='overview-box'>
       <view class='overview-item'>
-        <view class='overview-title'>
-          顾客平均到店频次 <view class='icon-question' bindtap="openPop" data-title="平均到店频次" data-content="在这段时间内的所有进店客的平均到店次数。"></view>
+        <view class='overview-title' bindtap="openPop" data-title="平均到店频次" data-content="在这段时间内的所有进店客的平均到店次数。">
+          顾客平均到店频次 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{old_customer_avg_times}}<view class='overview-unit'>次</view>

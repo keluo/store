@@ -9,8 +9,8 @@
   <view class="item-box-content">
     <view class="overview-box">
       <view class='overview-item'>
-        <view class='overview-title'>
-          顾客平均返店周期 <view class='icon-question' bindtap="openPop" data-title="平均返店周期" data-content="在这段时间内，有过2次及以上到店记录的进店客的平均到店间隔天数。"></view>
+        <view class='overview-title' bindtap="openPop" data-title="平均返店周期" data-content="在这段时间内，有过2次及以上到店记录的进店客的平均到店间隔天数。">
+          顾客平均返店周期 <view class='icon-question'></view>
         </view>
         <view class='overview-num'>
           {{old_customer_avg_return}}<view class='overview-unit'>天</view>
