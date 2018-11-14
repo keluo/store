@@ -23,7 +23,8 @@ Page({
     otherArray: [],// 对比店铺列表
     emailInputVal: '', 
     mailList:[],
-    emails: []
+    emails: [],
+    keliuToday: true
   },
   bindSelected: function(id){
     let name = this.data.selectArray.find((item) => {
@@ -149,7 +150,8 @@ Page({
   },
   isKeliu() {
     this.setData({
-      isActive: 0
+      isActive: 0,
+      keliuToday: !this.data.keliuToday
     })
   },
   isJindian() {

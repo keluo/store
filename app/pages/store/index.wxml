@@ -20,7 +20,7 @@
 <arrival-action wx:if="{{isActive == 1}}" params="{{params}}" selectArray="{{selectArray}}" bind:myevent="notToday"></arrival-action> -->
 
 <client-stat class='{{isActive == 0 ? "" : "hidden"}}' params="{{params}}" selectArray="{{otherArray}}"></client-stat>
-<arrival-action class='{{isActive == 1 ? "" : "hidden"}}' params="{{params}}" selectArray="{{otherArray}}" bind:myevent="notToday"></arrival-action>
+<arrival-action class='{{isActive == 1 ? "" : "hidden"}}' params="{{params}}" selectArray="{{otherArray}}" bind:myevent="notToday" keliuToday="{{keliuToday}}" ></arrival-action>
 
 <component-pop class="pop-box">
   <view slot="title">导出报表</view>

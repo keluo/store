@@ -23,6 +23,16 @@ Component({
     },
     selectArray: {
       type: Array
+    },
+    keliuToday: {
+      type: Boolean,
+      observer: function (newVal, oldVal, changedPath) {
+        if (newVal != oldVal){
+          this.setData({
+            isActive: 0
+          })
+        }
+      }
     }
   },
 
