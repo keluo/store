@@ -122,8 +122,20 @@ Page({
   },
   handleDownLoad () {
     let that = this;
-    this.selectComponent('.pop-box').init({
-      showCallback () {
+    // this.selectComponent('.pop-box').init({
+    //   showCallback () {
+    //     that.setData({
+    //       ['params.selectShow']: false
+    //     })
+    //   },
+    //   hideCallback () {
+    //     that.setData({
+    //       ['params.selectShow']: true
+    //     })
+    //   }
+    // }).show({});
+    this.selectComponent('.pop-box').show({
+      showCallback() {
         that.setData({
           ['params.selectShow']: false
         })
@@ -133,7 +145,7 @@ Page({
           ['params.selectShow']: true
         })
       }
-    }).show({});
+    })
   },
   isKeliu() {
     this.setData({
