@@ -94,6 +94,9 @@ Page({
       coupon_list: []
     });
     this.getList();
+    setTimeout(function () {
+      wx.stopPullDownRefresh();
+    }, 2000);
   },
 
   /**

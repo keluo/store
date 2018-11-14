@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "发券记录",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "component-select": "../../../../component/select/select"
   }

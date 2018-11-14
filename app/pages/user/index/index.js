@@ -82,6 +82,9 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this;
-    that.getInfo();
+    that.getInfo(); 
+    setTimeout(function () {
+      wx.stopPullDownRefresh();
+    },2000);
   }
 })

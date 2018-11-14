@@ -26,8 +26,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "天天客多多",
-    "backgroundTextStyle": "light",
-    "enablePullDownRefresh": true
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
   },
   "tabBar": {
     "color": "#333333",

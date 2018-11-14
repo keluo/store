@@ -90,6 +90,9 @@ Page({
       trade_list: []
     });
     this.getTradeList();
+    setTimeout(function () {
+      wx.stopPullDownRefresh();
+    }, 2000);
   },
 
   /**

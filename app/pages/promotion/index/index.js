@@ -115,7 +115,7 @@ Page({
   onCreateEcInit: function () {
     var that = this;
     that.ecCreateComponnet.init(function (canvas, width, height){
-      const chart = echarts.init(canvas, null, {
+      let chart = echarts.init(canvas, null, {
         width: width,
         height: height
       });
@@ -128,7 +128,7 @@ Page({
   onSendEcInit: function () {
     var that = this;
     that.ecSendComponnet.init(function (canvas, width, height) {
-      const chart = echarts.init(canvas, null, {
+      let chart = echarts.init(canvas, null, {
         width: width,
         height: height
       });
@@ -141,7 +141,7 @@ Page({
   onUsedEcInit: function () {
     var that = this;
     that.ecUsedComponnet.init(function (canvas, width, height) {
-      const chart = echarts.init(canvas, null, {
+      let chart = echarts.init(canvas, null, {
         width: width,
         height: height
       });
@@ -276,9 +276,18 @@ Page({
   getMapList: function () {
     var that = this;
     var url = app.api.bgCustomShareMapApi;
-    that.createChart.showLoading();
-    that.sendChart.showLoading();
-    that.usedChart.showLoading();
+    that.createChart.showLoading({
+      text: '',
+      color: '#5b9bd1'
+    });
+    that.sendChart.showLoading({
+      text: '',
+      color: '#5b9bd1'
+    });
+    that.usedChart.showLoading({
+      text: '',
+      color: '#5b9bd1'
+    });
     if (that.data.tabType == '2'){
       url = app.api.bgCustomSendMapApi;
     } else if (that.data.tabType == '3') {

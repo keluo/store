@@ -65,7 +65,10 @@ Page({
       canvas.setChart(chart);
       chart.setOption(that.option);
       that.chart = chart;
-      that.chart.showLoading();
+      that.chart.showLoading({
+        text: '',
+        color: '#5b9bd1'
+      });
       return chart;
     })
   },
