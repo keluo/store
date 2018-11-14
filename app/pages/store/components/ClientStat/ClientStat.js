@@ -411,6 +411,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       if (this.data.isVs) {
         https(keLiuDayAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
@@ -443,6 +444,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart.hideLoading();
         })
       }
     },
@@ -489,6 +491,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       if(this.data.isVs){
         https(jinDianDayAjax, {id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time}, 'get').then(res => {
@@ -520,6 +523,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart.hideLoading();
         })
       }
       
@@ -569,6 +573,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       if(this.data.isVs){
         https(newCustomerAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
@@ -610,6 +615,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart.hideLoading();
         })
       }
     },

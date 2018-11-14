@@ -390,6 +390,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       https(customerStayTimeAjax, this.data.params, 'get').then(res => {
         this.setData({
@@ -493,6 +494,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart2.hideLoading();
       })
       if(this.data.isVs){
         https(oldCustomerReturnDaysDayAjax,{id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
@@ -524,6 +526,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart2.hideLoading();
         })
       }
     },

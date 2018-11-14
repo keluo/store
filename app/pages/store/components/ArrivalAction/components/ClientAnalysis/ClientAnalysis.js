@@ -227,6 +227,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart.hideLoading();
         })
     },
     setCharts (obj) {

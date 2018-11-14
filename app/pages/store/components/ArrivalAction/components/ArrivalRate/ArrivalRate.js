@@ -181,6 +181,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       https(customerStayTimeAjax, this.data.params, 'get').then(res => {
         this.setData({

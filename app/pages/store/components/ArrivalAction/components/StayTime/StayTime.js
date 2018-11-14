@@ -432,6 +432,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
@@ -504,6 +505,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
@@ -576,6 +578,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart.hideLoading();
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
@@ -673,6 +676,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart2.hideLoading();
       })
       if(this.data.isVs){
         https(allCustomerStayTimeDayAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time}, 'get').then(res => {
@@ -704,6 +708,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart2.hideLoading();
         })
       }
     },
@@ -748,6 +753,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart2.hideLoading();
       })
       if(this.data.isVs){
         https(newCustomerStayTimeDayAjax,{id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time}, 'get').then(res => {
@@ -779,6 +785,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart2.hideLoading();
         })
       }
     },
@@ -823,6 +830,7 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        chart2.hideLoading();
       })
       if(this.data.isVs){
         https(oldCustomerStayTimeDayAjax, {id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
@@ -854,6 +862,7 @@ Component({
             icon: 'none',
             duration: 1500
           })
+          chart2.hideLoading();
         })
       }
     },
