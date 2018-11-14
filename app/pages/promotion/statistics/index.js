@@ -17,7 +17,7 @@ Page({
     popInfoList:[
       {
         title:'推广人数',
-        desc:'进店通过WIFI落地页成功分享店铺推广海报的人数。'
+        desc:'分享店铺推广海报的总人数。'
       },
       {
         title: '触达人数',

@@ -130,11 +130,11 @@ Page({
     const messages = {
       share_commi: {
         required: '请输入分享反佣',
-        min:'分享反佣>=0.1'
+        min:'分享反佣≥0.1'
       },
       voucher_commi: {
         required: '请输入核销反佣',
-        min: '核销反佣>=1'
+        min: '核销反佣≥1'
       }
     }
 

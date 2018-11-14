@@ -21,8 +21,8 @@ Page({
       name: '核销返佣'
     }],
     month: app.utils.util.formatMonth(new Date()),
-    total_charge: 0,
-    total_consume: 0,
+    total_charge: '0.00',
+    total_consume: '0.00',
     trade_list: [],
     hasNotMore: true,
     isLoadingMore: false,
@@ -72,6 +72,8 @@ Page({
         that.setData({
           trade_list: trade_list,
           total: data.total_count || 0,
+          total_charge: data.total_charge || '0.00',
+          total_consume: data.total_consume || '0.00',
           hasNotMore: trade_list.length === data.total_count,
           page: (trade_list.length === data.total_count) ? that.data.page : (that.data.page + 1)
         });

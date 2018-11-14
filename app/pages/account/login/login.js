@@ -27,7 +27,7 @@ Page({
     });
   },
   bindGetValid: function(){
-    if (this.data.phone){
+    if (this.data.phone && (/^1[3456789]\d{9}$/.test(this.data.phone))){
       this.countDown(60);
       app.https(app.api.smsSendApi, {
         'username': this.data.phone
@@ -46,7 +46,7 @@ Page({
       });
     } else {
       wx.showToast({
-        title: "请输入手机号码",
+        title: "请输入正确的手机号码",
         icon: 'none',
         mask: true
       });
@@ -58,7 +58,7 @@ Page({
     time = time || 60;
     that.setData({
       valid_disabled:true,
-      valid_text: time + '秒后重新发送'
+      valid_text: time + '秒后重发'
     });
     that.data.timmer = setInterval(function () {
       if (time < 2) {
@@ -71,7 +71,7 @@ Page({
       }
       time--
       that.setData({
-        valid_text: time + '秒后重新发送'
+        valid_text: time + '秒后重发'
       });
     }, 1000);
   },
@@ -95,6 +95,26 @@ Page({
       confirmColor:'#108EE9',
       showCancel:false,
     })
+  },
+  bindDemoLogin:function(){
+    app.https(app.api.loginDemoApi, {
+    }, 'get').then(function (data) {
+      data = data.data;
+      var token = wx.setStorageSync('user', {
+        token: data.token || '',
+        market_role: data.market_role || '',
+        username: data.username
+      });
+      wx.switchTab({
+        url: '/pages/promotion/index/index'
+      });
+    }).catch(function (data) {
+      wx.showToast({
+        title: data.msg,
+        icon: 'none',
+        mask: true
+      });
+    });
   },
   formSubmit: function (e) {
     var that = this;

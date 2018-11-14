@@ -79,7 +79,8 @@ Page({
     var that = this;
     that.setData({
       coupon_list: [],
-      total: 0
+      total: 0,
+      page:1
     });
     that.getSelectInitList();
     that.getList();

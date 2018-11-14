@@ -19,7 +19,7 @@
             发放时间：
           </view>
           <view class="item-span">
-            {{item.join_time}}张
+            {{item.join_time}}
           </view>
         </view>
         <view class="item-list-txt-ext">
@@ -27,7 +27,7 @@
             发放数量：
           </view>
           <view class="item-span">
-            {{item.voucher_quantity}}
+            {{item.voucher_quantity}}张
           </view>
         </view>
       </view>

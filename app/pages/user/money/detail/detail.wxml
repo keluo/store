@@ -4,7 +4,7 @@
     <view class="item-money-info">
       <view class="money-info-list info-head">
         <text class="info-cat">交易金额</text>
-        <text class="info-value">＋{{amount}}</text>
+        <text class="info-value">{{amount}}</text>
       </view>
       <view class="money-info-list">
         <text class="info-cat">交易类型</text>
@@ -22,7 +22,7 @@
         <text class="info-cat">推广人支付宝</text>
         <text class="info-value">{{extend_alipay_id}}</text>
       </view>
-      <view class="money-info-list" wx:if="{{trade_type == '1'}}">
+      <view class="money-info-list" wx:if="{{trade_type == '2'}}">
         <text class="info-cat">核销人支付宝</text>
         <text class="info-value">{{consume_alipay_id}}</text>
       </view>

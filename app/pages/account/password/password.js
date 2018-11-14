@@ -27,7 +27,7 @@ Page({
     });
   },
   bindGetValid: function () {
-    if (this.data.phone) {
+    if (this.data.phone && (/^1[3456789]\d{9}$/.test(this.data.phone))) {
       this.countDown(60);
       app.https(app.api.smsSendApi, {
         'username': this.data.phone
@@ -58,7 +58,7 @@ Page({
     time = time || 60;
     that.setData({
       valid_disabled: true,
-      valid_text: time + '秒后重新发送'
+      valid_text: time + '秒后重发'
     });
     that.data.timmer = setInterval(function () {
       if (time < 2) {
@@ -71,7 +71,7 @@ Page({
       }
       time--
       that.setData({
-        valid_text: time + '秒后重新发送'
+        valid_text: time + '秒后重发'
       });
     }, 1000);
   },

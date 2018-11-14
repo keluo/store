@@ -33,10 +33,13 @@ Page({
     var that = this;
     that.ecCreateComponnet = that.selectComponent('#mychart-dom-multi-create');
     that.optionCreate = that.getOption();
+    that.optionCreate.series[0].name = '总发放数';
     that.ecSendComponnet = that.selectComponent('#mychart-dom-multi-send');
     that.optionSend = that.getOption();
+    that.optionSend.series[0].name = '总领取数';
     that.ecUsedComponnet = that.selectComponent('#mychart-dom-multi-used');
     that.optionUsed = that.getOption();
+    that.optionUsed.series[0].name = '总核销数';
     that.onCreateEcInit();
     that.onSendEcInit();
     that.onUsedEcInit();

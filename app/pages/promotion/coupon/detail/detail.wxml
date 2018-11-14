@@ -58,6 +58,9 @@
           </view>
         </view>
       </view>
+      <view style="height:400rpx;">
+        <ec-canvas id="mychart-dom" canvas-id="mychart" ec="{{ ec }}" style="height:400rpx;"></ec-canvas>
+      </view>
     </view>
   </view>
 </view>

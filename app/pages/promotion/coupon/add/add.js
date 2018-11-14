@@ -218,8 +218,8 @@ Page({
       },
       floor_amount: {
         required: '输入最低消费',
-        digits: '最低消费大于1',
-        min: '最低消费大于1'
+        digits: '最低消费≥1',
+        min: '最低消费≥1'
       }
     }
 

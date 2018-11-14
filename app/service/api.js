@@ -30,6 +30,7 @@ const customerReturnDaysAjax = '/inner-api/customer/return_days'; //进店行为
 const oldCustomerReturnDaysDayAjax = '/inner-api/customer/day/return_days'; //进店行为 —— 返店周期 —— 趋势
 
 const loginApi = '/etma/login/'; //登录
+const loginDemoApi = '/etma/visitor/login/'; //demo登录
 const logoutApi = '/etma/logout/'; //退出
 const smsSendApi = '/etma/sms/send/'; //获取验证码
 const restPasswordApi = '/etma/password/pwdreset/'; //重置验证码
@@ -91,6 +92,7 @@ module.exports = {
   customerReturnDaysAjax,
   oldCustomerReturnDaysDayAjax,
   loginApi,
+  loginDemoApi,
   logoutApi,
   smsSendApi,
   restPasswordApi,

@@ -38,7 +38,7 @@
     </form>
     <view class="item-login-method">
       <view class="login-method actived" bindtap="bindMethodSelected">{{method === '1' ?'验证码登录':'账号登录'}}</view>
-      <view class="login-method">游客登录</view>
+      <view class="login-method" bindtap="bindDemoLogin">游客登录</view>
     </view>
 </view>
 <view class="item-login-footer">

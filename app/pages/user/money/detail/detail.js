@@ -15,7 +15,7 @@ Page({
     consume_alipay_id:'',
     account_balance:'',
     recharge_method:'',
-    trade_type:''
+    trade_type:''//0:充值 1:核销 2:分享
   },
 
   /**
