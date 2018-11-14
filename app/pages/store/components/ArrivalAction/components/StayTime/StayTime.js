@@ -387,71 +387,65 @@ Component({
       });
       let now_shallow_customer = 0;
       https(allCustomerStayInfoAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
-          let data = res.data.data;
-          let total = data.deep_customer + data.shallow_customer;
-          let shallow = 0;
-          now_shallow_customer = data.shallow_customer;
-          if(total != 0){
-            shallow = (data.shallow_customer / total * 100).toFixed();
-          }
-          this.setData({
-            svg_stay_time: data.all_customer_avg_stay_time,
-            bounce_rate: shallow
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
+        let data = res.data.data;
+        let total = data.deep_customer + data.shallow_customer;
+        let shallow = 0;
+        now_shallow_customer = data.shallow_customer;
+        if(total != 0){
+          shallow = (data.shallow_customer / total * 100).toFixed();
         }
+        this.setData({
+          svg_stay_time: data.all_customer_avg_stay_time,
+          bounce_rate: shallow
+        })
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       https(allCustomerStayTimeAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
-          let data = res.data.data;
-          let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
+        let data = res.data.data;
+        let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
 
-          if(total != 0){
-            option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
-            option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
-            option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
-            option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
-            option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
-          }else{
-            option.series[0].data[0] = 0;
-            option.series[0].data[1] = 0;
-            option.series[0].data[2] = 0;
-            option.series[0].data[3] = 0;
-            option.series[0].data[4] = 0;
-          }
-          setTimeout(() => {
-            chart.hideLoading();
-            chart.setOption(option, true)
-          }, 1000)
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
+        if(total != 0){
+          option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
+          option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
+          option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
+          option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
+          option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
+        }else{
+          option.series[0].data[0] = 0;
+          option.series[0].data[1] = 0;
+          option.series[0].data[2] = 0;
+          option.series[0].data[3] = 0;
+          option.series[0].data[4] = 0;
         }
+        setTimeout(() => {
+          chart.hideLoading();
+          chart.setOption(option, true)
+        }, 1000)
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
         https(allCustomerStayInfoAjax, ratioParams, 'get').then(res => {
-          if(res.code === "1"){
-            this.setData({
-              svg_stay_time_lrr: this.getRatio(res.data.data.all_customer_avg_stay_time, this.data.svg_stay_time),
-              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
-            })
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
+          this.setData({
+            svg_stay_time_lrr: this.getRatio(res.data.data.all_customer_avg_stay_time, this.data.svg_stay_time),
+            bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
+          })
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }, 1000)
     },
@@ -465,71 +459,65 @@ Component({
       });
       let now_shallow_customer = 0;
       https(newCustomerStayInfoAjax, this.data.params, 'get').then(res => {
-        if (res.code === "1") {
-          let data = res.data.data;
-          let total = data.deep_customer + data.shallow_customer;
-          let shallow = 0;
-          now_shallow_customer = data.shallow_customer;
-          if (total != 0) {
-            shallow = (data.shallow_customer / total * 100).toFixed();
-          }
-          this.setData({
-            svg_stay_time: data.new_customer_avg_stay_time,
-            bounce_rate: shallow
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
+        let data = res.data.data;
+        let total = data.deep_customer + data.shallow_customer;
+        let shallow = 0;
+        now_shallow_customer = data.shallow_customer;
+        if (total != 0) {
+          shallow = (data.shallow_customer / total * 100).toFixed();
         }
+        this.setData({
+          svg_stay_time: data.new_customer_avg_stay_time,
+          bounce_rate: shallow
+        })
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       https(newCustomerStayTimeAjax, this.data.params, 'get').then(res => {
-        if (res.code === "1") {
-          let data = res.data.data;
-          let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
+        let data = res.data.data;
+        let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
 
-          if (total != 0) {
-            option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
-            option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
-            option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
-            option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
-            option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
-          } else {
-            option.series[0].data[0] = 0;
-            option.series[0].data[1] = 0;
-            option.series[0].data[2] = 0;
-            option.series[0].data[3] = 0;
-            option.series[0].data[4] = 0;
-          }
-          setTimeout(() => {
-            chart.hideLoading();
-            chart.setOption(option, true)
-          }, 1000)
+        if (total != 0) {
+          option.series[0].data[0] = (data.customer_0to10_min / total * 100).toFixed();
+          option.series[0].data[1] = (data.customer_11to30_min / total * 100).toFixed();
+          option.series[0].data[2] = (data.customer_31to60_min / total * 100).toFixed();
+          option.series[0].data[3] = (data.customer_1to2_h / total * 100).toFixed();
+          option.series[0].data[4] = (data.customer_2_h / total * 100).toFixed();
         } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
+          option.series[0].data[0] = 0;
+          option.series[0].data[1] = 0;
+          option.series[0].data[2] = 0;
+          option.series[0].data[3] = 0;
+          option.series[0].data[4] = 0;
         }
+        setTimeout(() => {
+          chart.hideLoading();
+          chart.setOption(option, true)
+        }, 1000)
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
         https(newCustomerStayInfoAjax, ratioParams, 'get').then(res => {
-          if (res.code === "1") {
-            this.setData({
-              svg_stay_time_lrr: this.getRatio(res.data.data.new_customer_avg_stay_time, this.data.svg_stay_time),
-              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
-            })
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
+          this.setData({
+            svg_stay_time_lrr: this.getRatio(res.data.data.new_customer_avg_stay_time, this.data.svg_stay_time),
+            bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
+          })
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }, 1000)
     },
@@ -543,28 +531,25 @@ Component({
       });
       let now_shallow_customer = 0;
       https(oldCustomerStayInfoAjax, this.data.params, 'get').then(res => {
-        if (res.code === "1") {
-          let data = res.data.data;
-          let total = data.deep_customer + data.shallow_customer;
-          let shallow = 0;
-          now_shallow_customer = data.shallow_customer;
-          if (total != 0) {
-            shallow = (data.shallow_customer / total * 100).toFixed();
-          }
-          this.setData({
-            svg_stay_time: data.old_customer_avg_stay_time,
-            bounce_rate: shallow
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
+        let data = res.data.data;
+        let total = data.deep_customer + data.shallow_customer;
+        let shallow = 0;
+        now_shallow_customer = data.shallow_customer;
+        if (total != 0) {
+          shallow = (data.shallow_customer / total * 100).toFixed();
         }
+        this.setData({
+          svg_stay_time: data.old_customer_avg_stay_time,
+          bounce_rate: shallow
+        })
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       https(oldCustomerStayTimeAjax, this.data.params, 'get').then(res => {
-        if (res.code === "1") {
           let data = res.data.data;
           let total = data.customer_0to10_min + data.customer_11to30_min + data.customer_31to60_min + data.customer_1to2_h + data.customer_2_h
 
@@ -585,29 +570,26 @@ Component({
             chart.hideLoading();
             chart.setOption(option, true)
           }, 1000)
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
         https(oldCustomerStayInfoAjax, ratioParams, 'get').then(res => {
-          if (res.code === "1") {
-            this.setData({
-              svg_stay_time_lrr: this.getRatio(res.data.data.old_customer_avg_stay_time, this.data.svg_stay_time),
-              bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
-            })
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
+          this.setData({
+            svg_stay_time_lrr: this.getRatio(res.data.data.old_customer_avg_stay_time, this.data.svg_stay_time),
+            bounce_rate_lrr: this.getRatio(res.data.data.shallow_customer, now_shallow_customer)
+          })
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }, 1000)
     },
@@ -659,73 +641,69 @@ Component({
         color: '#5b9bd1',
       });
       https(allCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
-          let myList = res.data.data;
+        let myList = res.data.data;
 
-          option2.xAxis.data = [];
-          option2.series[0].data = [];
-          // 查一天
+        option2.xAxis.data = [];
+        option2.series[0].data = [];
+        // 查一天
+        if (this.data.params.begin_time == this.data.params.end_time) {
+          this.setToadyChart({
+            begin_time: res.data.begin_time,
+            myList: myList,
+            option: option2,
+            index: 0,
+            name: 'stay_time'
+          })
+        } else {
+          // 不是同一天
+          this.setNotToadyChart({
+            myList: myList,
+            option: option2,
+            index: 0,
+            name: 'stay_time'
+          })
+        }
+        if (!this.data.isVs) {
+          chart2.hideLoading();
+          chart2.setOption(option2, true);
+        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
+      })
+      if(this.data.isVs){
+        https(allCustomerStayTimeDayAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time}, 'get').then(res => {
+          let myList = res.data.data
+
           if (this.data.params.begin_time == this.data.params.end_time) {
             this.setToadyChart({
               begin_time: res.data.begin_time,
               myList: myList,
-              option: option2,
-              index: 0,
+              option: option3,
+              index: 1,
               name: 'stay_time'
             })
-          } else {
-            // 不是同一天
+          }else{
             this.setNotToadyChart({
               myList: myList,
-              option: option2,
-              index: 0,
+              option: option3,
+              index: 1,
               name: 'stay_time'
             })
           }
-          if (!this.data.isVs) {
+          setTimeout(() => {
             chart2.hideLoading();
-            chart2.setOption(option2, true);
-          }
-        } else {
+            chart2.setOption(option3, true);
+          }, 1000)
+        }).catch(err => {
           wx.showToast({
-            title: res.msg,
+            title: err.msg,
             icon: 'none',
             duration: 1500
           })
-        }
-      })
-      if(this.data.isVs){
-        https(allCustomerStayTimeDayAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time}, 'get').then(res => {
-          if(res.code == "1"){
-            let myList = res.data.data
-
-            if (this.data.params.begin_time == this.data.params.end_time) {
-              this.setToadyChart({
-                begin_time: res.data.begin_time,
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'stay_time'
-              })
-            }else{
-              this.setNotToadyChart({
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'stay_time'
-              })
-            }
-            setTimeout(() => {
-              chart2.hideLoading();
-              chart2.setOption(option3, true);
-            }, 1000)
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
         })
       }
     },
@@ -738,7 +716,6 @@ Component({
         color: '#5b9bd1',
       });
       https(newCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
           let myList = res.data.data;
 
           option2.xAxis.data = [];
@@ -765,46 +742,43 @@ Component({
             chart2.hideLoading();
             chart2.setOption(option2, true);
           }
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       if(this.data.isVs){
         https(newCustomerStayTimeDayAjax,{id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time}, 'get').then(res => {
-          if(res.code === "1"){
-            let myList = res.data.data;
+          let myList = res.data.data;
 
-            if (this.data.params.begin_time == this.data.params.end_time) {
-              this.setToadyChart({
-                begin_time: res.data.begin_time,
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'stay_time'
-              })
-            }else{
-              this.setNotToadyChart({
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'stay_time'
-              })
-            }
-            setTimeout(() => {
-              chart2.hideLoading();
-              chart2.setOption(option3, true);
-            }, 1000)
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
+          if (this.data.params.begin_time == this.data.params.end_time) {
+            this.setToadyChart({
+              begin_time: res.data.begin_time,
+              myList: myList,
+              option: option3,
+              index: 1,
+              name: 'stay_time'
+            })
+          }else{
+            this.setNotToadyChart({
+              myList: myList,
+              option: option3,
+              index: 1,
+              name: 'stay_time'
             })
           }
+          setTimeout(() => {
+            chart2.hideLoading();
+            chart2.setOption(option3, true);
+          }, 1000)
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }
     },
@@ -817,73 +791,69 @@ Component({
         color: '#5b9bd1',
       });
       https(oldCustomerStayTimeDayAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
+        let myList = res.data.data;
+
+        option2.xAxis.data = [];
+        option2.series[0].data = [];
+        //查一天
+        if (this.data.params.begin_time == this.data.params.end_time) {
+          this.setToadyChart({
+            begin_time: res.data.begin_time,
+            myList: myList,
+            option: option2,
+            index: 0,
+            name: 'stay_time'
+          })
+        } else {
+          // 不是同一天
+          this.setNotToadyChart({
+            myList: myList,
+            option: option2,
+            index: 0,
+            name: 'stay_time'
+          })
+        }
+        if(!this.data.isVs){
+          chart2.hideLoading();
+          chart2.setOption(option2, true);
+        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
+      })
+      if(this.data.isVs){
+        https(oldCustomerStayTimeDayAjax, {id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
           let myList = res.data.data;
 
-          option2.xAxis.data = [];
-          option2.series[0].data = [];
-          //查一天
           if (this.data.params.begin_time == this.data.params.end_time) {
             this.setToadyChart({
               begin_time: res.data.begin_time,
               myList: myList,
-              option: option2,
-              index: 0,
+              option: option3,
+              index: 1,
               name: 'stay_time'
             })
-          } else {
-            // 不是同一天
+          }else{
             this.setNotToadyChart({
               myList: myList,
-              option: option2,
-              index: 0,
+              option: option3,
+              index: 1,
               name: 'stay_time'
             })
           }
-          if(!this.data.isVs){
+          setTimeout(() => {
             chart2.hideLoading();
-            chart2.setOption(option2, true);
-          }
-        } else {
+            chart2.setOption(option3, true);
+          }, 1000)
+        }).catch(err => {
           wx.showToast({
-            title: res.msg,
+            title: err.msg,
             icon: 'none',
             duration: 1500
           })
-        }
-      })
-      if(this.data.isVs){
-        https(oldCustomerStayTimeDayAjax, {id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
-          if(res.code === "1"){
-            let myList = res.data.data;
-
-            if (this.data.params.begin_time == this.data.params.end_time) {
-              this.setToadyChart({
-                begin_time: res.data.begin_time,
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'stay_time'
-              })
-            }else{
-              this.setNotToadyChart({
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'stay_time'
-              })
-            }
-            setTimeout(() => {
-              chart2.hideLoading();
-              chart2.setOption(option3, true);
-            }, 1000)
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
         })
       }
     },

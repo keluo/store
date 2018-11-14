@@ -287,30 +287,42 @@ Component({
       })
       //获取新顾客
       https(totalCustomerAjax, this.data.params, 'get').then(res => {
-        if (res.code === "1") {
-          this.setData({
-            totalNewCustomer: res.data.data.totalNewCustomer
-          })
-        }
+        this.setData({
+          totalNewCustomer: res.data.data.totalNewCustomer
+        })
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
 
       // 获取环比
       setTimeout(() => {
         let ratioParams = this.getPeriodTime();
         https(totalCustomerAjax, ratioParams, 'get').then(res => {//新客环比
-          if (res.code === "1") {
-            this.setData({
-              newCustomer_lrr: this.getRatio(res.data.data.totalNewCustomer, this.data.totalNewCustomer)
-            })
-          }
+          this.setData({
+            newCustomer_lrr: this.getRatio(res.data.data.totalNewCustomer, this.data.totalNewCustomer)
+          })
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
         https(keLiuAllTotalAjax, ratioParams, 'get').then(res => {//客流、进店环比
-          if (res.code === "1") {
-            this.setData({
-              keLiu_lrr: this.getRatio(res.data.ke_liu, this.data.keLiu_total),
-              jinDian_lrr: this.getRatio(res.data.ru_dian, this.data.jinDian_total)
-            })
-          }
+          this.setData({
+            keLiu_lrr: this.getRatio(res.data.ke_liu, this.data.keLiu_total),
+            jinDian_lrr: this.getRatio(res.data.ru_dian, this.data.jinDian_total)
+          })
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }, 1000)
     },
@@ -362,45 +374,43 @@ Component({
         color: '#5b9bd1',
       });
       https(keLiuDayAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
-          let myList = res.data.data;
+        let myList = res.data.data;
 
-          option.xAxis.data = [];
-          option.xAxis.name = '';
-          option2.xAxis.name = '';
-          option.series[0].data = [];
-          //查一天
-          if (this.data.params.begin_time == this.data.params.end_time) {
-            this.setTodayChart({
-              begin_time: res.data.begin_time,
-              option: option,
-              index: 0,
-              myList: myList,
-              name: 'ke_liu'
-            })
-          } else {
-            // 不是同一天
-            this.setNotToadyChart({
-              myList: myList,
-              option: option,
-              index: 0,
-              name: 'ke_liu'
-            });
-          }
-
-          if(!this.data.isVs){
-            setTimeout(() => {
-              chart.hideLoading();
-              chart.setOption(option, true);
-            }, 1000)
-          }
-        }else{
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
+        option.xAxis.data = [];
+        option.xAxis.name = '';
+        option2.xAxis.name = '';
+        option.series[0].data = [];
+        //查一天
+        if (this.data.params.begin_time == this.data.params.end_time) {
+          this.setTodayChart({
+            begin_time: res.data.begin_time,
+            option: option,
+            index: 0,
+            myList: myList,
+            name: 'ke_liu'
           })
+        } else {
+          // 不是同一天
+          this.setNotToadyChart({
+            myList: myList,
+            option: option,
+            index: 0,
+            name: 'ke_liu'
+          });
         }
+
+        if(!this.data.isVs){
+          setTimeout(() => {
+            chart.hideLoading();
+            chart.setOption(option, true);
+          }, 1000)
+        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       if (this.data.isVs) {
         https(keLiuDayAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
@@ -427,6 +437,12 @@ Component({
             chart.setOption(option2, true);
           }, 1000)
           
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }
     },
@@ -439,7 +455,6 @@ Component({
         color: '#5b9bd1',
       });
       https(jinDianDayAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
           let myList = res.data.data;
 
           option.xAxis.data = [];
@@ -468,13 +483,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option, true);
           }
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       if(this.data.isVs){
         https(jinDianDayAjax, {id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time}, 'get').then(res => {
@@ -500,6 +514,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option2, true);
           }, 1000)
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }
       
@@ -513,7 +533,6 @@ Component({
         color: '#5b9bd1',
       });
       https(newCustomerAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
           let myList = res.data.data;
 
           option.xAxis.data = [];
@@ -544,7 +563,12 @@ Component({
               chart.setOption(option, true);
             }, 1000)
           }
-        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       if(this.data.isVs){
         https(newCustomerAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
@@ -580,6 +604,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option2, true);
           }, 1000)
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }
     },

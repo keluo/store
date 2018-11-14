@@ -157,60 +157,54 @@ Component({
         color: '#5b9bd1',
       });
       https(customerArrivedTimesAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
-          let data = res.data.data;
-          let total = data.arrived_1_time + data.arrived_2_time + data.arrived_3to5_time + data.arrived_6to9_time + data.arrived_10_time
-          if(total != 0){
-            option.series[0].data[0] = (data.arrived_1_time / total * 100).toFixed();
-            option.series[0].data[1] = (data.arrived_2_time / total * 100).toFixed();
-            option.series[0].data[2] = (data.arrived_3to5_time / total * 100).toFixed();
-            option.series[0].data[3] = (data.arrived_6to9_time / total * 100).toFixed();
-            option.series[0].data[4] = (data.arrived_10_time / total * 100).toFixed();
-          }else{
-            option.series[0].data[0] = 0;
-            option.series[0].data[1] = 0;
-            option.series[0].data[2] = 0;
-            option.series[0].data[3] = 0;
-            option.series[0].data[4] = 0;
-          }
-
-          chart.hideLoading();
-          chart.setOption(option, true);
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
+        let data = res.data.data;
+        let total = data.arrived_1_time + data.arrived_2_time + data.arrived_3to5_time + data.arrived_6to9_time + data.arrived_10_time
+        if(total != 0){
+          option.series[0].data[0] = (data.arrived_1_time / total * 100).toFixed();
+          option.series[0].data[1] = (data.arrived_2_time / total * 100).toFixed();
+          option.series[0].data[2] = (data.arrived_3to5_time / total * 100).toFixed();
+          option.series[0].data[3] = (data.arrived_6to9_time / total * 100).toFixed();
+          option.series[0].data[4] = (data.arrived_10_time / total * 100).toFixed();
+        }else{
+          option.series[0].data[0] = 0;
+          option.series[0].data[1] = 0;
+          option.series[0].data[2] = 0;
+          option.series[0].data[3] = 0;
+          option.series[0].data[4] = 0;
         }
+
+        chart.hideLoading();
+        chart.setOption(option, true);
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       https(customerStayTimeAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
-          this.setData({
-            old_customer_avg_times: res.data.data.old_customer_avg_times.toFixed()
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        }
+        this.setData({
+          old_customer_avg_times: res.data.data.old_customer_avg_times.toFixed()
+        })
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
         https(customerStayTimeAjax, ratioParams, 'get').then(res => {
-          if (res.code === "1") {
-            this.setData({
-              time_lrr: this.getRatio(res.data.data.old_customer_avg_times, this.data.old_customer_avg_times),
-            })
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
+          this.setData({
+            time_lrr: this.getRatio(res.data.data.old_customer_avg_times, this.data.old_customer_avg_times),
+          })
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }, 1000)
     },

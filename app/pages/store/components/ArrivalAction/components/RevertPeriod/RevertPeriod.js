@@ -366,7 +366,6 @@ Component({
         color: '#5b9bd1',
       });
       https(customerReturnDaysAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
           let data = res.data.data;
           let total = data.return_1to2_day + data.return_3to7_day + data.return_8to15_day + data.return_16to30_day + data.return_30_day
           if(total != 0){
@@ -385,41 +384,36 @@ Component({
 
           chart.hideLoading();
           chart.setOption(option, true);
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       https(customerStayTimeAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
-          this.setData({
-            old_customer_avg_return: res.data.data.old_customer_avg_return.toFixed()
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        }
+        this.setData({
+          old_customer_avg_return: res.data.data.old_customer_avg_return.toFixed()
+        })
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
         https(customerStayTimeAjax, ratioParams, 'get').then(res => {
-          if (res.code === "1") {
-            this.setData({
-              return_lrr: this.getRatio(res.data.data.old_customer_avg_return, this.data.old_customer_avg_return),
-            })
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
+          this.setData({
+            return_lrr: this.getRatio(res.data.data.old_customer_avg_return, this.data.old_customer_avg_return),
+          })
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
       }, 1000)
     },
@@ -468,72 +462,68 @@ Component({
         color: '#5b9bd1',
       });
       https(oldCustomerReturnDaysDayAjax, this.data.params, 'get').then(res => {
-        if(res.code === "1"){
+        let myList = res.data.data;
+
+        option2.xAxis.data = [];
+        option2.series[0].data = [];
+
+        if(this.data.params.begin_time === this.data.params.end_time){
+          this.setToadyChart({
+            begin_time: res.data.begin_time,
+            myList: myList,
+            option: option2,
+            index: 0,
+            name: 'return_ds'
+          })
+        }else{
+          this.setNotTodayChart({
+            myList: myList,
+            option: option2,
+            index: 0,
+            name: 'return_ds'
+          })
+        }
+        if(!this.data.isVs){
+          chart2.hideLoading();
+          chart2.setOption(option2, true);
+        }
+      }).catch(err => {
+        wx.showToast({
+          title: err.msg,
+          icon: 'none',
+          duration: 1500
+        })
+      })
+      if(this.data.isVs){
+        https(oldCustomerReturnDaysDayAjax,{id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
           let myList = res.data.data;
 
-          option2.xAxis.data = [];
-          option2.series[0].data = [];
-
-          if(this.data.params.begin_time === this.data.params.end_time){
+          if (this.data.params.begin_time === this.data.params.end_time){
             this.setToadyChart({
               begin_time: res.data.begin_time,
               myList: myList,
-              option: option2,
-              index: 0,
+              option: option3,
+              index: 1,
               name: 'return_ds'
             })
           }else{
             this.setNotTodayChart({
               myList: myList,
-              option: option2,
-              index: 0,
+              option: option3,
+              index: 1,
               name: 'return_ds'
             })
           }
-          if(!this.data.isVs){
+          setTimeout(() => {
             chart2.hideLoading();
-            chart2.setOption(option2, true);
-          }
-        } else {
+            chart2.setOption(option3, true);
+          }, 1000)
+        }).catch(err => {
           wx.showToast({
-            title: res.msg,
+            title: err.msg,
             icon: 'none',
             duration: 1500
           })
-        }
-      })
-      if(this.data.isVs){
-        https(oldCustomerReturnDaysDayAjax,{id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
-          if(res.code === "1"){
-            let myList = res.data.data;
-
-            if (this.data.params.begin_time === this.data.params.end_time){
-              this.setToadyChart({
-                begin_time: res.data.begin_time,
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'return_ds'
-              })
-            }else{
-              this.setNotTodayChart({
-                myList: myList,
-                option: option3,
-                index: 1,
-                name: 'return_ds'
-              })
-            }
-            setTimeout(() => {
-              chart2.hideLoading();
-              chart2.setOption(option3, true);
-            }, 1000)
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none',
-              duration: 1500
-            })
-          }
         })
       }
     },

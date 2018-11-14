@@ -221,6 +221,12 @@ Component({
             chart.hideLoading();
             chart.setOption(option, true);
           }, 1000)
+        }).catch(err => {
+          wx.showToast({
+            title: err.msg,
+            icon: 'none',
+            duration: 1500
+          })
         })
     },
     setCharts (obj) {
