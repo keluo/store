@@ -20,6 +20,7 @@ Page({
     day_time: 0,
     dateList: [],
     selectArray: [],
+    otherArray: [],// 对比店铺列表
     emailInputVal: '', 
     mailList:[],
     emails: []
@@ -28,10 +29,16 @@ Page({
     let name = this.data.selectArray.find((item) => {
       return item.id == id.detail
     }).name
-
+    let list = [];
+    this.data.selectArray.map((item,index)=>{
+      if (item.id != id.detail){
+        list.push(item)
+      }
+    })
     this.setData({
       ['params.id']: id.detail,
-      ['params.name']: name
+      ['params.name']: name,
+      otherArray: list
     })
   },
 
@@ -153,10 +160,17 @@ Page({
           name: res.data.sgs[i].place_name
         })
       }
+      let otherArr = [];
+      arr.map((item,index)=>{
+        if(index != 0){
+          otherArr.push(item)
+        }
+      })
       this.setData({
         selectArray: arr,
         ['params.id']: res.data.sgs[0] ? (res.data.sgs[0].id ? res.data.sgs[0].id: '' ) : '',
-        ['params.name']: res.data.sgs[0] ? (res.data.sgs[0].place_name ? res.data.sgs[0].place_name : '请选择') : '请选择'
+        ['params.name']: res.data.sgs[0] ? (res.data.sgs[0].place_name ? res.data.sgs[0].place_name : '请选择') : '请选择',
+        otherArray: otherArr
       })
     })
   },
