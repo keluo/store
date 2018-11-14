@@ -34,7 +34,7 @@ let option = {
   },
   legend: {
     bottom: 0,
-    data: ['连接WiFi人数', '推广人数', '核销人数']
+    data: ['连接WiFi数', '推广人数', '核销券数']
   },
   tooltip: {
     trigger: 'axis',
@@ -106,8 +106,8 @@ let option = {
 
 function initChart(canvas, width, height) {
   chart = echarts.init(canvas, null, {
-    width: 343,
-    height: 200
+    width: width,
+    height: height
   });
   canvas.setChart(chart);
   chart.setOption(option);
@@ -204,24 +204,26 @@ Component({
           option.series[1].data = [];
           option.series[2].data = [];
 
-          this.setChart({
+          this.setCharts({
             list: ptdcList,
             index: 0
           });
-          this.setChart({
+          this.setCharts({
             list: sdcList,
             index: 1
           });
-          this.setChart({
+          this.setCharts({
             list: vudcList,
             index: 2
           });
 
-          chart.hideLoading();
-          chart.setOption(option, true);
+          setTimeout(() => {
+            chart.hideLoading();
+            chart.setOption(option, true);
+          }, 1000)
         })
     },
-    setChart (obj) {
+    setCharts (obj) {
       for(let i = 0;i<obj.list.length;i++){
         option.xAxis.data[i] = obj.list[i].date;
         option.series[obj.index].data[i] = obj.list[i].count;
