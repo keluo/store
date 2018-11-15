@@ -137,6 +137,11 @@ Component({
     time_lrr: {
       lrr: 0,
       plus_minus: true
+    },
+    pop: {
+      close: true,
+      title: '',
+      content: ''
     }
   },
   detached() {
@@ -239,12 +244,15 @@ Component({
       return obj
     },
     openPop(e) {// 打开弹窗
-      wx.showModal({
-        title: e.target.dataset.title,
-        content: e.target.dataset.content,
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#108EE9'
+      this.setData({
+        ['pop.close']: false,
+        ['pop.title']: e.currentTarget.dataset.title,
+        ['pop.content']: e.currentTarget.dataset.content
+      })
+    },
+    closePop() {// 关闭弹窗
+      this.setData({
+        ['pop.close']: true
       })
     },
     fmtDate: function (obj) {

@@ -251,7 +251,12 @@ Component({
     isVs: false,
     vsId: '',
     nowText: '店铺对比',// 店铺名称
-    chartShow: true
+    chartShow: true,
+    pop: {
+      close: true,
+      title: '',
+      content: ''
+    } 
   },
   detached(){
     chart.dispose();// 组件实例被从页面节点树移除时销毁echarts实例
@@ -685,13 +690,16 @@ Component({
       option2.series[0] = option.series[0]
     },
     openPop (e) {// 打开弹窗
-      wx.showModal({
-        title: e.target.dataset.title,
-        content: e.target.dataset.content,
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#108EE9'
-      })
+      this.setData({
+        ['pop.close']: false,
+        ['pop.title']: e.currentTarget.dataset.title,
+        ['pop.content']: e.currentTarget.dataset.content
+      }) 
+    },
+    closePop () {// 关闭弹窗
+      this.setData({
+        ['pop.close']: true
+      }) 
     },
     fmtMin (obj) {
       var date = new Date(obj);

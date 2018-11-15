@@ -37,3 +37,13 @@
     </view>
   </view>
 </view>
+<!-- 弹层 --> 
+<cover-view class="pop-up" hidden="{{pop.close}}"> 
+  <cover-view class="pop-up-container"> 
+    <cover-view class="pop-title">{{pop.title}}</cover-view> 
+    <cover-view class="pop-content">{{pop.content}}</cover-view> 
+    <cover-view class="pop-foot" bindtap='closePop'> 
+      知道了 
+    </cover-view>  
+  </cover-view> 
+</cover-view>
