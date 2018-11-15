@@ -351,11 +351,6 @@ Component({
     },
     isVs: false,
     vsId: '',
-    pop: {
-      close: true,
-      title: '',
-      content: ''
-    },
     nowText: '店铺对比',
     chartShow: true
   },
@@ -927,15 +922,12 @@ Component({
       option3.series[0] = option2.series[0]
     },
     openPop(e) {// 打开弹窗
-      this.setData({
-        ['pop.close']: false,
-        ['pop.title']: e.target.dataset.title,
-        ['pop.content']: e.target.dataset.content
-      })
-    },
-    closePop(e) {// 关闭弹窗
-      this.setData({
-        ['pop.close']: true
+      wx.showModal({
+        title: e.target.dataset.title,
+        content: e.target.dataset.content,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#108EE9'
       })
     },
     fmtMin(obj) {

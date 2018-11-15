@@ -158,11 +158,6 @@ Component({
       count: 0,
       lrr: 0,
       plus_minus: true
-    },
-    pop: {
-      close: true,
-      title: '',
-      content: ''
     }
   },
   detached() {
@@ -237,15 +232,12 @@ Component({
       }
     },
     openPop(e) {// 打开弹窗
-      this.setData({
-        ['pop.close']: false,
-        ['pop.title']: e.target.dataset.title,
-        ['pop.content']: e.target.dataset.content
-      })
-    },
-    closePop(e) {// 关闭弹窗
-      this.setData({
-        ['pop.close']: true
+      wx.showModal({
+        title: e.target.dataset.title,
+        content: e.target.dataset.content,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#108EE9'
       })
     }
   }
