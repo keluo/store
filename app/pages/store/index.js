@@ -14,10 +14,9 @@ Page({
       name: '',
       begin_time: '',
       end_time: '',
-      day_time: '',
+      day_time: '',// 自己用的
       selectShow: true
     },
-    day_time: 0,
     dateList: [],
     selectArray: [],
     otherArray: [],// 对比店铺列表
@@ -204,8 +203,7 @@ Page({
     this.setData({
       ['params.begin_time']: obj.begin_time,
       ['params.end_time']: obj.end_time,
-      ['params.day_time']: obj.id,
-      day_time: e.detail.value
+      ['params.day_time']: obj.id
     })
   },
   notToday (e) {
@@ -270,7 +268,7 @@ Page({
     if (subArr.length > 0){
       https(exportInfo, {
         id: this.data.params.id,
-        day_time: this.data.day_time,
+        day_id: this.data.params.day_time,
         emails: subArr
       }, 'get').then(res => {
         console.log(res)
