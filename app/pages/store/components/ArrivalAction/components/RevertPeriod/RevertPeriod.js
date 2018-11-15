@@ -419,22 +419,17 @@ Component({
       }, 1000)
     },
     getPeriodTime() {// 获取上一个周期时间
+      let list = [
+        { begin_time: 1, end_time: 1 },
+        { begin_time: 1, end_time: 1 },
+        { begin_time: 7, end_time: 1 },
+        { begin_time: 15, end_time: 1 },
+        { begin_time: 30, end_time: 1 }
+      ]
       let obj = {
         id: this.data.params.id,
-        begin_time: '',
-        end_time: ''
-      }
-      if (this.data.params.day_time == 0) {//今天
-        obj['day_id'] = 1
-      } else if (this.data.params.day_time == 1) {//昨天
-        obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
-        obj.end_time = obj.begin_time;
-      } else {//不是同一天
-        var days = (new Date(this.data.params.end_time).getTime() - new Date(this.data.params.begin_time).getTime()) / (1000 * 60 * 60 * 24);
-        days = Math.floor(days) + 1;
-
-        obj.begin_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - days));
-        obj.end_time = this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - 1));
+        begin_time: this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - list[this.data.params.day_time].begin_time)),
+        end_time: this.fmtDate(new Date(this.data.params.begin_time).setDate(new Date(this.data.params.begin_time).getDate() - list[this.data.params.day_time].end_time))
       }
       return obj
     },
