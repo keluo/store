@@ -401,22 +401,7 @@ Component({
           }, 1000)
         }
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-
-        this.setTodayChart({
-          begin_time: this.data.params.begin_time,
-          option: option,
-          index: 0,
-          myList: {},
-          name: 'ke_liu'
-        })
-
-        chart.setOption(option, true);
-        chart.hideLoading();
+        this.handleErr(err,chart,option);
       })
       if (this.data.isVs) {
         https(keLiuDayAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
@@ -444,12 +429,7 @@ Component({
           }, 1000)
           
         }).catch(err => {
-          wx.showToast({
-            title: err.msg,
-            icon: 'none',
-            duration: 1500
-          })
-          chart.hideLoading();
+          this.handleErr(err, chart, option2);
         })
       }
     },
@@ -491,12 +471,7 @@ Component({
             chart.setOption(option, true);
           }
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart.hideLoading();
+        this.handleErr(err, chart, option);
       })
       if(this.data.isVs){
         https(jinDianDayAjax, {id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time}, 'get').then(res => {
@@ -523,12 +498,7 @@ Component({
             chart.setOption(option2, true);
           }, 1000)
         }).catch(err => {
-          wx.showToast({
-            title: err.msg,
-            icon: 'none',
-            duration: 1500
-          })
-          chart.hideLoading();
+          this.handleErr(err, chart, option2);
         })
       }
       
@@ -573,12 +543,7 @@ Component({
             }, 1000)
           }
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart.hideLoading();
+        this.handleErr(err, chart, option);
       })
       if(this.data.isVs){
         https(newCustomerAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time }, 'get').then(res => {
@@ -615,12 +580,7 @@ Component({
             chart.setOption(option2, true);
           }, 1000)
         }).catch(err => {
-          wx.showToast({
-            title: err.msg,
-            icon: 'none',
-            duration: 1500
-          })
-          chart.hideLoading();
+          this.handleErr(err, chart, option2);
         })
       }
     },
@@ -700,6 +660,31 @@ Component({
       this.setData({
         ['pop.close']: true
       }) 
+    },
+    handleErr (err, myChart, myOption) {
+      wx.showToast({
+        title: err.msg,
+        icon: 'none',
+        duration: 1500
+      })
+      if (this.data.params.day_time == 0 || this.data.params.day_time == 1) {
+        this.setTodayChart({
+          begin_time: this.data.params.begin_time,
+          option: myOption,
+          index: 0,
+          myList: {},
+          name: 'ke_liu'
+        })
+      } else {
+        this.setNotToadyChart({
+          myList: {},
+          option: myOption,
+          index: 0,
+          name: 'ke_liu'
+        });
+      }
+      myChart.setOption(myOption, true);
+      myChart.hideLoading();
     },
     fmtMin (obj) {
       var date = new Date(obj);

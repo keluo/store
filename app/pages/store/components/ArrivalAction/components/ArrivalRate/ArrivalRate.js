@@ -181,6 +181,12 @@ Component({
           icon: 'none',
           duration: 1500
         })
+        option.series[0].data[0] = 0;
+        option.series[0].data[1] = 0;
+        option.series[0].data[2] = 0;
+        option.series[0].data[3] = 0;
+        option.series[0].data[4] = 0;
+        chart.setOption(option, true);
         chart.hideLoading();
       })
       https(customerStayTimeAjax, this.data.params, 'get').then(res => {

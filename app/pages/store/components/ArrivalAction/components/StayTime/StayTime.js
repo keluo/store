@@ -427,12 +427,7 @@ Component({
           chart.setOption(option, true)
         }, 1000)
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart.hideLoading();
+        this.handleDistErr(err);
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
@@ -500,12 +495,7 @@ Component({
           chart.setOption(option, true)
         }, 1000)
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart.hideLoading();
+        this.handleDistErr(err);
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
@@ -573,12 +563,7 @@ Component({
             chart.setOption(option, true)
           }, 1000)
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart.hideLoading();
+        this.handleDistErr(err);
       })
       setTimeout(() => {// 获取环比信息
         let ratioParams = this.getPeriodTime();
@@ -666,12 +651,7 @@ Component({
           chart2.setOption(option2, true);
         }
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart2.hideLoading();
+        this.handleTrendErr(err, chart2, option2);
       })
       if(this.data.isVs){
         https(allCustomerStayTimeDayAjax, { id: this.data.vsId, begin_time: this.data.params.begin_time, end_time: this.data.params.end_time}, 'get').then(res => {
@@ -698,12 +678,7 @@ Component({
             chart2.setOption(option3, true);
           }, 1000)
         }).catch(err => {
-          wx.showToast({
-            title: err.msg,
-            icon: 'none',
-            duration: 1500
-          })
-          chart2.hideLoading();
+          this.handleTrendErr(err, chart2, option3);
         })
       }
     },
@@ -743,12 +718,7 @@ Component({
             chart2.setOption(option2, true);
           }
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart2.hideLoading();
+        this.handleTrendErr(err, chart2, option2);
       })
       if(this.data.isVs){
         https(newCustomerStayTimeDayAjax,{id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time}, 'get').then(res => {
@@ -775,12 +745,7 @@ Component({
             chart2.setOption(option3, true);
           }, 1000)
         }).catch(err => {
-          wx.showToast({
-            title: err.msg,
-            icon: 'none',
-            duration: 1500
-          })
-          chart2.hideLoading();
+          this.handleTrendErr(err, chart2, option3);
         })
       }
     },
@@ -820,12 +785,7 @@ Component({
           chart2.setOption(option2, true);
         }
       }).catch(err => {
-        wx.showToast({
-          title: err.msg,
-          icon: 'none',
-          duration: 1500
-        })
-        chart2.hideLoading();
+        this.handleTrendErr(err, chart2, option2);
       })
       if(this.data.isVs){
         https(oldCustomerStayTimeDayAjax, {id:this.data.vsId,begin_time:this.data.params.begin_time,end_time:this.data.params.end_time},'get').then(res => {
@@ -852,12 +812,7 @@ Component({
             chart2.setOption(option3, true);
           }, 1000)
         }).catch(err => {
-          wx.showToast({
-            title: err.msg,
-            icon: 'none',
-            duration: 1500
-          })
-          chart2.hideLoading();
+          this.handleTrendErr(err, chart2, option3);
         })
       }
     },
@@ -937,6 +892,45 @@ Component({
       this.setData({
         ['pop.close']: true
       })
+    },
+    handleDistErr (err) {// 分布图错误处理
+      option.series[0].data[0] = 0;
+      option.series[0].data[1] = 0;
+      option.series[0].data[2] = 0;
+      option.series[0].data[3] = 0;
+      option.series[0].data[4] = 0;
+      wx.showToast({
+        title: err.msg,
+        icon: 'none',
+        duration: 1500
+      })
+      chart.setOption(option, true)
+      chart.hideLoading();
+    },
+    handleTrendErr(err, myChart, myOption) {
+      wx.showToast({
+        title: err.msg,
+        icon: 'none',
+        duration: 1500
+      })
+      if (this.data.params.day_time == 0 || this.data.params.day_time == 1) {
+        this.setTodayChart({
+          begin_time: this.data.params.begin_time,
+          option: myOption,
+          index: 0,
+          myList: {},
+          name: 'ke_liu'
+        })
+      } else {
+        this.setNotToadyChart({
+          myList: {},
+          option: myOption,
+          index: 0,
+          name: 'ke_liu'
+        });
+      }
+      myChart.setOption(myOption, true);
+      myChart.hideLoading();
     },
     fmtMin(obj) {
       var date = new Date(obj);
