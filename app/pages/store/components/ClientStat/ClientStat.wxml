@@ -2,7 +2,7 @@
 <view class='overview-box'>
   <view class='overview-item'>
     <view class='overview-title' bindtap="openPop" data-title="门店客流" data-content="所有路过店铺和进入店铺的人。">
-      客流量 <view class='icon-question'></view>
+      客流量 <view class='iconfont icon-question'></view>
     </view>
     <view class='overview-num'>
       {{keLiu_total}}
@@ -13,7 +13,7 @@
   </view>
   <view class='overview-item'>
     <view class='overview-title' bindtap="openPop" data-title="进店客" data-content="进入店铺且停留时长大于2分钟的人。">
-      进店客 <view class='icon-question'></view>
+      进店客 <view class='iconfont icon-question'></view>
     </view>
     <view class='overview-num'>
       {{jinDian_total}}
@@ -24,7 +24,7 @@
   </view>
   <view class='overview-item'>
     <view class='overview-title' bindtap="openPop" data-title="新顾客" data-content="首次到店的人。">
-      新顾客 <view class='icon-question'></view>
+      新顾客 <view class='iconfont icon-question'></view>
     </view>
     <view class='overview-num'>
       {{totalNewCustomer}}

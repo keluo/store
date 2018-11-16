@@ -95,7 +95,7 @@
   <view slot="content" style="text-align: center;">
     <canvas class='canvas' canvas-id='canvasid' style="width: 300rpx; display:inline-block;"></canvas>
     <view>
-      保存二维码图片到本地，打开支付宝扫描相册中的该图。（支付宝账号必须是商家账号哦~）
+      保存上方二维码图片到手机相册，打开支付宝扫描相册中的该图进行授权。（支付宝账号必须是商家账号哦~）
     </view>  
   </view>
   <view slot="foot" bindtap='saveImg'>

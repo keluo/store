@@ -2,7 +2,7 @@
 <view class="container">
   <view class="top-wrap">
     <view class="item-user">
-      <image src="/images/3.png" class="user-photo"></image>
+      <image src="/images/1.png" class="user-photo"></image>
       <view class="item-user-info">
         <text class="user-name">{{username}}</text>
         <text class="user-address">{{name}}</text>

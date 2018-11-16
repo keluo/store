@@ -133,6 +133,12 @@ class FormValidate {
         return that.optional(value) || value === that.scope.detail.value[param]
       },
       /**
+       * 验证两个输入框的内容是否不相同
+       */
+      unEqualTo(value, param) {
+        return that.optional(value) || value !== that.scope.detail.value[param]
+      },
+      /**
        * 验证是否包含某个值
        */
       contains(value, param) {
@@ -174,6 +180,13 @@ class FormValidate {
       range(value, param) {
         return that.optional(value) || (value >= param[0] && value <= param[1])
       },
+      /**
+       * 检测是否有中文
+       */
+      hasChinese(value){
+        var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+        return that.optional(value) || !reg.test(value)
+      }
     }
   }
 
