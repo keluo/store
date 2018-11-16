@@ -667,6 +667,12 @@ Component({
         icon: 'none',
         duration: 1500
       })
+      myOption.xAxis.data = [];
+      myOption.xAxis.name = '';
+      myOption.series[0].data = [];
+      if (myOption.series.length > 1){
+        myOption.series[1].data = [];
+      }
       if (this.data.params.day_time == 0 || this.data.params.day_time == 1) {
         this.setTodayChart({
           begin_time: this.data.params.begin_time,
@@ -683,8 +689,10 @@ Component({
           name: 'ke_liu'
         });
       }
-      myChart.setOption(myOption, true);
-      myChart.hideLoading();
+      setTimeout(()=>{
+        myChart.setOption(myOption, true);
+        myChart.hideLoading();
+      },1000)
     },
     fmtMin (obj) {
       var date = new Date(obj);
