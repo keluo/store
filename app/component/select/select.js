@@ -12,6 +12,10 @@ Component({
       type: Boolean,
       value: false
     },
+    width:{
+      type: String,
+      value: '400'
+    },
     nowText: {
       type: String,
       value: '请选择'

@@ -1,5 +1,5 @@
 <!--component/select/select.wxml-->
-<view class="com-selectBox {{left?'left':''}}">
+<view class="com-selectBox {{left?'left':''}}" style="{{'max-width:' + width + 'rpx'}}">
     <view class='com-sContent' bindtap='selectToggle'>
         <view class='com-sTxt'>{{nowText}}</view>
         <view class="icon-bottom" animation="{{animationData}}"></view>
