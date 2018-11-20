@@ -117,13 +117,13 @@ button::after{
   height: 64rpx;
   line-height: 64rpx;
   text-align:center;
-  border: 1rpx solid #108EE9;
+  border: 1px solid #108EE9;
   font-size: 28rpx;
   color: #108EE9;
   border-right: 0rpx;
 }
 .item-tab .item-tab-bar:last-child{
-  border-right: 1rpx solid #108EE9;
+  border-right: 1px solid #108EE9;
   border-radius: 0rpx 4rpx 4rpx 0rpx;
 }
 .item-tab .item-tab-bar:first-child{

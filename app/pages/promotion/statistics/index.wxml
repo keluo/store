@@ -51,41 +51,31 @@
       <!-- <button class="btn">短信激励核销</button> -->
     </view>
     <view class="item-options">
-      <text class="">总人数：0人</text>
-      <!-- <view class="item-options-right">
-        <text class="blue">未核销</text>
-      </view> -->
+      <text class="">总人数：{{total_count}}人</text>
+      <view class="item-options-right">
+        <component-select options="{{state_group}}" bind:selected="bindStateSelected" selected="{{state}}"></component-select>
+      </view>
     </view>
     <view class="item-content ">
-      <!-- <view class="item-list" >
+      <view class="item-list" wx:for="{{wechat_user_list}}"  wx:key="{{index}}">
         <view class="item-list-content">
-          <image src="/images/3.png"></image>
-          <view>陈丹</view>
-          <view>183xxxx8012</view>
-          <view class="blue">未核销</view>
+          <image src="{{item.headimgurl}}"></image>
+          <view style="width:20%;text-algin:center;">{{item.nickname}}</view>
+          <view style="width:40%;text-algin:center;">{{item.loginid}}</view>
+          <view style="width:20%;text-algin:center;">{{item.state_name}}</view>
         </view>
       </view>
-      <view class="item-list">
-        <view class="item-list-content">
-          <image src="/images/3.png"></image>
-          <view>陈丹</view>
-          <view>183xxxx8012</view>
-          <view class="blue">未核销</view>
-        </view>
-      </view>
-      <view class="item-list">
-        <view class="item-list-content">
-          <image src="/images/3.png"></image>
-          <view>陈丹</view>
-          <view>183xxxx8012</view>
-          <view class="blue">未核销</view>
-        </view>
-      </view> -->
     </view>
   </view>
-  <!-- <view class="item-btn">
-    <button class="btn">返回顶部</button>
-  </view> -->
+  <view class="loading-tip {{isLoadingMore ? 'show' : ''}}">
+    正在加载中...
+  </view>
+  <view class="loading-tip {{hasNotMore ? 'show' : ''}}">
+    没有更多数据了
+  </view>
+  <view class="item-btn" wx:if="{{wechat_user_list.length > 10}}">
+    <button class="btn" bindtap="goTop">返回顶部</button>
+  </view>
 </view>
 <component-pop class="pop-box">
   <view slot="title">{{popInfoList[popInfoIndex].title}}</view>

@@ -2,7 +2,7 @@
   "navigationBarTitleText": "推广",
   "navigationBarBackgroundColor": "#108EE9",
   "navigationBarTextStyle": "white",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "component-select": "../../../component/select/select",
     "component-pop": "../../../component/pop/pop",

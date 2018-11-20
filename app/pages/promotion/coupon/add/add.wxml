@@ -4,7 +4,7 @@
   <view class="item item-info-group">
     <view class="item-info">
       <view class="item-label">
-        面额：
+        优惠面额：
       </view>
       <view class="item-input">
         <input name="amount" class="txt" value="{{amount}}" placeholder="请输入优惠券面额"></input>

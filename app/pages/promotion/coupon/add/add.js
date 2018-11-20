@@ -211,7 +211,7 @@ Page({
     // 验证字段的提示信息，若不传则调用默认的信息
     const messages = {
       amount: {
-        required: '请输入面额',
+        required: '请输入优惠面额',
         digits: '面额:1~999',
         min: '面额：1~999',
         max: '面额：1~999'

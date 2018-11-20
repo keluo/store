@@ -11,7 +11,7 @@
       <view class="item-box">
         <navigator url = "/pages/promotion/statistics/index">
           <image src="/images/promotion/index/promotion_statistics.png"></image>
-          <text>门店推广统计</text>
+          <text>推广效果</text>
         </navigator>
       </view>
       <view class="item-box">

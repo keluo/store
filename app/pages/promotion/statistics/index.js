@@ -8,6 +8,10 @@ Page({
   data: {
     fromday: '',
     range_date_group: [],
+    state:'',
+    state_group:[],
+    wechat_user_list: [],
+    total_count:0,
     sg_id: '',
     sg_group: [],
     share_count: 0,
@@ -29,13 +33,17 @@ Page({
       },
       {
         title: '核销总数',
-        desc: '通过店铺推广海报上的领券二维码领取后到店核销的优惠券总数。'
+        desc: '优惠券领取成功后到店使用的总数。'
       },{
         title: '微信触达用户',
         desc: '在微信内看到店铺推广海报并识别海报上二维码到达领券页面的用户。'
       }
     ],
-    popInfoIndex: 0
+    popInfoIndex: 0,
+    hasNotMore: true,
+    isLoadingMore: false,
+    page: 1,
+    total: 0
   },
   bindShowPop:function(e){
     this.setData({
@@ -54,12 +62,38 @@ Page({
     that.getSgInitList().then(function () {
       that.getDateInitList().then(function(){
         that.getSgCustomShare();
+        that.getWechatUserList();
       });
     });
     that.selectComponent('.pop-box').init({
       close:false
     });
 
+  },
+  getWechatUserList: function () {
+    var that = this;
+    app.https(app.api.wechatUserListApi, {
+      sg_id: that.data.sg_id,
+      fromday: that.data.fromday,
+      state: that.data.state
+    }, 'get').then(function (data) {
+      data = data.data;
+      let param = {
+        wechat_user_list: data.was || [],
+        total_count: data.total_count || 0
+      };
+      if (that.data.state_group.length == 0) {
+        param['state_group'] = data.states || [];
+        param['state'] = data.states ? (data.states[0].id || '') : '';
+      }
+      that.setData(param);
+    });
+  },
+  bindStateSelected: function(e){
+    this.setData({
+      state: e.detail
+    });
+    this.getWechatUserList();
   },
   bindSgSelected: function(e){
     this.setData({
@@ -115,54 +149,58 @@ Page({
         resolve();
       });
     });
+  },//回到顶部
+  goTop: function (e) {  // 一键回到顶部
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      page: 1,
+      wechat_user_list: [],
+      state: '',
+      state_group: []
+    });
+    this.getWechatUserList();
+    setTimeout(function () {
+      wx.stopPullDownRefresh();
+    }, 2000);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    var that = this;
+    if (that.data.isLoadingMore || that.data.hasNotMore) return;
+    wx.showNavigationBarLoading();
+    that.setData({
+      isLoadingMore: true
+    });
+    that.getList().then(function () {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      that.setData({
+        isLoadingMore: false
+      });
+    });
+    setTimeout(function () {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      that.setData({
+        isLoadingMore: false
+      });
+    }, 3000);
   }
 })

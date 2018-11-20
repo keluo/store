@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "门店推广统计",
+  "navigationBarTitleText": "推广效果",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "component-select": "../../../../component/select/select",
     "component-pop": "../../../component/pop/pop"

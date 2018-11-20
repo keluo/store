@@ -63,6 +63,9 @@ const messageApi = '/notification/notice/'; //消息通知
 const authCheckApi = '/apo/auth/query/'; //授权检测
 const moneyCheckApi = '/etma/trade/enough/'; //余额检测
 
+const wechatUserListApi = '/etma/sg/wechat/access/'; //微信触达用户列表
+
+
 
 
 
@@ -115,5 +118,6 @@ module.exports = {
   serviceLinkApi,
   messageApi,
   authCheckApi,
-  moneyCheckApi
+  moneyCheckApi,
+  wechatUserListApi
 }
