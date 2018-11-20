@@ -1,7 +1,7 @@
 <!-- 客流组件 -->
 <view class='overview-box'>
   <view class='overview-item'>
-    <view class='overview-title' bindtap="openPop" data-title="门店客流" data-content="所有路过店铺和进入店铺的人。">
+    <view class='overview-title' bindtap="openPop" data-title="客流量" data-content="所有路过店铺和进入店铺的人。">
       客流量 <view class='iconfont icon-question'></view>
     </view>
     <view class='overview-num'>
