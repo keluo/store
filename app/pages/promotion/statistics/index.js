@@ -162,6 +162,15 @@ Page({
       })
     }
   },
+  bindShowTip:function(){
+    wx.showToast({
+      title: '敬请期待',
+      icon: 'none',
+      mask: true,
+      image: '../../../images/store/smile.png',
+      duration: 1500,
+    });
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

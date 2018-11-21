@@ -48,7 +48,7 @@
   <view class="item user-list">
     <view class="item-title">
       <view>微信内触达用户<icon class="iconfont icon-question" bindtap="bindShowPop" data-index="4"></icon></view>
-      <!-- <button class="btn">短信激励核销</button> -->
+      <button class="btn" wx:if="{{state == '1'}}" bindtap="bindShowTip">短信激励核销</button>
     </view>
     <view class="item-options">
       <text class="">总人数：{{total_count}}人</text>
@@ -60,9 +60,9 @@
       <view class="item-list" wx:for="{{wechat_user_list}}"  wx:key="{{index}}">
         <view class="item-list-content">
           <image src="{{item.headimgurl}}"></image>
-          <view style="width:20%;text-algin:center;">{{item.nickname}}</view>
-          <view style="width:40%;text-algin:center;">{{item.loginid}}</view>
-          <view style="width:20%;text-algin:center;">{{item.state_name}}</view>
+          <view style="width:20%;text-align:center;">{{item.nickname}}</view>
+          <view style="width:40%;text-align:center;">{{item.loginid ? item.loginid : '------'}}</view>
+          <view style="width:20%;text-align:center;">{{item.state_name}}</view>
         </view>
       </view>
     </view>
