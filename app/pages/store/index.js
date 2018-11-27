@@ -270,6 +270,7 @@ Page({
         title: '发送成功',
         duration: 1500
       })
+      this.selectComponent('.pop-box').hide({});
       https(exportInfo, {
         id: this.data.params.id,
         day_id: this.data.params.day_time,
@@ -293,7 +294,7 @@ Page({
           } catch (e) {
             console.log(e)
           }
-          this.selectComponent('.pop-box').hide({});
+          // this.selectComponent('.pop-box').hide({});
         }else{
           // wx.showToast({
           //   title: '发送失败',
