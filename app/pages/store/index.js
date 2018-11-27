@@ -266,6 +266,10 @@ Page({
     }, [])
 
     if (subArr.length > 0){
+      wx.showToast({
+        title: '发送成功',
+        duration: 1500
+      })
       https(exportInfo, {
         id: this.data.params.id,
         day_id: this.data.params.day_time,
@@ -273,10 +277,10 @@ Page({
       }, 'get').then(res => {
         console.log(res)
         if(res.code === "1"){
-          wx.showToast({
-            title: '发送成功',
-            duration: 1500
-          })
+          // wx.showToast({
+          //   title: '发送成功',
+          //   duration: 1500
+          // })
 
           for (let i = 0; i < list.length; i++) {
             list[i].checked = false
@@ -291,11 +295,11 @@ Page({
           }
           this.selectComponent('.pop-box').hide({});
         }else{
-          wx.showToast({
-            title: '发送失败',
-            icon: 'none',
-            duration: 1500
-          })
+          // wx.showToast({
+          //   title: '发送失败',
+          //   icon: 'none',
+          //   duration: 1500
+          // })
         }
       })    
     }else{
